@@ -22,19 +22,19 @@ webpackEmptyAsyncContext.id = 190;
 
 var map = {
 	"../pages/chief/chief.module": [
-		500,
+		503,
 		5
 	],
 	"../pages/login/login.module": [
-		501,
+		502,
 		4
 	],
 	"../pages/order/order.module": [
-		502,
+		500,
 		3
 	],
 	"../pages/setup-type/setup-type.module": [
-		503,
+		501,
 		2
 	],
 	"../pages/setup/setup.module": [
@@ -274,10 +274,9 @@ var OrderProvider = /** @class */ (function () {
     };
     OrderProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["AngularFireDatabase"]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["AngularFireDatabase"]])
     ], OrderProvider);
     return OrderProvider;
-    var _a;
 }());
 
 //# sourceMappingURL=order.js.map
@@ -351,10 +350,10 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/chief/chief.module#ChiefPageModule', name: 'ChiefPage', segment: 'chief', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order/order.module#OrderPageModule', name: 'OrderPage', segment: 'order', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup-type/setup-type.module#SetupTypePageModule', name: 'SetupTypePage', segment: 'setup-type', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/chief/chief.module#ChiefPageModule', name: 'ChiefPage', segment: 'chief', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup/setup.module#SetupPageModule', name: 'SetupPage', segment: 'setup', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] }
                     ]
@@ -454,7 +453,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthenticateProvider = /** @class */ (function () {
     function AuthenticateProvider(http) {
         this.http = http;
-        console.log('Hello AuthenticateProvider Provider');
     }
     AuthenticateProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),

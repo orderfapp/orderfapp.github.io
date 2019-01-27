@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 502:
+/***/ 500:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderPageModule", function() { return OrderPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order__ = __webpack_require__(508);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order__ = __webpack_require__(506);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var OrderPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 508:
+/***/ 506:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -84,8 +84,6 @@ var OrderPage = /** @class */ (function () {
             if (dataInfo) {
                 for (var index = 0; index < dataInfo.length; index++) {
                     var food = new __WEBPACK_IMPORTED_MODULE_2__providers_order_order__["a" /* CFood */]();
-                    console.log("Đang");
-                    console.log(dataInfo[index]);
                     food.copy(dataInfo[index]);
                     _this.orderProvider.listFood[food.id] = food;
                     _this.dataOfFood.push(food);
@@ -142,8 +140,6 @@ var OrderPage = /** @class */ (function () {
             orderDetail.sl = 1;
             orderDetail.slgiao = 0;
             orderDetail.status = "Đang làm";
-            console.log("Đang làm");
-            console.log(food);
             orderDetail.food.copy(food);
             this.orderTable.listOrder.push(orderDetail);
         }
@@ -192,7 +188,6 @@ var OrderPage = /** @class */ (function () {
                 {
                     text: 'Đóng',
                     handler: function (data) {
-                        console.log('Cancel clicked');
                     }
                 },
                 {
@@ -202,15 +197,11 @@ var OrderPage = /** @class */ (function () {
                         _this.orderFlag = true;
                         var dataSub = _this.orderProvider.getAllFoodByTable(_this.currentTable).valueChanges().subscribe(function (dataInfo) {
                             _this.orderTable = new __WEBPACK_IMPORTED_MODULE_2__providers_order_order__["b" /* COrder */]();
-                            console.log(dataInfo);
                             if (dataInfo[1]) {
                                 _this.orderTable.table = dataInfo[1] + "";
                                 for (var key in dataInfo[0]) {
                                     var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_order__["c" /* COrderDetails */]();
                                     orderDetail.copy(dataInfo[0][key]);
-                                    console.log("OK");
-                                    console.log(_this.orderProvider.listFood[key]);
-                                    console.log(_this.orderProvider.listFood[key]);
                                     orderDetail.food.copy(_this.orderProvider.listFood[key]);
                                     _this.orderTable.listOrder.push(orderDetail);
                                 }
@@ -229,10 +220,12 @@ var OrderPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-order',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\order\order.html"*/'<!--\n  Generated template for the DeviceListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>Order</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-list class="listFood" *ngIf="orderFlag">\n    <ion-item *ngFor="let foodDetails of items">\n      <ion-avatar item-start>\n        <img src=\'{{foodDetails.image ? foodDetails.image : "assets/icon/noimage.png"}}\'>\n      </ion-avatar>\n      <p>{{foodDetails.name}}</p>\n      <p>Giá : {{foodDetails.value}}k<font style="color:red">{{foodDetails.status ? "" :" Hết hàng"}}</font>\n      </p>\n      <button ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">Đặt</button>\n    </ion-item>\n  </ion-list>\n  <ion-list *ngIf="orderFlag">\n    <h2>Danh sách món đã đặt</h2>\n    <ion-row *ngIf="orderTable.listOrder.length == 0">\n      <div>Chưa đặt món</div>\n    </ion-row>\n    <ion-item-sliding *ngFor="let orderDetail of orderTable.listOrder">\n      <ion-item>\n        <ion-avatar item-start>\n          <img src=\'{{orderDetail.food.image ? orderDetail.food.image : "assets/icon/noimage.png"}}\'>\n        </ion-avatar>\n        <h2>{{orderDetail.food.name}}</h2>\n        <p>Đã giao:{{" " + orderDetail.slgiao}}</p>\n        <button ion-button clear color="maincolor" item-end (click)="addFood(orderDetail.food)">Số lượng\n          {{orderDetail.sl}}</button>\n      </ion-item>\n      <ion-item-options side="left">\n        <button ion-button color="mainlightcolor" (click)="deleteFood(orderDetail.food)">\n          <ion-icon ios="ios-trash-outline" md="ios-trash-outline"></ion-icon>\n          Delete\n        </button>\n      </ion-item-options>\n      <ion-item-options side="right">\n        <button ion-button color="maindarkcolor" (click)="editFood(orderDetail.food)">\n          <ion-icon ios="ios-create-outline" md="ios-create-outline"></ion-icon>\n          Edit\n        </button>\n      </ion-item-options>\n    </ion-item-sliding>\n    <ion-row no-padding *ngIf="orderTable.listOrder.length > 0">\n      <ion-col col-6 no-padding text-center>\n        <button ion-button color="mainlightcolor" (click)="closeOrder()">\n          Xóa\n        </button>\n      </ion-col>\n      <ion-col col-6 no-padding text-center>\n        <button ion-button color="mainlightcolor" (click)="confirmOrder()">\n          Hoàn tất\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-list>\n</ion-content>\n<ion-footer>\n  <ion-row no-padding>\n    <ion-col col-4 no-padding text-center>\n      <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor"\n        icon-only icon-only (click)="createFood()">\n        <ion-icon ios="ios-add-outline" md="ios-add-outline"></ion-icon>\n      </button>\n    </ion-col>\n    <ion-col col-4 no-padding text-center>\n      <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor"\n        icon-only (click)="goToChief()">\n        <ion-icon ios="ios-bonfire" md="ios-bonfire"></ion-icon>\n      </button>\n    </ion-col>\n    <ion-col col-4 no-padding text-center>\n      <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor"\n        icon-only (click)="addOrder()">\n        <ion-icon ios="ios-paper" md="ios-paper"></ion-icon>\n      </button>\n    </ion-col>\n  </ion-row>\n</ion-footer>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\order\order.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_order_order__["e" /* OrderProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_order_order__["e" /* OrderProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_order_order__["e" /* OrderProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], OrderPage);
     return OrderPage;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=order.js.map

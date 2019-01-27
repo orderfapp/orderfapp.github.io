@@ -68,7 +68,6 @@ var StatisticsPage = /** @class */ (function () {
         this.navParams = navParams;
     }
     StatisticsPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad StatisticsPage');
     };
     StatisticsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
