@@ -43542,6 +43542,22 @@ page-setup .listFood {
   margin-bottom: 0px;
 }
 
+page-setup .listType {
+  margin-top: 0.5rem;
+}
+
+page-setup .removeLines .item-inner {
+  border-bottom: none !important;
+}
+
+page-setup .borderList {
+  border: solid 1.3px lightgray;
+}
+
+page-setup .footerColor {
+  background-color: white;
+}
+
 page-setup-type .backgroundColor {
   background-color: #e0e0e0;
 }
@@ -43568,4 +43584,8 @@ page-setup-type .text-input {
 
 page-setup-type .listFood {
   margin-bottom: 0px;
+}
+
+page-setup-type .footerColor {
+  background-color: white;
 }

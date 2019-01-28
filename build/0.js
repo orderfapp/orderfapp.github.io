@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 504:
+/***/ 502:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SetupPageModule", function() { return SetupPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__setup__ = __webpack_require__(510);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__setup__ = __webpack_require__(508);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var SetupPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 510:
+/***/ 508:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46,7 +46,7 @@ var SetupPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_order_order__ = __webpack_require__(288);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(511);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(509);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -68,9 +68,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var SetupPage = /** @class */ (function () {
-    function SetupPage(navCtrl, orderProvider, navParams) {
+    function SetupPage(navCtrl, orderProvider, alertCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.orderProvider = orderProvider;
+        this.alertCtrl = alertCtrl;
         this.navParams = navParams;
         this.listDataGroup = [];
         this.localFood = new __WEBPACK_IMPORTED_MODULE_2__providers_order_order__["a" /* CFood */]();
@@ -106,18 +107,40 @@ var SetupPage = /** @class */ (function () {
         data.isExpand = !data.isExpand;
     };
     SetupPage.prototype.deleteFood = function (food) {
-        this.orderProvider.deleteFood(food);
+        var _this = this;
+        var prompt = this.alertCtrl.create({
+            title: 'Xóa món',
+            buttons: [
+                {
+                    text: 'Đóng',
+                    handler: function (data) {
+                    }
+                },
+                {
+                    text: 'Xóa',
+                    handler: function (data) {
+                        _this.orderProvider.deleteFood(food);
+                    }
+                }
+            ]
+        });
+        prompt.present();
     };
     SetupPage.prototype.editFood = function (food) {
         this.title = "Sửa";
-        this.orderProvider.editFood(food);
+        this.localFood.copy(food);
     };
     SetupPage.prototype.cancelEdit = function () {
         this.localFood = new __WEBPACK_IMPORTED_MODULE_2__providers_order_order__["a" /* CFood */]();
         this.title = "Tạo";
     };
     SetupPage.prototype.saveData = function () {
-        this.orderProvider.addFood(this.localFood);
+        if (this.title == "Tạo") {
+            this.orderProvider.addFood(this.localFood);
+        }
+        else {
+            this.orderProvider.editFood(this.localFood);
+        }
         this.title = "Tạo";
     };
     SetupPage.prototype.createType = function () {
@@ -125,10 +148,11 @@ var SetupPage = /** @class */ (function () {
     };
     SetupPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-setup',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\setup\setup.html"*/'<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>Đăng kí Món Ăn</ion-title>\n    <!-- <ion-buttons end>\n        <button ion-button clear>\n          1/5\n        </button>\n      </ion-buttons> -->\n  </ion-navbar>\n</ion-header>\n<ion-content padding class="backgroundColor">\n  <form (ngSubmit)="saveData()" #FoodForm="ngForm">\n    <ion-list>\n      <ion-row class="headerInput">\n        Thông tin Món Ăn\n      </ion-row>\n      <ion-row class="heightInput">\n        <ion-input class="inputRound" placeholder="Tên món" type="text" [(ngModel)]="localFood.name" name="name"\n          required></ion-input>\n      </ion-row>\n      <ion-row class="heightInput">\n        <ion-input class="inputRound" placeholder="Giá" type="text" [(ngModel)]="localFood.value" name="value" required></ion-input>\n      </ion-row>\n      <ion-row class="heightInput">\n        <ion-input class="inputRound" placeholder="Link Image" type="text" [(ngModel)]="localFood.image" name="image"\n          required></ion-input>\n      </ion-row>\n      <ion-item>\n        <ion-toggle [(ngModel)]="localFood.status" name="status"></ion-toggle>\n        <ion-label>\n          Tình trạng(Hết/Còn)\n        </ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-label>Phân loại</ion-label>\n        <ion-select [(ngModel)]="localFood.type" name="type" required>\n          <ion-option value="{{type}}" *ngFor="let type of orderProvider.listTypeFood">{{type}}</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-row class="heightInput">\n        <ion-col col-2>\n        </ion-col>\n        <ion-col col-4>\n          <button ion-button full class="submit-btn buttonAdd" [disabled]="!FoodForm.form.valid" text-uppercase>\n            {{title}}\n          </button>\n        </ion-col>\n        <ion-col col-4>\n          <button ion-button full class="buttonAdd" type="button" text-uppercase (click)="cancelEdit()">\n            Cancel\n          </button>\n        </ion-col>\n        <ion-col col-2>\n\n        </ion-col>\n      </ion-row>\n    </ion-list>\n  </form>\n  <ion-row class="headerInput">\n    Danh Sách Món Ăn\n  </ion-row>\n  <ion-list class="listFood" *ngFor="let typeFood of listDataGroup">\n    <button ion-item class="parentList" detail-none icon-start (click)="expandList(typeFood)" *ngIf="!typeFood.isExpand">\n      <ion-icon ios="md-add" md="md-add"></ion-icon>\n      {{typeFood.type}}\n    </button>\n    <button ion-item class="parentList" detail-none icon-start (click)="expandList(typeFood)" *ngIf="typeFood.isExpand">\n      <ion-icon ios="md-remove" md="md-remove"></ion-icon>\n      {{typeFood.type}}\n    </button>\n    <ion-list class="childList listFood" *ngIf="typeFood.isExpand">\n      <ion-item-sliding *ngFor="let foodDetails of typeFood.listData">\n        <ion-item no-lines>\n          <ion-avatar item-start>\n            <img src=\'{{foodDetails.image ? foodDetails.image : "assets/icon/noimage.png"}}\'>\n          </ion-avatar>\n          <h2>{{foodDetails.name}}</h2>\n          <p>Giá : {{foodDetails.value}}k<font style="color:red">{{foodDetails.status ? "" :" Hết hàng"}}</font>\n          </p>\n        </ion-item>\n        <ion-item-options side="left">\n          <button ion-button color="mainlightcolor" (click)="deleteFood(foodDetails)">\n            <ion-icon ios="ios-trash-outline" md="ios-trash-outline"></ion-icon>\n            Delete\n          </button>\n        </ion-item-options>\n        <ion-item-options side="right">\n          <button ion-button color="maindarkcolor" (click)="editFood(foodDetails)">\n            <ion-icon ios="ios-create-outline" md="ios-create-outline"></ion-icon>\n            Edit\n          </button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n  </ion-list>\n</ion-content>\n<ion-footer>\n    <ion-row no-padding>\n      <ion-col col-12 no-padding text-center>\n        <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor" icon-only icon-only (click)="createType()">\n            <ion-icon ios="ios-add-outline" md="ios-add-outline"></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-footer>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\setup\setup.html"*/,
+            selector: 'page-setup',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\setup\setup.html"*/'<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>Đăng kí Món Ăn</ion-title>\n    <!-- <ion-buttons end>\n        <button ion-button clear>\n          1/5\n        </button>\n      </ion-buttons> -->\n  </ion-navbar>\n</ion-header>\n<ion-content padding class="backgroundColor">\n  <form (ngSubmit)="saveData()" #FoodForm="ngForm">\n    <ion-list>\n      <ion-row class="headerInput">\n        Thông tin Món Ăn\n      </ion-row>\n      <ion-row class="heightInput">\n        <ion-input class="inputRound" placeholder="Tên món" type="text" [(ngModel)]="localFood.name" name="name"\n          required></ion-input>\n      </ion-row>\n      <ion-row class="heightInput">\n        <ion-input class="inputRound" placeholder="Giá" type="text" [(ngModel)]="localFood.value" name="value" required></ion-input>\n      </ion-row>\n      <ion-row class="heightInput">\n        <ion-input class="inputRound" placeholder="Link Image" type="text" [(ngModel)]="localFood.image" name="image"\n          required></ion-input>\n      </ion-row>\n      <ion-item class="removeLines">\n        <ion-toggle [(ngModel)]="localFood.status" name="status"></ion-toggle>\n        <ion-label>\n          Tình trạng(Hết/Còn)\n        </ion-label>\n      </ion-item>\n      <ion-item class="listType removeLines">\n        <ion-label>Phân loại</ion-label>\n        <ion-select [(ngModel)]="localFood.type" name="type" required>\n          <ion-option value="{{type}}" *ngFor="let type of orderProvider.listTypeFood">{{type}}</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-row class="heightInput">\n        <ion-col col-2>\n        </ion-col>\n        <ion-col col-4>\n          <button ion-button full class="submit-btn buttonAdd" [disabled]="!FoodForm.form.valid" text-uppercase>\n            {{title}}\n          </button>\n        </ion-col>\n        <ion-col col-4>\n          <button ion-button full class="buttonAdd" type="button" text-uppercase (click)="cancelEdit()">\n            Cancel\n          </button>\n        </ion-col>\n        <ion-col col-2>\n        </ion-col>\n      </ion-row>\n    </ion-list>\n  </form>\n  <ion-row class="headerInput">\n    Danh Sách Món Ăn\n  </ion-row>\n  <ion-list class="listFood borderList" *ngFor="let typeFood of listDataGroup">\n    <button ion-item class="parentList" detail-none icon-start (click)="expandList(typeFood)" *ngIf="!typeFood.isExpand">\n      <ion-icon ios="md-add" md="md-add"></ion-icon>\n      {{typeFood.type}}\n    </button>\n    <button ion-item class="parentList" detail-none icon-start (click)="expandList(typeFood)" *ngIf="typeFood.isExpand">\n      <ion-icon ios="md-remove" md="md-remove"></ion-icon>\n      {{typeFood.type}}\n    </button>\n    <ion-list class="childList listFood" *ngIf="typeFood.isExpand">\n      <ion-item-sliding *ngFor="let foodDetails of typeFood.listData">\n        <ion-item>\n          <ion-avatar item-start>\n            <img src=\'{{foodDetails.image ? foodDetails.image : "assets/icon/noimage.png"}}\'>\n          </ion-avatar>\n          <h2>{{foodDetails.name}}</h2>\n          <p>Giá : {{foodDetails.value}}k<font style="color:red">{{foodDetails.status ? "" :" Hết hàng"}}</font>\n          </p>\n        </ion-item>\n        <ion-item-options side="left">\n          <button ion-button color="mainlightcolor" (click)="deleteFood(foodDetails)">\n            <ion-icon ios="ios-trash-outline" md="ios-trash-outline"></ion-icon>\n            Delete\n          </button>\n        </ion-item-options>\n        <ion-item-options side="right">\n          <button ion-button color="maindarkcolor" (click)="editFood(foodDetails)">\n            <ion-icon ios="ios-create-outline" md="ios-create-outline"></ion-icon>\n            Edit\n          </button>\n        </ion-item-options>\n      </ion-item-sliding>\n    </ion-list>\n  </ion-list>\n</ion-content>\n<ion-footer>\n    <ion-row no-padding class="footerColor">\n      <ion-col col-6 no-padding text-center>\n        <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor" icon-only icon-only navPop>\n            <ion-icon ios="md-arrow-round-back" md="md-arrow-round-back"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6 no-padding text-center>\n        <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor" icon-only icon-only (click)="createType()">\n            <ion-icon ios="md-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-footer>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\setup\setup.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2__providers_order_order__["e" /* OrderProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
     ], SetupPage);
     return SetupPage;
@@ -138,7 +162,7 @@ var SetupPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 511:
+/***/ 509:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -17250,11 +17274,11 @@ var SetupPage = /** @class */ (function () {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(67), __webpack_require__(512)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(67), __webpack_require__(510)(module)))
 
 /***/ }),
 
-/***/ 512:
+/***/ 510:
 /***/ (function(module, exports) {
 
 module.exports = function(module) {

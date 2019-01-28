@@ -22,27 +22,27 @@ webpackEmptyAsyncContext.id = 190;
 
 var map = {
 	"../pages/chief/chief.module": [
-		503,
+		501,
 		5
 	],
 	"../pages/login/login.module": [
-		502,
+		500,
 		4
 	],
 	"../pages/order/order.module": [
-		500,
+		503,
 		3
 	],
 	"../pages/setup-type/setup-type.module": [
-		501,
+		505,
 		2
 	],
 	"../pages/setup/setup.module": [
-		504,
+		502,
 		0
 	],
 	"../pages/statistics/statistics.module": [
-		505,
+		504,
 		1
 	]
 };
@@ -350,12 +350,12 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/order/order.module#OrderPageModule', name: 'OrderPage', segment: 'order', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/setup-type/setup-type.module#SetupTypePageModule', name: 'SetupTypePage', segment: 'setup-type', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/chief/chief.module#ChiefPageModule', name: 'ChiefPage', segment: 'chief', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup/setup.module#SetupPageModule', name: 'SetupPage', segment: 'setup', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/order/order.module#OrderPageModule', name: 'OrderPage', segment: 'order', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/setup-type/setup-type.module#SetupTypePageModule', name: 'SetupTypePage', segment: 'setup-type', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_8_angularfire2__["AngularFireModule"].initializeApp(firebaseConfig),
