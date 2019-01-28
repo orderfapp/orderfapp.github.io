@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Order Food",
+  "short_name": "Order Food",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
