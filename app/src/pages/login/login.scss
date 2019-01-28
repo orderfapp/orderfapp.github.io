@@ -1,0 +1,78 @@
+page-login {
+    .highlightRemove .item-inner{
+        box-shadow: none !important;
+    }    
+    .inputItemStyleF{
+        background-color: transparent;
+        .item-inner{
+          padding: 0px!important;
+        }
+      }    
+      .inputlabel{
+        min-width: 0px;
+        max-width: 10rem;
+        color: white!important;
+      }
+      .inputTextStyle{
+        border-style: solid;
+        border-width: 1px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        border-color: map-get($colors, bgiphonedark);
+        padding: 0;
+        height: 3.5rem;
+        .text-input-ios{
+          margin: 0 0 0 1rem;
+          height: 100%;
+        }
+        .text-input-md{
+          margin: 0 0 0 1rem;
+          height: 100%;
+        }
+      }  
+    .backgroundMain{
+        background-color: map-get($colors, maincolor);
+    }
+    .backgroundMain{
+        background-color: map-get($colors, maincolor);
+    }
+    .backgroundMainFooter{
+        background-color: map-get($colors, light);
+    }
+    .nameLogo{
+        color:  map-get($colors, light);
+        font-size: 4rem;
+        text-align: center;
+    }
+    .forgotPass{
+        justify-content: flex-end;
+        font-style: italic;
+        text-decoration: underline;
+        padding-top: 0.5rem;
+    }
+    .logo-row {
+        padding-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        text-align: center;
+      }  
+    .logo-login{
+        width: 70%;
+        height: auto;
+    }
+    .marginRow{
+          padding-top: 0.5rem;
+    }
+    .roundButton{
+        height: 4rem;
+        width: 4rem;        
+    }
+    .fontInforIcon{
+        font-size: 4rem;
+    }
+    .colorTextHind{
+        color: map-get($colors, maincolor);
+    }
+}

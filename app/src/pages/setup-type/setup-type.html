@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar color='maincolor'>
+    <ion-title>Đăng kí loại món ăn</ion-title>
+    <!-- <ion-buttons end>
+          <button ion-button clear>
+            1/5
+          </button>
+        </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+<ion-content padding class="backgroundColor">
+  <form (ngSubmit)="saveData()" #TypeForm="ngForm">
+    <ion-list>
+      <ion-row class="headerInput">
+        Thông tin loại Món Ăn
+      </ion-row>
+      <ion-row class="heightInput">
+        <ion-input class="inputRound" placeholder="Tên loại món" type="text" [(ngModel)]="localType" name="name"
+          required></ion-input>
+      </ion-row>
+      <ion-row class="heightInput">
+        <ion-col col-2>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button full class="submit-btn buttonAdd" [disabled]="!TypeForm.form.valid" text-uppercase>
+            {{title}}
+          </button>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button full class="buttonAdd" type="button" text-uppercase (click)="cancelEdit()">
+            Cancel
+          </button>
+        </ion-col>
+        <ion-col col-2>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </form>
+  <ion-row class="headerInput">
+    Danh Sách phân loại Món Ăn
+  </ion-row>
+  <ion-list class="childList listFood">
+    <ion-item-sliding *ngFor="let typeFood of orderProvider.listTypeFood">
+      <ion-item>
+        <h2>{{typeFood}}</h2>
+      </ion-item>
+      <ion-item-options side="left">
+        <button ion-button color="mainlightcolor" (click)="deleteType(typeFood)">
+          <ion-icon ios="ios-trash-outline" md="ios-trash-outline"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+      <ion-item-options side="right">
+        <button ion-button color="maindarkcolor" (click)="editType(typeFood)">
+          <ion-icon ios="ios-create-outline" md="ios-create-outline"></ion-icon>
+          Copy
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-row no-padding class="footerColor">
+    <ion-col col-12 no-padding text-center>
+      <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor" icon-only icon-only navPop>
+          <ion-icon ios="md-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

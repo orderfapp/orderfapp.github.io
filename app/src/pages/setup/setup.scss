@@ -1,0 +1,38 @@
+page-setup {
+    .backgroundColor{
+        background-color: map-get($colors, bgiphonedark);
+    }
+    .headerInput{
+        font-size: 2rem;
+        color: black;
+        font-weight: bold;
+        padding-bottom: 0.5rem;
+    }
+    .heightInput{
+        padding-bottom: 0.5rem;
+    }
+    .inputRound{
+        -webkit-border-radius: 0.7rem;
+        -moz-border-radius: 0.7rem;
+        border-radius: 0.7rem;
+        background-color: map-get($colors, bginputiphonelight);
+    }
+    .text-input{
+        margin: 7px 10px;
+    }   
+    .listFood{
+        margin-bottom: 0px;
+    }
+    .listType{
+        margin-top: 0.5rem;
+    }
+    .removeLines .item-inner{
+        border-bottom: none !important;
+    }
+    .borderList{
+        border: solid 1.3px lightgray;
+    }
+    .footerColor{
+        background-color: white;
+    }
+}

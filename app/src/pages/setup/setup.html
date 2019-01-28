@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-navbar color='maincolor'>
+    <ion-title>Đăng kí Món Ăn</ion-title>
+    <!-- <ion-buttons end>
+        <button ion-button clear>
+          1/5
+        </button>
+      </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+<ion-content padding class="backgroundColor">
+  <form (ngSubmit)="saveData()" #FoodForm="ngForm">
+    <ion-list>
+      <ion-row class="headerInput">
+        Thông tin Món Ăn
+      </ion-row>
+      <ion-row class="heightInput">
+        <ion-input class="inputRound" placeholder="Tên món" type="text" [(ngModel)]="localFood.name" name="name"
+          required></ion-input>
+      </ion-row>
+      <ion-row class="heightInput">
+        <ion-input class="inputRound" placeholder="Giá" type="text" [(ngModel)]="localFood.value" name="value" required></ion-input>
+      </ion-row>
+      <ion-row class="heightInput">
+        <ion-input class="inputRound" placeholder="Link Image" type="text" [(ngModel)]="localFood.image" name="image"
+          required></ion-input>
+      </ion-row>
+      <ion-item class="removeLines">
+        <ion-toggle [(ngModel)]="localFood.status" name="status"></ion-toggle>
+        <ion-label>
+          Tình trạng(Hết/Còn)
+        </ion-label>
+      </ion-item>
+      <ion-item class="listType removeLines">
+        <ion-label>Phân loại</ion-label>
+        <ion-select [(ngModel)]="localFood.type" name="type" required>
+          <ion-option value="{{type}}" *ngFor="let type of orderProvider.listTypeFood">{{type}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-row class="heightInput">
+        <ion-col col-2>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button full class="submit-btn buttonAdd" [disabled]="!FoodForm.form.valid" text-uppercase>
+            {{title}}
+          </button>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button full class="buttonAdd" type="button" text-uppercase (click)="cancelEdit()">
+            Cancel
+          </button>
+        </ion-col>
+        <ion-col col-2>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </form>
+  <ion-row class="headerInput">
+    Danh Sách Món Ăn
+  </ion-row>
+  <ion-list class="listFood borderList" *ngFor="let typeFood of listDataGroup">
+    <button ion-item class="parentList" detail-none icon-start (click)="expandList(typeFood)" *ngIf="!typeFood.isExpand">
+      <ion-icon ios="md-add" md="md-add"></ion-icon>
+      {{typeFood.type}}
+    </button>
+    <button ion-item class="parentList" detail-none icon-start (click)="expandList(typeFood)" *ngIf="typeFood.isExpand">
+      <ion-icon ios="md-remove" md="md-remove"></ion-icon>
+      {{typeFood.type}}
+    </button>
+    <ion-list class="childList listFood" *ngIf="typeFood.isExpand">
+      <ion-item-sliding *ngFor="let foodDetails of typeFood.listData">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src='{{foodDetails.image ? foodDetails.image : "assets/icon/noimage.png"}}'>
+          </ion-avatar>
+          <h2>{{foodDetails.name}}</h2>
+          <p>Giá : {{foodDetails.value}}k<font style="color:red">{{foodDetails.status ? "" :" Hết hàng"}}</font>
+          </p>
+        </ion-item>
+        <ion-item-options side="left">
+          <button ion-button color="mainlightcolor" (click)="deleteFood(foodDetails)">
+            <ion-icon ios="ios-trash-outline" md="ios-trash-outline"></ion-icon>
+            Delete
+          </button>
+        </ion-item-options>
+        <ion-item-options side="right">
+          <button ion-button color="maindarkcolor" (click)="editFood(foodDetails)">
+            <ion-icon ios="ios-create-outline" md="ios-create-outline"></ion-icon>
+            Edit
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-row no-padding class="footerColor">
+      <ion-col col-6 no-padding text-center>
+        <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor" icon-only icon-only navPop>
+            <ion-icon ios="md-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-6 no-padding text-center>
+        <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor" icon-only icon-only (click)="createType()">
+            <ion-icon ios="md-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-footer>

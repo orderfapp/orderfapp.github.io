@@ -1,0 +1,63 @@
+<!--
+  Generated template for the DeviceListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color='maincolor'>
+    <ion-title>List Order</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>  
+  <ion-list>
+      <ion-row *ngIf="dataOfOrder.length == 0">
+          <div>Chưa đặt bàn</div>
+        </ion-row>
+    <ion-list class="listFood" *ngFor="let order of items">
+      <button ion-item class="parentList" detail-none icon-start (click)="expandList(order)" *ngIf="!order.isExpand">
+        <ion-icon ios="md-add" md="md-add"></ion-icon>
+        {{order.table}}
+      </button>
+      <button ion-item class="parentList" detail-none icon-start (click)="expandList(order)" *ngIf="order.isExpand">
+          <ion-icon ios="md-remove" md="md-remove"></ion-icon>
+          {{order.table}}
+        </button>
+      <ion-list class="childList listFood" *ngIf="order.isExpand">
+          <ion-item-sliding *ngFor="let orderDetail of order.listOrder">
+              <ion-item no-lines>
+                <ion-avatar item-start (click)="minusFood(orderDetail)">
+                  <img src='{{orderDetail.food.image ? orderDetail.food.image : "assets/icon/noimage.png"}}'>
+                </ion-avatar>
+                <h2>{{orderDetail.food.name}}</h2>
+                <p>Số lượng {{orderDetail.sl}}</p>
+                <button ion-button clear color="maincolor" item-end (click)="addFood(orderDetail)">Đã giao:{{" " + orderDetail.slgiao}}</button>
+              </ion-item>
+              <ion-item-options side="left">
+                <button ion-button color="mainlightcolor" (click)="deleteFood(order,orderDetail.food)">
+                  <ion-icon ios="ios-trash-outline" md="ios-trash-outline"></ion-icon>
+                  Delete
+                </button>
+              </ion-item-options>
+              <ion-item-options side="right">
+                <button ion-button color="maindarkcolor" (click)="editFood(orderDetail)">
+                  <ion-icon ios="ios-create-outline" md="ios-create-outline"></ion-icon>
+                  Edit
+                </button>
+              </ion-item-options>
+            </ion-item-sliding>        
+      </ion-list>
+    </ion-list>
+  </ion-list>  
+</ion-content>
+<ion-footer>
+  <ion-row no-padding>  
+    <ion-col col-12 no-padding text-center>
+      <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor"
+        icon-only navPop>
+        <ion-icon ios="ios-paper" md="ios-paper"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

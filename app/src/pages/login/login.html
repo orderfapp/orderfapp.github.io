@@ -1,0 +1,24 @@
+<ion-content padding class="backgroundMain">
+  <ion-row class="logo-row">
+    <img class="logo-login" src="assets/icon/icon-IoT222.png" />
+  </ion-row>
+  <form (ngSubmit)="login()" #loginForm="ngForm">
+    <ion-row class="nameLogo">
+      <div>VF Monitoring</div>
+    </ion-row>
+    <ion-item class="highlightRemove inputItemStyleF" no-lines>
+      <ion-input placeholder="Tên nhân viên" class="inputTextStyle"></ion-input>
+    </ion-item>
+    <ion-item class="highlightRemove inputItemStyleF" no-lines>
+        <ion-input placeholder="Mật khẩu" class="inputTextStyle"></ion-input>
+      </ion-item>
+    <ion-row class="marginRow">
+      <ion-col col-6>
+        <button ion-button color="light" block outline [disabled]="!loginForm.form.valid">Sign In</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button type="button" color="bgiphonedark" block outline (click)="changeAccount()">Create Account</button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
