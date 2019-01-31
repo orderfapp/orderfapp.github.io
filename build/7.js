@@ -1,14 +1,14 @@
 webpackJsonp([7],{
 
-/***/ 512:
+/***/ 504:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChiefPageModule", function() { return ChiefPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderDetailsPageModule", function() { return OrderDetailsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chief__ = __webpack_require__(521);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order_details__ = __webpack_require__(515);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ChiefPageModule = /** @class */ (function () {
-    function ChiefPageModule() {
+var OrderDetailsPageModule = /** @class */ (function () {
+    function OrderDetailsPageModule() {
     }
-    ChiefPageModule = __decorate([
+    OrderDetailsPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__chief__["a" /* ChiefPage */],
+                __WEBPACK_IMPORTED_MODULE_2__order_details__["a" /* OrderDetailsPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__chief__["a" /* ChiefPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__order_details__["a" /* OrderDetailsPage */]),
             ],
         })
-    ], ChiefPageModule);
-    return ChiefPageModule;
+    ], OrderDetailsPageModule);
+    return OrderDetailsPageModule;
 }());
 
-//# sourceMappingURL=chief.module.js.map
+//# sourceMappingURL=order-details.module.js.map
 
 /***/ }),
 
-/***/ 521:
+/***/ 515:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChiefPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrderDetailsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__ = __webpack_require__(290);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_option_option__ = __webpack_require__(291);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58,123 +59,181 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
- * Generated class for the ChiefPage page.
+ * Generated class for the OrderDetailsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var ChiefPage = /** @class */ (function () {
-    function ChiefPage(navCtrl, orderProvider, navParams) {
+var OrderDetailsPage = /** @class */ (function () {
+    function OrderDetailsPage(navCtrl, navParams, orderProvider, viewCtrl, optionProvider, alertCtrl) {
         this.navCtrl = navCtrl;
-        this.orderProvider = orderProvider;
         this.navParams = navParams;
-        this.dataOfOrder = [];
-        this.initializeItems();
+        this.orderProvider = orderProvider;
+        this.viewCtrl = viewCtrl;
+        this.optionProvider = optionProvider;
+        this.alertCtrl = alertCtrl;
+        this.mode = "";
+        this.currentTable = "";
+        this.orderProvider.orderTable.listOrder = this.orderProvider.orderTable.listOrder.sort(function (a, b) {
+            if (a.id < b.id)
+                return -1;
+            if (a.id > b.id)
+                return 1;
+            return 0;
+        });
     }
-    ChiefPage.prototype.initializeItems = function () {
-        var _this = this;
-        var data = this.orderProvider.getAllOrder().valueChanges().subscribe(function (dataInfo) {
-            var count = 0;
-            var listOrderHide = [];
-            _this.dataOfOrder = [];
-            if (dataInfo) {
-                for (var index = 0; index < dataInfo.length; index++) {
-                    var order = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["a" /* COrder */]();
-                    var element = dataInfo[index];
-                    order.copy(element);
-                    for (var key in element.order) {
-                        var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["b" /* COrderDetails */]();
-                        orderDetail.copy(element.order[key]);
-                        orderDetail.food.copy(_this.orderProvider.listFoodObject[element.order[key].id]);
-                        if (element.order[key].option) {
-                            for (var keyOption in element.order[key].option) {
-                                orderDetail.option.push(keyOption);
-                            }
-                        }
-                        order.listOrder.push(orderDetail);
-                    }
-                    _this.dataOfOrder.push(order);
-                    if (order.status) {
-                        listOrderHide.push(index);
-                        count++;
-                    }
-                }
-                if (count > _this.orderProvider.limitShow) {
-                    for (var index = listOrderHide.length - _this.orderProvider.limitShow - 1; index >= 0; index--) {
-                        _this.dataOfOrder.splice(listOrderHide[index], 1);
-                    }
-                }
-            }
-            else {
-                _this.dataOfOrder = [];
-            }
-            _this.items = _this.dataOfOrder;
+    OrderDetailsPage.prototype.ngOnInit = function () {
+        if (this.navParams.data) {
+            this.mode = this.navParams.data.mode;
+            this.currentTable = this.navParams.data.currentTable;
+        }
+        this.orderProvider.orderTable.listOrder = this.orderProvider.orderTable.listOrder.sort(function (a, b) {
+            if (a.id < b.id)
+                return -1;
+            if (a.id > b.id)
+                return 1;
+            return 0;
         });
     };
-    ChiefPage.prototype.confirmAll = function (order) {
-        order.status = !order.status;
-        for (var index = 0; index < order.listOrder.length; index++) {
-            order.listOrder[index].status = order.status;
-        }
-        this.orderProvider.updateStatus(order);
-    };
-    ChiefPage.prototype.confirm = function (order, food) {
-        food.status = !food.status;
-        var count = 0;
-        for (var index = 0; index < order.listOrder.length; index++) {
-            var element = order.listOrder[index];
-            if (element.status == food.status) {
-                count++;
-            }
-        }
-        if (count == order.listOrder.length) {
-            order.status = food.status;
-        }
-        this.orderProvider.updateStatus(order);
-    };
-    ChiefPage.prototype.getItems = function (ev) {
-        var val = ev.target.value;
-        // if the value is an empty string don't filter the items
-        if (val && val.trim() != '') {
-            val = this.xoaDau(val);
-            this.items = this.dataOfOrder.filter(function (item) {
-                return (item.table.toLowerCase().includes(val.toLowerCase()) == true || item.name.toLowerCase().includes(val.toLowerCase()) == true);
+    OrderDetailsPage.prototype.addOption = function (food) {
+        var alert = this.alertCtrl.create();
+        alert.setTitle('Chọn thêm?');
+        for (var index = 0; index < this.optionProvider.listOption.length; index++) {
+            var element = this.optionProvider.listOption[index];
+            alert.addInput({
+                type: 'checkbox',
+                label: element,
+                value: element
             });
         }
-        else {
-            this.items = this.dataOfOrder;
+        alert.addButton('Hủy');
+        alert.addButton({
+            text: 'Chọn',
+            handler: function (data) {
+                food.option = data;
+            }
+        });
+        alert.present();
+    };
+    OrderDetailsPage.prototype.deleteFood = function (food) {
+        var _this = this;
+        var prompt = this.alertCtrl.create({
+            title: 'Xóa món',
+            buttons: [
+                {
+                    text: 'Đóng',
+                    handler: function (data) {
+                    }
+                },
+                {
+                    text: 'Xóa',
+                    handler: function (data) {
+                        var indexFood = -1;
+                        for (var index = 0; index < _this.orderProvider.orderTable.listOrder.length; index++) {
+                            if (_this.orderProvider.orderTable.listOrder[index].id == food.id) {
+                                indexFood = index;
+                                break;
+                            }
+                        }
+                        if (indexFood != -1) {
+                            _this.orderProvider.orderTable.listOrder.splice(indexFood, 1);
+                            if (_this.orderProvider.listSLFoodObject[food.id] == 1) {
+                                _this.orderProvider.listSLFoodObject[food.id] = null;
+                            }
+                            else if (indexFood != -1 && _this.orderProvider.listSLFoodObject[food.id] > 1) {
+                                _this.orderProvider.listSLFoodObject[food.id] = _this.orderProvider.listSLFoodObject[food.id] - 1;
+                            }
+                        }
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    };
+    OrderDetailsPage.prototype.addFood = function (food) {
+        var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* COrderDetails */]();
+        orderDetail.id = food.id;
+        orderDetail.sl = 1;
+        orderDetail.status = false;
+        orderDetail.food.copy(food.food);
+        this.orderProvider.orderTable.listOrder.push(orderDetail);
+        this.orderProvider.orderTable.listOrder = this.orderProvider.orderTable.listOrder.sort(function (a, b) {
+            if (a.id < b.id)
+                return -1;
+            if (a.id > b.id)
+                return 1;
+            return 0;
+        });
+        this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] + 1;
+    };
+    OrderDetailsPage.prototype.minusFood = function (food) {
+        var indexFood = -1;
+        for (var index = 0; index < this.orderProvider.orderTable.listOrder.length; index++) {
+            if (this.orderProvider.orderTable.listOrder[index].id == food.id) {
+                indexFood = index;
+                break;
+            }
+        }
+        if (indexFood > -1) {
+            this.orderProvider.orderTable.listOrder.splice(indexFood, 1);
+            if (this.orderProvider.listSLFoodObject[food.id] == 1) {
+                this.orderProvider.listSLFoodObject[food.id] = null;
+            }
+            else if (indexFood != -1 && this.orderProvider.listSLFoodObject[food.id] > 1) {
+                this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] - 1;
+            }
         }
     };
-    ChiefPage.prototype.xoaDau = function (str) {
-        str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
-        str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
-        str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
-        str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
-        str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
-        str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
-        str = str.replace(/đ/g, "d");
-        str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
-        str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
-        str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
-        str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
-        str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
-        str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
-        str = str.replace(/Đ/g, "D");
-        return str;
+    OrderDetailsPage.prototype.closeOrder = function (order) {
+        var _this = this;
+        var prompt = this.alertCtrl.create({
+            title: 'Xóa order',
+            buttons: [
+                {
+                    text: 'Đóng',
+                    handler: function (data) {
+                    }
+                },
+                {
+                    text: 'Xóa',
+                    handler: function (data) {
+                        _this.orderProvider.clearOrder(order);
+                        _this.viewCtrl.dismiss();
+                    }
+                }
+            ]
+        });
+        prompt.present();
     };
-    ChiefPage = __decorate([
+    OrderDetailsPage.prototype.confirmOrder = function (order) {
+        if (this.currentTable) {
+            order.table = this.currentTable.toLowerCase();
+        }
+        else {
+            order.table = this.mode;
+        }
+        order.mode = this.mode;
+        this.orderProvider.addOrder(order);
+        this.currentTable = "";
+        this.viewCtrl.dismiss();
+    };
+    OrderDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-chief',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\chief\chief.html"*/'<!--\n  Generated template for the DeviceListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>List Order</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-row no-padding *ngFor="let orderDetails of items">\n    <ion-col col-2 no-padding class="colBackground">\n      <button ion-button class="buttonFullHeight" color="bgiphonedark" outline (click)="confirmAll(orderDetails)" no-padding>{{orderDetails.table}}</button>\n    </ion-col>\n    <ion-col col-10 no-padding>\n      <ion-list no-padding class="listDetails" *ngFor="let foodDetails of orderDetails.listOrder">\n        <ion-item [ngClass]="{\'disableFood\': foodDetails.status}">\n          <ion-avatar item-start>\n            <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n          </ion-avatar>\n          <h2>{{foodDetails.food.name}}</h2>\n          <p *ngIf="foodDetails.option.length == 0">Bình thường</p>\n          <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n          <button ion-button clear color="maincolor" item-end (click)="confirm(orderDetails, foodDetails)">OK</button>\n        </ion-item>\n      </ion-list>\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\chief\chief.html"*/,
+            selector: 'page-order-details',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\order-details\order-details.html"*/'<ion-content>\n  <ion-list>\n    <ion-row no-padding class="headerRow" text-center>\n      <button ion-button class="buttonHeader" color="light" full clear>{{mode + " " + currentTable}}</button>\n    </ion-row>\n    <ion-item (press)="deleteFood(foodDetails)" (swipe)="addOption(foodDetails)" *ngFor="let foodDetails of orderProvider.orderTable.listOrder">\n      <ion-avatar item-start (click)="minusFood(foodDetails)">\n        <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n      </ion-avatar>\n      <h2>{{foodDetails.food.name}}</h2>\n      <p *ngIf="foodDetails.option.length == 0">Bình thường</p>\n      <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n      <button ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">{{"SL " + foodDetails.sl}}</button>\n    </ion-item>\n    <ion-row no-padding>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" (click)="closeOrder(orderProvider.orderTable)">\n          Xóa\n        </button>\n      </ion-col>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" (click)="confirmOrder(orderProvider.orderTable)">\n          Hoàn tất\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\order-details\order-details.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* OrderFoodProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
-    ], ChiefPage);
-    return ChiefPage;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_option_option__["a" /* OptionProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+    ], OrderDetailsPage);
+    return OrderDetailsPage;
 }());
 
-//# sourceMappingURL=chief.js.map
+//# sourceMappingURL=order-details.js.map
 
 /***/ })
 

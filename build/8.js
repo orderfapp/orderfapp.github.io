@@ -1,14 +1,14 @@
 webpackJsonp([8],{
 
-/***/ 508:
+/***/ 503:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CashierPageModule", function() { return CashierPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cashier__ = __webpack_require__(517);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(514);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var CashierPageModule = /** @class */ (function () {
-    function CashierPageModule() {
+var LoginPageModule = /** @class */ (function () {
+    function LoginPageModule() {
     }
-    CashierPageModule = __decorate([
+    LoginPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__cashier__["a" /* CashierPage */],
+                __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__cashier__["a" /* CashierPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]),
             ],
         })
-    ], CashierPageModule);
-    return CashierPageModule;
+    ], LoginPageModule);
+    return LoginPageModule;
 }());
 
-//# sourceMappingURL=cashier.module.js.map
+//# sourceMappingURL=login.module.js.map
 
 /***/ }),
 
-/***/ 517:
+/***/ 514:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CashierPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__ = __webpack_require__(290);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_authenticate_authenticate__ = __webpack_require__(290);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58,114 +59,79 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
- * Generated class for the CashierPage page.
+ * Generated class for the LoginPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var CashierPage = /** @class */ (function () {
-    function CashierPage(navCtrl, orderProvider, popoverCtrl, navParams) {
+var LoginPage = /** @class */ (function () {
+    function LoginPage(navCtrl, auth, alertCtrl, navParams, orderProvider) {
         this.navCtrl = navCtrl;
-        this.orderProvider = orderProvider;
-        this.popoverCtrl = popoverCtrl;
+        this.auth = auth;
+        this.alertCtrl = alertCtrl;
         this.navParams = navParams;
-        this.dataOfOrder = [];
-        this.initializeItems();
+        this.orderProvider = orderProvider;
+        this.loginInfo = { userName: '', password: '' };
+        this.showButton = false;
     }
-    CashierPage.prototype.initializeItems = function () {
+    LoginPage.prototype.login = function () {
         var _this = this;
-        var data = this.orderProvider.getAllOrder().valueChanges().subscribe(function (dataInfo) {
-            var count = 0;
-            var listOrderHide = [];
-            _this.dataOfOrder = [];
-            if (dataInfo) {
-                for (var index = 0; index < dataInfo.length; index++) {
-                    var order = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["a" /* COrder */]();
-                    var element = dataInfo[index];
-                    order.copy(element);
-                    for (var key in element.order) {
-                        var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["b" /* COrderDetails */]();
-                        orderDetail.copy(element.order[key]);
-                        orderDetail.food.copy(_this.orderProvider.listFoodObject[element.order[key].id]);
-                        if (element.order[key].option) {
-                            for (var keyOption in element.order[key].option) {
-                                orderDetail.option.push(keyOption);
-                            }
-                        }
-                        order.listOrder.push(orderDetail);
-                    }
-                    _this.dataOfOrder.push(order);
-                    if (order.status) {
-                        listOrderHide.push(index);
-                        count++;
-                    }
-                }
-                if (count > _this.orderProvider.limitShow) {
-                    for (var index = listOrderHide.length - _this.orderProvider.limitShow - 1; index >= 0; index--) {
-                        _this.dataOfOrder.splice(listOrderHide[index], 1);
-                    }
-                }
+        this.showButton = false;
+        this.auth.login(this.loginInfo).subscribe(function (allowed) {
+            if (allowed) {
+                _this.showButton = true;
             }
             else {
-                _this.dataOfOrder = [];
+                _this.showError("Sai tài khoản : " + _this.loginInfo.userName);
             }
-            _this.items = _this.dataOfOrder;
+        }, function (error) {
+            _this.showError(error);
         });
     };
-    CashierPage.prototype.payment = function (order) {
-        var popover = this.popoverCtrl.create("PaymentPage", {
-            order: order
-        }, {
-            cssClass: 'payment-popover'
+    LoginPage.prototype.showError = function (text) {
+        var alert = this.alertCtrl.create({
+            title: 'Thông báo lỗi',
+            subTitle: text,
+            buttons: ['OK']
         });
-        popover.present({
-            ev: ""
+        alert.present();
+    };
+    LoginPage.prototype.goToOrder = function () {
+        this.navCtrl.push('OrderPage');
+    };
+    LoginPage.prototype.goToKitchen = function () {
+        this.navCtrl.push('ChiefPage');
+    };
+    LoginPage.prototype.goToCashier = function () {
+        this.navCtrl.push('CashierPage');
+    };
+    LoginPage.prototype.goToSetting = function () {
+        this.navCtrl.push('SetupPage');
+    };
+    LoginPage.prototype.summary = function () {
+        this.orderProvider.removeOrder();
+        var alert = this.alertCtrl.create({
+            title: 'Data đã được tổng kết',
+            buttons: ['OK']
         });
+        alert.present();
     };
-    CashierPage.prototype.getItems = function (ev) {
-        var val = ev.target.value;
-        // if the value is an empty string don't filter the items
-        if (val && val.trim() != '') {
-            val = this.xoaDau(val);
-            this.items = this.dataOfOrder.filter(function (item) {
-                return (item.table.toLowerCase().includes(val.toLowerCase()) == true || item.name.toLowerCase().includes(val.toLowerCase()) == true);
-            });
-        }
-        else {
-            this.items = this.dataOfOrder;
-        }
-    };
-    CashierPage.prototype.xoaDau = function (str) {
-        str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
-        str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
-        str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
-        str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
-        str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
-        str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
-        str = str.replace(/đ/g, "d");
-        str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
-        str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
-        str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
-        str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
-        str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
-        str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
-        str = str.replace(/Đ/g, "D");
-        return str;
-    };
-    CashierPage = __decorate([
+    LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-cashier',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\cashier\cashier.html"*/'<!--\n  Generated template for the DeviceListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>List Order</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-row no-padding *ngFor="let orderDetails of items">\n    <ion-col col-2 no-padding class="colBackground">\n      <button ion-button class="buttonFullHeight" color="bgiphonedark" outline (click)="payment(orderDetails)" no-padding>Thanh toán</button>\n    </ion-col>\n    <ion-col col-10 no-padding>\n      <ion-list no-padding class="listDetails" *ngFor="let foodDetails of orderDetails.listOrder">\n        <ion-item [ngClass]="{\'disableFood\': foodDetails.status}">\n          <ion-avatar item-start>\n            <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n          </ion-avatar>\n          <h2>{{foodDetails.food.name}}</h2>\n          <p *ngIf="foodDetails.option.length == 0">Bình thường</p>\n          <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n          <button ion-button clear color="maincolor" item-end (click)="confirm(foodDetails)">{{foodDetails.food.value + " K"}}</button>\n        </ion-item>\n      </ion-list>\n      <ion-list no-padding class="listDetails">\n        <ion-item>\n          <button ion-button clear color="maincolor" class="payment" item-end (click)="payment(orderDetails)">{{"Thanh toán " + orderDetails.total() + " K"}}</button>\n        </ion-item>\n      </ion-list>\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\cashier\cashier.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\login\login.html"*/'<ion-content padding class="backgroundMain">\n  <ion-row class="logo-row">\n    <img class="logo-login" src="assets/icon/icon-login.png" />\n  </ion-row>\n  <ion-row class="nameLogo">\n    <div>TN Order</div>\n  </ion-row>\n  <form (ngSubmit)="login()" #loginForm="ngForm" *ngIf="!showButton">\n    <ion-item no-padding class="highlightRemove inputItemStyleF" no-lines>\n      <ion-input placeholder="Tên nhân viên" class="inputTextStyle" name="userName" [(ngModel)]="loginInfo.userName"\n        required></ion-input>\n    </ion-item>\n    <ion-item no-padding class="highlightRemove inputItemStyleF" no-lines>\n      <ion-input placeholder="Mật khẩu" class="inputTextStyle" name="password" [(ngModel)]="loginInfo.password"\n        required></ion-input>\n    </ion-item>\n    <ion-row class="marginRow" no-padding>\n      <ion-col col-12>\n        <button ion-button color="light" block outline>login</button>\n      </ion-col>\n    </ion-row>\n  </form>\n  <ion-row class="marginRow" *ngIf="showButton">\n    <ion-col col-6 *ngIf="auth.userLogin.role == \'Admin\'">\n      <button ion-button color="light" block outline (click)="goToOrder()" icon-start>\n        <ion-icon ios="ios-paper-outline" md="ios-paper-outline"></ion-icon>\n        Order\n      </button>\n    </ion-col>\n    <ion-col col-6 *ngIf="auth.userLogin.role == \'Admin\'">\n      <button ion-button color="bgiphonedark" block outline (click)="goToKitchen()" icon-start>\n        <ion-icon ios="ios-bonfire" md="ios-bonfire"></ion-icon>\n        Kitchen\n      </button>\n    </ion-col>\n    <ion-col col-12 *ngIf="auth.userLogin.role == \'Order\'">\n      <button ion-button color="light" block outline (click)="goToOrder()" icon-start>\n        <ion-icon ios="ios-paper-outline" md="ios-paper-outline"></ion-icon>\n        Order\n      </button>\n    </ion-col>\n    <ion-col col-12 *ngIf="auth.userLogin.role == \'Kitchen\'">\n      <button ion-button color="bgiphonedark" block outline (click)="goToKitchen()" icon-start>\n        <ion-icon ios="ios-bonfire" md="ios-bonfire"></ion-icon>\n        Kitchen\n      </button>\n    </ion-col>\n  </ion-row>\n  <ion-row class="marginRow" *ngIf="showButton">\n    <ion-col col-6 *ngIf="auth.userLogin.role == \'Admin\'">\n      <button ion-button color="light" block outline (click)="goToCashier()" icon-start>\n        <ion-icon ios="ios-cash-outline" md="ios-cash-outline"></ion-icon>\n        Cashier\n      </button>\n    </ion-col>\n    <ion-col col-6 *ngIf="auth.userLogin.role == \'Admin\'">\n      <button ion-button color="bgiphonedark" block outline (click)="goToSetting()" icon-start>\n        <ion-icon ios="ios-settings-outline" md="ios-settings-outline"></ion-icon>\n        Setting\n      </button>\n    </ion-col>\n    <ion-col col-12 *ngIf="auth.userLogin.role == \'Cashier\'">\n      <button ion-button color="light" block outline (click)="goToCashier()" icon-start>\n        <ion-icon ios="ios-cash-outline" md="ios-cash-outline"></ion-icon>\n        Cashier\n      </button>\n    </ion-col>\n    <ion-col col-12 *ngIf="auth.userLogin.role == \'Admin\'">\n      <button ion-button color="bgiphonedark" block outline (click)="summary()" icon-start>\n        <ion-icon ios="ios-settings-outline" md="ios-settings-outline"></ion-icon>\n        Summary\n      </button>\n    </ion-col>\n  </ion-row>\n\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\login\login.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* OrderFoodProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
-    ], CashierPage);
-    return CashierPage;
+            __WEBPACK_IMPORTED_MODULE_3__providers_authenticate_authenticate__["a" /* AuthenticateProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */]])
+    ], LoginPage);
+    return LoginPage;
 }());
 
-//# sourceMappingURL=cashier.js.map
+//# sourceMappingURL=login.js.map
 
 /***/ })
 

@@ -1,14 +1,14 @@
 webpackJsonp([5],{
 
-/***/ 510:
+/***/ 506:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderDetailsPageModule", function() { return OrderDetailsPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentPageModule", function() { return PaymentPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order_details__ = __webpack_require__(519);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment__ = __webpack_require__(517);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var OrderDetailsPageModule = /** @class */ (function () {
-    function OrderDetailsPageModule() {
+var PaymentPageModule = /** @class */ (function () {
+    function PaymentPageModule() {
     }
-    OrderDetailsPageModule = __decorate([
+    PaymentPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__order_details__["a" /* OrderDetailsPage */],
+                __WEBPACK_IMPORTED_MODULE_2__payment__["a" /* PaymentPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__order_details__["a" /* OrderDetailsPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__payment__["a" /* PaymentPage */]),
             ],
         })
-    ], OrderDetailsPageModule);
-    return OrderDetailsPageModule;
+    ], PaymentPageModule);
+    return PaymentPageModule;
 }());
 
-//# sourceMappingURL=order-details.module.js.map
+//# sourceMappingURL=payment.module.js.map
 
 /***/ }),
 
-/***/ 519:
+/***/ 517:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrderDetailsPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaymentPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__ = __webpack_require__(290);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__ = __webpack_require__(289);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,179 +59,68 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the OrderDetailsPage page.
+ * Generated class for the PaymentPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var OrderDetailsPage = /** @class */ (function () {
-    function OrderDetailsPage(navCtrl, navParams, orderProvider, viewCtrl, alertCtrl) {
+var PaymentPage = /** @class */ (function () {
+    function PaymentPage(navCtrl, viewCtrl, orderProvider, navParams) {
         this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.orderProvider = orderProvider;
         this.viewCtrl = viewCtrl;
-        this.alertCtrl = alertCtrl;
-        this.mode = "";
-        this.currentTable = "";
-        this.orderProvider.orderTable.listOrder = this.orderProvider.orderTable.listOrder.sort(function (a, b) {
-            if (a.id < b.id)
-                return -1;
-            if (a.id > b.id)
-                return 1;
-            return 0;
-        });
+        this.orderProvider = orderProvider;
+        this.navParams = navParams;
+        this.order = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["b" /* COrder */]();
+        this.allOrder = [];
+        this.money = null;
+        this.returnBack = 0;
+        this.returnText = "";
     }
-    OrderDetailsPage.prototype.ngOnInit = function () {
+    PaymentPage.prototype.ngOnInit = function () {
         if (this.navParams.data) {
-            this.mode = this.navParams.data.mode;
-            this.currentTable = this.navParams.data.currentTable;
-        }
-        this.orderProvider.orderTable.listOrder = this.orderProvider.orderTable.listOrder.sort(function (a, b) {
-            if (a.id < b.id)
-                return -1;
-            if (a.id > b.id)
-                return 1;
-            return 0;
-        });
-    };
-    OrderDetailsPage.prototype.addOption = function (food) {
-        var alert = this.alertCtrl.create();
-        alert.setTitle('Chọn thêm?');
-        alert.addInput({
-            type: 'checkbox',
-            label: 'Không hành',
-            value: 'Không hành'
-        });
-        alert.addInput({
-            type: 'checkbox',
-            label: 'Nhiều hành',
-            value: 'Nhiều hành'
-        });
-        alert.addButton('Hủy');
-        alert.addButton({
-            text: 'Chọn',
-            handler: function (data) {
-                food.option = data;
-            }
-        });
-        alert.present();
-    };
-    OrderDetailsPage.prototype.deleteFood = function (food) {
-        var _this = this;
-        var prompt = this.alertCtrl.create({
-            title: 'Xóa món',
-            buttons: [
-                {
-                    text: 'Đóng',
-                    handler: function (data) {
-                    }
-                },
-                {
-                    text: 'Xóa',
-                    handler: function (data) {
-                        var indexFood = -1;
-                        for (var index = 0; index < _this.orderProvider.orderTable.listOrder.length; index++) {
-                            if (_this.orderProvider.orderTable.listOrder[index].id == food.id) {
-                                indexFood = index;
-                                break;
-                            }
-                        }
-                        if (indexFood != -1) {
-                            _this.orderProvider.orderTable.listOrder.splice(indexFood, 1);
-                            if (_this.orderProvider.listSLFoodObject[food.id] == 1) {
-                                _this.orderProvider.listSLFoodObject[food.id] = null;
-                            }
-                            else if (indexFood != -1 && _this.orderProvider.listSLFoodObject[food.id] > 1) {
-                                _this.orderProvider.listSLFoodObject[food.id] = _this.orderProvider.listSLFoodObject[food.id] - 1;
-                            }
-                        }
-                    }
-                }
-            ]
-        });
-        prompt.present();
-    };
-    OrderDetailsPage.prototype.addFood = function (food) {
-        var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["b" /* COrderDetails */]();
-        orderDetail.id = food.id;
-        orderDetail.sl = 1;
-        orderDetail.status = false;
-        orderDetail.food.copy(food.food);
-        this.orderProvider.orderTable.listOrder.push(orderDetail);
-        this.orderProvider.orderTable.listOrder = this.orderProvider.orderTable.listOrder.sort(function (a, b) {
-            if (a.id < b.id)
-                return -1;
-            if (a.id > b.id)
-                return 1;
-            return 0;
-        });
-        this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] + 1;
-    };
-    OrderDetailsPage.prototype.minusFood = function (food) {
-        var indexFood = -1;
-        for (var index = 0; index < this.orderProvider.orderTable.listOrder.length; index++) {
-            if (this.orderProvider.orderTable.listOrder[index].id == food.id) {
-                indexFood = index;
-                break;
-            }
-        }
-        if (indexFood > -1) {
-            this.orderProvider.orderTable.listOrder.splice(indexFood, 1);
-            if (this.orderProvider.listSLFoodObject[food.id] == 1) {
-                this.orderProvider.listSLFoodObject[food.id] = null;
-            }
-            else if (indexFood != -1 && this.orderProvider.listSLFoodObject[food.id] > 1) {
-                this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] - 1;
-            }
+            this.order = this.navParams.data.order;
+            this.allOrder = this.navParams.data.allOrder;
         }
     };
-    OrderDetailsPage.prototype.closeOrder = function (order) {
-        var _this = this;
-        var prompt = this.alertCtrl.create({
-            title: 'Xóa order',
-            buttons: [
-                {
-                    text: 'Đóng',
-                    handler: function (data) {
-                    }
-                },
-                {
-                    text: 'Xóa',
-                    handler: function (data) {
-                        _this.orderProvider.clearOrder(order);
-                        _this.viewCtrl.dismiss();
-                    }
-                }
-            ]
-        });
-        prompt.present();
-    };
-    OrderDetailsPage.prototype.confirmOrder = function (order) {
-        if (this.currentTable) {
-            order.table = this.currentTable.toLowerCase();
+    PaymentPage.prototype.change = function (ev) {
+        var val = ev.target.value;
+        var total = this.order.total();
+        if (val) {
+            val = parseInt(val);
         }
         else {
-            order.table = this.mode;
+            val = 0;
         }
-        order.mode = this.mode;
-        this.orderProvider.addOrder(order);
-        this.currentTable = "";
+        if (val - total < 0) {
+            this.returnBack = total - val;
+            this.returnText = "Khách còn thiếu: ";
+        }
+        else if (val - total >= 0) {
+            this.returnBack = val - total;
+            this.returnText = "Tiền trả lại: ";
+        }
+    };
+    PaymentPage.prototype.payment = function () {
+        this.order.payment = true;
+        this.orderProvider.paymentOrder(this.order);
         this.viewCtrl.dismiss();
     };
-    OrderDetailsPage = __decorate([
+    PaymentPage.prototype.closePayment = function () {
+        this.viewCtrl.dismiss();
+    };
+    PaymentPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-order-details',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\order-details\order-details.html"*/'<ion-content>\n  <ion-list>\n    <ion-row no-padding class="headerRow" text-center>\n      <button ion-button class="buttonHeader" color="light" full clear>{{mode + " " + currentTable}}</button>\n    </ion-row>\n    <ion-item (press)="deleteFood(foodDetails)" (swipe)="addOption(foodDetails)" *ngFor="let foodDetails of orderProvider.orderTable.listOrder">\n      <ion-avatar item-start (click)="minusFood(foodDetails)">\n        <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n      </ion-avatar>\n      <h2>{{foodDetails.food.name}}</h2>\n      <p *ngIf="foodDetails.option.length == 0">Bình thường</p>\n      <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n      <button ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">{{"SL " + foodDetails.sl}}</button>\n    </ion-item>\n    <ion-row no-padding>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" (click)="closeOrder(orderProvider.orderTable)">\n          Xóa\n        </button>\n      </ion-col>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" (click)="confirmOrder(orderProvider.orderTable)">\n          Hoàn tất\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\order-details\order-details.html"*/,
+            selector: 'page-payment',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\payment\payment.html"*/'<ion-content>\n    <form (ngSubmit)="payment()" #paymentForm="ngForm">\n  <ion-list>\n    <ion-row no-padding class="headerRow" text-center>\n      <button ion-button class="buttonHeader" color="light" full clear>Thanh toán</button>\n    </ion-row>  \n    <ion-item>\n      <ion-label>{{order.total() | currency:\'VND\':\'VNĐ\':\'2.0\'}}</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input placeholder="Số tiền khách trả" type="number" pattern="[0-9]*" [(ngModel)]="money" name="money" (input)="change($event)" required></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>{{returnText}} {{returnBack | currency:\'VND\':\'VNĐ\':\'2.0\'}}</ion-label>\n    </ion-item>\n    <ion-row no-padding>\n      <ion-col col-6 padding text-center>\n        <button ion-button type="button" block color="mainlightcolor" (click)="closePayment()">\n          Hủy\n        </button>\n      </ion-col>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" [disabled]="!paymentForm.form.valid">\n          Thanh toán\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-list>\n  </form>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\payment\payment.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* OrderFoodProvider */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
-    ], OrderDetailsPage);
-    return OrderDetailsPage;
+            __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+    ], PaymentPage);
+    return PaymentPage;
 }());
 
-//# sourceMappingURL=order-details.js.map
+//# sourceMappingURL=payment.js.map
 
 /***/ })
 

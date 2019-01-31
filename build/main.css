@@ -43435,6 +43435,10 @@ page-cashier .payment {
   color: crimson;
 }
 
+page-cashier .listOrder {
+  border-bottom: solid 2px lightgray;
+}
+
 page-chief .childList {
   margin-bottom: 0px;
   padding-left: 2rem;
@@ -43448,6 +43452,10 @@ page-chief .listFood {
   margin-bottom: 0px;
 }
 
+page-chief .listOrder {
+  border-bottom: solid 2px lightgray;
+}
+
 page-chief .listDetails {
   margin-bottom: 0px;
 }
@@ -43457,6 +43465,7 @@ page-chief .buttonFullHeight {
   width: 100%;
   margin: 0;
   white-space: pre-wrap;
+  border: none;
 }
 
 page-chief .colBackground {
@@ -43493,6 +43502,7 @@ page-login .inputTextStyle {
   border-color: #e0e0e0;
   padding: 0;
   height: 3.5rem;
+  color: white;
 }
 
 page-login .inputTextStyle .text-input-ios {
@@ -43584,19 +43594,11 @@ page-login .buttonLogin {
   width: 90%;
   top: 5rem !important;
   left: 1rem !important;
-  bottom: 9rem !important;
   border-radius: 10px;
 }
 
 .payment-popover .popover-arrow {
   display: none;
-}
-
-page-order .listFood {
-  min-height: 60%;
-  max-height: 60%;
-  margin-bottom: 0px;
-  overflow-y: scroll;
 }
 
 page-order-details .headerRow {
@@ -43619,6 +43621,78 @@ page-payment .buttonHeader .button-inner {
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
+}
+
+page-setting-option .backgroundColor {
+  background-color: #e0e0e0;
+}
+
+page-setting-option .headerInput {
+  font-size: 2rem;
+  color: black;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+}
+
+page-setting-option .heightInput {
+  padding-bottom: 0.5rem;
+}
+
+page-setting-option .inputRound {
+  border-radius: 0.7rem;
+  background-color: #ffffff;
+}
+
+page-setting-option .text-input {
+  margin: 7px 10px;
+}
+
+page-setting-option .listFood {
+  margin-bottom: 0px;
+}
+
+page-setting-option .footerColor {
+  background-color: white;
+}
+
+page-setting-user .backgroundColor {
+  background-color: #e0e0e0;
+}
+
+page-setting-user .headerInput {
+  font-size: 2rem;
+  color: black;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+}
+
+page-setting-user .heightInput {
+  padding-bottom: 0.5rem;
+}
+
+page-setting-user .inputRound {
+  border-radius: 0.7rem;
+  background-color: #ffffff;
+}
+
+page-setting-user .text-input {
+  margin: 7px 10px;
+}
+
+page-setting-user .listFood {
+  margin-bottom: 0px;
+}
+
+page-setting-user .footerColor {
+  background-color: white;
+}
+
+page-setting-user .removeLines .item-inner {
+  border-bottom: none !important;
+}
+
+page-setting-user .listType {
+  margin-top: 0.5rem;
 }
 
 page-setup .backgroundColor {
