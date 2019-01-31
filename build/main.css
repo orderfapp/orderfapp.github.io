@@ -43398,6 +43398,43 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+page-cashier .childList {
+  margin-bottom: 0px;
+  padding-left: 2rem;
+}
+
+page-cashier .parentList {
+  font-weight: bold;
+}
+
+page-cashier .listFood {
+  margin-bottom: 0px;
+}
+
+page-cashier .listDetails {
+  margin-bottom: 0px;
+}
+
+page-cashier .buttonFullHeight {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+page-cashier .colBackground {
+  background-color: #00796b;
+}
+
+page-cashier .disableFood {
+  background-color: #dedede;
+}
+
+page-cashier .payment {
+  font-size: 1.8rem !important;
+  color: crimson;
+}
+
 page-chief .childList {
   margin-bottom: 0px;
   padding-left: 2rem;
@@ -43409,6 +43446,25 @@ page-chief .parentList {
 
 page-chief .listFood {
   margin-bottom: 0px;
+}
+
+page-chief .listDetails {
+  margin-bottom: 0px;
+}
+
+page-chief .buttonFullHeight {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+page-chief .colBackground {
+  background-color: #00796b;
+}
+
+page-chief .disableFood {
+  background-color: #dedede;
 }
 
 page-login .highlightRemove .item-inner {
@@ -43507,11 +43563,62 @@ page-login .colorTextHind {
   color: #00796b;
 }
 
+page-login .buttonLogin {
+  height: 120px;
+  width: 120px;
+}
+
+.custom-popover .popover-content {
+  width: 90%;
+  top: 5rem !important;
+  left: 1rem !important;
+  bottom: 9rem !important;
+  border-radius: 10px;
+}
+
+.custom-popover .popover-arrow {
+  display: none;
+}
+
+.payment-popover .popover-content {
+  width: 90%;
+  top: 5rem !important;
+  left: 1rem !important;
+  bottom: 9rem !important;
+  border-radius: 10px;
+}
+
+.payment-popover .popover-arrow {
+  display: none;
+}
+
 page-order .listFood {
   min-height: 60%;
   max-height: 60%;
   margin-bottom: 0px;
   overflow-y: scroll;
+}
+
+page-order-details .headerRow {
+  background-color: #00796b;
+}
+
+page-order-details .buttonHeader .button-inner {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+page-payment .headerRow {
+  background-color: #00796b;
+}
+
+page-payment .buttonHeader .button-inner {
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 
 page-setup .backgroundColor {
