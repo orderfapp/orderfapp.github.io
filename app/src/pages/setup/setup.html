@@ -94,16 +94,30 @@
   </ion-list>
 </ion-content>
 <ion-footer>
-    <ion-row no-padding class="footerColor">
-      <ion-col col-6 no-padding text-center>
-        <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor" icon-only icon-only navPop>
-            <ion-icon ios="md-arrow-round-back" md="md-arrow-round-back"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-6 no-padding text-center>
-        <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor" icon-only icon-only (click)="createType()">
-            <ion-icon ios="md-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-footer>
+  <ion-row no-padding class="footerColor">
+    <ion-col col-3 no-padding text-center>
+      <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor"
+        icon-only icon-only navPop>
+        <ion-icon ios="md-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col col-3 no-padding text-center>
+      <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor"
+        icon-only icon-only (click)="createType()">
+        <ion-icon ios="ios-grid-outline" md="ios-grid-outline"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col col-3 no-padding text-center>
+      <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor"
+        icon-only icon-only (click)="createUser()">
+        <ion-icon ios="ios-contact-outline" md="ios-contact-outline"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col col-3 no-padding text-center>
+      <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor"
+        icon-only icon-only (click)="createOption()">
+        <ion-icon ios="ios-more-outline" md="ios-more-outline"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

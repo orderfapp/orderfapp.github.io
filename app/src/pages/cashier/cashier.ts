@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, PopoverController } from 'ionic-angular';
 import { OrderFoodProvider, COrder, COrderDetails } from '../../providers/order-food/order-food';
 
 /**
- * Generated class for the ChiefPage page.
+ * Generated class for the CashierPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,15 +11,16 @@ import { OrderFoodProvider, COrder, COrderDetails } from '../../providers/order-
 
 @IonicPage()
 @Component({
-  selector: 'page-chief',
-  templateUrl: 'chief.html',
+  selector: 'page-cashier',
+  templateUrl: 'cashier.html',
 })
-export class ChiefPage {
+export class CashierPage {
   dataOfOrder = [];
   items: any[];
-  constructor(private navCtrl: NavController,
+  constructor(public navCtrl: NavController,
     private orderProvider: OrderFoodProvider,
-    private navParams: NavParams) {
+    private popoverCtrl: PopoverController,
+    public navParams: NavParams) {
     this.initializeItems();
   }
   initializeItems() {
@@ -40,47 +41,38 @@ export class ChiefPage {
               for (const keyOption in element.order[key].option) {
                 orderDetail.option.push(keyOption);
               }
+
             }
             order.listOrder.push(orderDetail);
-          }          
+          }
           this.dataOfOrder.push(order);
           if (order.status) {
             listOrderHide.push(index);
             count++;
-          }          
-        }      
-        if (count > this.orderProvider.limitShow) {   
-          for (let index = listOrderHide.length - this.orderProvider.limitShow - 1 ; index >= 0 ; index--) {
-            this.dataOfOrder.splice(listOrderHide[index], 1);
-          }       
+          }
         }
-      }      
+        if (count > this.orderProvider.limitShow) {
+          for (let index = listOrderHide.length - this.orderProvider.limitShow - 1; index >= 0; index--) {
+            this.dataOfOrder.splice(listOrderHide[index], 1);
+          }
+        }
+      }
       else {
         this.dataOfOrder = [];
       }
       this.items = this.dataOfOrder;
     });
   }
-  confirmAll(order: COrder) {
-    order.status = !order.status;
-    for (let index = 0; index < order.listOrder.length; index++) {
-      order.listOrder[index].status = order.status;
-    }
-    this.orderProvider.updateStatus(order);
-  }
-  confirm(order: COrder, food: COrderDetails) {
-    food.status = !food.status;
-    let count = 0;
-    for (let index = 0; index < order.listOrder.length; index++) {
-      const element = order.listOrder[index];
-      if (element.status == food.status) {
-        count++;
-      }
-    }
-    if (count == order.listOrder.length) {
-      order.status = food.status;
-    }
-    this.orderProvider.updateStatus(order);
+  payment(order: COrder) {
+    let popover = this.popoverCtrl.create("PaymentPage", {
+      order: order,
+      allOrder: this.dataOfOrder
+    }, {
+        cssClass: 'payment-popover'
+      });
+    popover.present({
+      ev: ""
+    });
   }
   getItems(ev: any) {
     let val = ev.target.value;
@@ -95,7 +87,6 @@ export class ChiefPage {
       this.items = this.dataOfOrder;
     }
   }
-
   xoaDau(str) {
     str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
     str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");

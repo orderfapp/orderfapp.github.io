@@ -1,4 +1,4 @@
-page-chief {
+page-cashier {
     .childList{
         margin-bottom: 0px;
         padding-left: 2rem;
@@ -9,9 +9,6 @@ page-chief {
      .listFood{
         margin-bottom: 0px;
     }
-    .listOrder{
-        border-bottom: solid 2px lightgray;;
-    }
     .listDetails{
         margin-bottom: 0px;        
      }
@@ -20,7 +17,6 @@ page-chief {
          width: 100%;
          margin: 0;
          white-space: pre-wrap;
-         border: none;
      }
      .colBackground{
          background-color: map-get($colors, maincolor);
@@ -28,4 +24,11 @@ page-chief {
      .disableFood{
         background-color: #dedede;
      }
+     .payment{
+        font-size: 1.8rem !important;
+        color: crimson;
+     }
+     .listOrder{
+        border-bottom: solid 2px lightgray;;
+    }
 }

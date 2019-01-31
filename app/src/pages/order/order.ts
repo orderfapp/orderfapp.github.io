@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { OrderProvider, CFood, COrder, COrderDetails } from '../../providers/order/order';
+import { IonicPage, NavController, NavParams, AlertController, PopoverController } from 'ionic-angular';
+import { OrderFoodProvider, CFood, COrder, COrderDetails } from '../../providers/order-food/order-food';
 
 
 /**
@@ -17,97 +17,79 @@ import { OrderProvider, CFood, COrder, COrderDetails } from '../../providers/ord
 })
 export class OrderPage {
   items: any[];
-  orderFlag: boolean = false;
-  currentTable: string = "";
-  dataOfFood = [];
-  orderTable: COrder = new COrder();
-
+  currentTable: string = "";  
   constructor(private navCtrl: NavController,
-    private navParams: NavParams,
-    private orderProvider: OrderProvider,
-    private alertCtrl: AlertController) {
-    this.initializeItems();
-  }
-
-  initializeItems() {
-    let data = this.orderProvider.getAllFood().valueChanges().subscribe(dataInfo => {
-      this.dataOfFood = [];
-      this.orderProvider.listFood = {};
-      if (dataInfo) {
-        for (let index = 0; index < dataInfo.length; index++) {
-          let food = new CFood();
-          food.copy(dataInfo[index]);
-          this.orderProvider.listFood[food.id] = food;
-          this.dataOfFood.push(food);
-        }
-      }
-      else {
-        this.dataOfFood = [];
-        this.orderProvider.listFood = {};
-      }
-      this.items = this.dataOfFood;
-    });
+              private navParams: NavParams,
+              private orderProvider: OrderFoodProvider,
+              private popoverCtrl: PopoverController,
+              private alertCtrl: AlertController) {
+    this.items = this.orderProvider.listDataFood;
   }
   getItems(ev: any) {
     let val = ev.target.value;
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       val = this.xoaDau(val)
-      this.items = this.dataOfFood.filter((item) => {
-        return (item.name.toLowerCase().includes(val.toLowerCase()) == true);
+      this.items = this.orderProvider.listDataFood.filter((item) => {
+        return (this.xoaDau(item.name).toLowerCase().includes(val.toLowerCase()) == true);
       })
     }
     else {
-      this.items = this.dataOfFood;
+      this.items = this.orderProvider.listDataFood;
     }
-  }
-  addOrder() {
-    this.showPrompt();
-  }
-  confirmOrder() {
-    this.orderTable.table = this.currentTable.toLowerCase();
-    this.orderProvider.addOrder(this.orderTable);
-    this.orderFlag = false;
-    this.currentTable = "";
-  }
-  goToChief() {
-    this.navCtrl.push('ChiefPage');
-  }
-  createFood() {
-    this.navCtrl.push('SetupPage');
   }
   addFood(food: CFood) {
     let indexFood = -1;
-    for (let index = 0; index < this.orderTable.listOrder.length; index++) {
-      if (this.orderTable.listOrder[index].id == food.id) {
+    let orderDetail = new COrderDetails();
+    orderDetail.id = food.id;
+    orderDetail.sl = 1;
+    orderDetail.status = false;
+    orderDetail.food.copy(food);
+    for (let index = 0; index < this.orderProvider.orderTable.listOrder.length; index++) {
+      if (this.orderProvider.orderTable.listOrder[index].id == food.id) {
         indexFood = index;
         break;
       }
     }
+    this.orderProvider.orderTable.listOrder.push(orderDetail);
     if (indexFood != -1) {
-      this.orderTable.listOrder[indexFood].sl++;
+      this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] + 1;
     }
     else {
-      let orderDetail = new COrderDetails();
-      orderDetail.id = food.id;
-      orderDetail.sl = 1;
-      orderDetail.slgiao = 0;
-      orderDetail.status = "Đang làm";
-      orderDetail.food.copy(food);
-      this.orderTable.listOrder.push(orderDetail);
+      this.orderProvider.listSLFoodObject[food.id] = 1;
     }
   }
   minusFood(food: CFood) {
     let indexFood = -1;
-    for (let index = 0; index < this.orderTable.listOrder.length; index++) {
-      if (this.orderTable.listOrder[index].id == food.id) {
+    for (let index = 0; index < this.orderProvider.orderTable.listOrder.length; index++) {
+      if (this.orderProvider.orderTable.listOrder[index].id == food.id) {
         indexFood = index;
         break;
       }
     }
-    if (this.orderTable.listOrder[indexFood].sl == 1) {
+    if (indexFood > -1) {
+      this.orderProvider.orderTable.listOrder.splice(indexFood, 1);
+      if (this.orderProvider.listSLFoodObject[food.id] == 1) {
+        this.orderProvider.listSLFoodObject[food.id] = null;
+      }
+      else if (indexFood != -1 && this.orderProvider.listSLFoodObject[food.id] > 1) {
+        this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] - 1;
+      }
+    }
+  }
+  addOrder(data: string) {
+    if (!data || this.orderProvider.orderTable.listOrder.length == 0) {
+      return;
+    }
+    if (data == this.orderProvider.stringModeMuaVe) {
       const prompt = this.alertCtrl.create({
-        title: 'Xóa món',
+        title: 'Tên người mua',
+        inputs: [
+          {
+            name: 'tableNumber',
+            placeholder: 'Nhập tên'
+          },
+        ],
         buttons: [
           {
             text: 'Đóng',
@@ -115,111 +97,68 @@ export class OrderPage {
             }
           },
           {
-            text: 'Xóa',
+            text: 'OK',
             handler: data => {
-              this.orderTable.listOrder.splice(indexFood, 1);
+              if (data.tableNumber) {
+                this.currentTable = data.tableNumber.toLowerCase();
+                let popover = this.popoverCtrl.create("OrderDetailsPage", {
+                  mode: this.orderProvider.stringModeMuaVe,
+                  currentTable: this.currentTable
+                }, {
+                    cssClass: 'custom-popover'
+                  });
+                popover.present({
+                  ev: ""
+                });
+              }
+              else {
+                return false
+              }
             }
           }
         ]
       });
       prompt.present();
     }
-    else if (indexFood != -1 && this.orderTable.listOrder[indexFood].sl > 1) {
-      this.orderTable.listOrder[indexFood].sl--;
-    }
-  }
-  deleteFood(food: CFood) {
-    const prompt = this.alertCtrl.create({
-      title: 'Xóa món',
-      buttons: [
-        {
-          text: 'Đóng',
-          handler: data => {
-          }
-        },
-        {
-          text: 'Xóa',
-          handler: data => {
-            let indexFood = -1;
-            for (let index = 0; index < this.orderTable.listOrder.length; index++) {
-              if (this.orderTable.listOrder[index].id == food.id) {
-                indexFood = index;
-                break;
+    else if (data == this.orderProvider.stringModeTaiBan) {
+      const prompt = this.alertCtrl.create({
+        title: 'Chọn bàn',
+        inputs: [
+          {
+            name: 'tableNumber',
+            placeholder: 'Nhập số bàn'
+          },
+        ],
+        buttons: [
+          {
+            text: 'Đóng',
+            handler: data => {
+            }
+          },
+          {
+            text: 'OK',
+            handler: data => {
+              if (data.tableNumber) {
+                this.currentTable = data.tableNumber.toLowerCase();
+                let popover = this.popoverCtrl.create("OrderDetailsPage", {
+                  mode: this.orderProvider.stringModeTaiBan,
+                  currentTable: this.currentTable
+                }, {
+                    cssClass: 'custom-popover'
+                  });
+                popover.present({
+                  ev: ""
+                });
+              }
+              else {
+                return false
               }
             }
-            if (indexFood != -1) {
-              this.orderTable.listOrder.splice(indexFood, 1);
-            }
           }
-        }
-      ]
-    });
-    prompt.present();
-  }
-  closeOrder() {
-    const prompt = this.alertCtrl.create({
-      title: 'Xóa order',
-      buttons: [
-        {
-          text: 'Đóng',
-          handler: data => {
-          }
-        },
-        {
-          text: 'Xóa',
-          handler: data => {
-            this.orderProvider.clearOrder(this.orderTable);
-          }
-        }
-      ]
-    });
-    prompt.present();
-  }
-  showPrompt() {
-    const prompt = this.alertCtrl.create({
-      title: 'Chọn bàn',
-      inputs: [
-        {
-          name: 'tableNumber',
-          placeholder: 'Nhập số bàn'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Đóng',
-          handler: data => {
-          }
-        },
-        {
-          text: 'OK',
-          handler: data => {
-            if (data.tableNumber) {
-              this.currentTable = data.tableNumber.toLowerCase();
-              this.orderFlag = true;
-              let dataSub = this.orderProvider.getAllFoodByTable(this.currentTable).valueChanges().subscribe(dataInfo => {
-                this.orderTable = new COrder();
-                if (dataInfo[1]) {
-                  this.orderTable.table = dataInfo[1] + "";
-                  for (const key in dataInfo[0]) {
-                    let orderDetail = new COrderDetails();
-                    orderDetail.copy(dataInfo[0][key]);
-                    orderDetail.food.copy(this.orderProvider.listFood[key]);
-                    this.orderTable.listOrder.push(orderDetail);
-                  }
-                }
-                else {
-                  this.orderTable = new COrder();
-                }
-              });
-            }
-            else {
-              return false
-            }
-          }
-        }
-      ]
-    });
-    prompt.present();
+        ]
+      });
+      prompt.present();
+    }
   }
   xoaDau(str) {
     str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");

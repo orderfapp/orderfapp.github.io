@@ -1,24 +1,76 @@
 <ion-content padding class="backgroundMain">
   <ion-row class="logo-row">
-    <img class="logo-login" src="assets/icon/icon-IoT222.png" />
+    <img class="logo-login" src="assets/icon/icon-login.png" />
   </ion-row>
-  <form (ngSubmit)="login()" #loginForm="ngForm">
-    <ion-row class="nameLogo">
-      <div>VF Monitoring</div>
-    </ion-row>
-    <ion-item class="highlightRemove inputItemStyleF" no-lines>
-      <ion-input placeholder="Tên nhân viên" class="inputTextStyle"></ion-input>
+  <ion-row class="nameLogo">
+    <div>TN Order</div>
+  </ion-row>
+  <form (ngSubmit)="login()" #loginForm="ngForm" *ngIf="!showButton">
+    <ion-item no-padding class="highlightRemove inputItemStyleF" no-lines>
+      <ion-input placeholder="Tên nhân viên" class="inputTextStyle" name="userName" [(ngModel)]="loginInfo.userName"
+        required></ion-input>
     </ion-item>
-    <ion-item class="highlightRemove inputItemStyleF" no-lines>
-        <ion-input placeholder="Mật khẩu" class="inputTextStyle"></ion-input>
-      </ion-item>
-    <ion-row class="marginRow">
-      <ion-col col-6>
-        <button ion-button color="light" block outline [disabled]="!loginForm.form.valid">Sign In</button>
-      </ion-col>
-      <ion-col col-6>
-        <button ion-button type="button" color="bgiphonedark" block outline (click)="changeAccount()">Create Account</button>
+    <ion-item no-padding class="highlightRemove inputItemStyleF" no-lines>
+      <ion-input placeholder="Mật khẩu" class="inputTextStyle" name="password" [(ngModel)]="loginInfo.password"
+        required></ion-input>
+    </ion-item>
+    <ion-row class="marginRow" no-padding>
+      <ion-col col-12>
+        <button ion-button color="light" block outline>login</button>
       </ion-col>
     </ion-row>
   </form>
+  <ion-row class="marginRow" *ngIf="showButton">
+    <ion-col col-6 *ngIf="auth.userLogin.role == 'Admin'">
+      <button ion-button color="light" block outline (click)="goToOrder()" icon-start>
+        <ion-icon ios="ios-paper-outline" md="ios-paper-outline"></ion-icon>
+        Order
+      </button>
+    </ion-col>
+    <ion-col col-6 *ngIf="auth.userLogin.role == 'Admin'">
+      <button ion-button color="bgiphonedark" block outline (click)="goToKitchen()" icon-start>
+        <ion-icon ios="ios-bonfire" md="ios-bonfire"></ion-icon>
+        Kitchen
+      </button>
+    </ion-col>
+    <ion-col col-12 *ngIf="auth.userLogin.role == 'Order'">
+      <button ion-button color="light" block outline (click)="goToOrder()" icon-start>
+        <ion-icon ios="ios-paper-outline" md="ios-paper-outline"></ion-icon>
+        Order
+      </button>
+    </ion-col>
+    <ion-col col-12 *ngIf="auth.userLogin.role == 'Kitchen'">
+      <button ion-button color="bgiphonedark" block outline (click)="goToKitchen()" icon-start>
+        <ion-icon ios="ios-bonfire" md="ios-bonfire"></ion-icon>
+        Kitchen
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="marginRow" *ngIf="showButton">
+    <ion-col col-6 *ngIf="auth.userLogin.role == 'Admin'">
+      <button ion-button color="light" block outline (click)="goToCashier()" icon-start>
+        <ion-icon ios="ios-cash-outline" md="ios-cash-outline"></ion-icon>
+        Cashier
+      </button>
+    </ion-col>
+    <ion-col col-6 *ngIf="auth.userLogin.role == 'Admin'">
+      <button ion-button color="bgiphonedark" block outline (click)="goToSetting()" icon-start>
+        <ion-icon ios="ios-settings-outline" md="ios-settings-outline"></ion-icon>
+        Setting
+      </button>
+    </ion-col>
+    <ion-col col-12 *ngIf="auth.userLogin.role == 'Cashier'">
+      <button ion-button color="light" block outline (click)="goToCashier()" icon-start>
+        <ion-icon ios="ios-cash-outline" md="ios-cash-outline"></ion-icon>
+        Cashier
+      </button>
+    </ion-col>
+    <ion-col col-12 *ngIf="auth.userLogin.role == 'Admin'">
+      <button ion-button color="bgiphonedark" block outline (click)="summary()" icon-start>
+        <ion-icon ios="ios-settings-outline" md="ios-settings-outline"></ion-icon>
+        Summary
+      </button>
+    </ion-col>
+  </ion-row>
+
 </ion-content>

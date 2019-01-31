@@ -1,0 +1,30 @@
+<ion-content>
+    <form (ngSubmit)="payment()" #paymentForm="ngForm">
+  <ion-list>
+    <ion-row no-padding class="headerRow" text-center>
+      <button ion-button class="buttonHeader" color="light" full clear>Thanh toán</button>
+    </ion-row>  
+    <ion-item>
+      <ion-label>{{order.total() | currency:'VND':'VNĐ':'2.0'}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Số tiền khách trả" type="number" pattern="[0-9]*" [(ngModel)]="money" name="money" (input)="change($event)" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{returnText}} {{returnBack | currency:'VND':'VNĐ':'2.0'}}</ion-label>
+    </ion-item>
+    <ion-row no-padding>
+      <ion-col col-6 padding text-center>
+        <button ion-button type="button" block color="mainlightcolor" (click)="closePayment()">
+          Hủy
+        </button>
+      </ion-col>
+      <ion-col col-6 padding text-center>
+        <button ion-button block color="mainlightcolor" [disabled]="!paymentForm.form.valid">
+          Thanh toán
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+  </form>
+</ion-content>

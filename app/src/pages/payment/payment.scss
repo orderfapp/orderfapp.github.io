@@ -1,0 +1,8 @@
+page-payment {
+    .headerRow{
+        background-color: map-get($colors, maincolor);
+    }
+    .buttonHeader .button-inner{
+        justify-content:flex-start;
+    }
+}

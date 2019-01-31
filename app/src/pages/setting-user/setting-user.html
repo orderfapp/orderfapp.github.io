@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-navbar color='maincolor'>
+    <ion-title>Đăng kí user</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding class="backgroundColor">
+  <form (ngSubmit)="saveData()" #UserForm="ngForm">
+    <ion-list>
+      <ion-row class="headerInput">
+        Thông tin user
+      </ion-row>
+      <ion-row class="heightInput">
+        <ion-input class="inputRound" placeholder="Login ID" type="text" [(ngModel)]="user.loginid" name="loginid"
+          required></ion-input>
+      </ion-row>
+      <ion-row class="heightInput">
+        <ion-input class="inputRound" placeholder="Mật khẩu" type="password" [(ngModel)]="user.password" name="password"
+          required></ion-input>
+      </ion-row>
+      <ion-row class="heightInput">
+        <ion-input class="inputRound" placeholder="Confirm mật khẩu" type="password" [(ngModel)]="user.confirmPass" name="confirmPass"
+          required></ion-input>
+      </ion-row>
+      <ion-row class="heightInput">
+        <ion-input class="inputRound" placeholder="Tên" type="text" [(ngModel)]="user.name" name="name"
+          required></ion-input>
+      </ion-row>
+      <ion-item class="removeLines">
+        <ion-toggle [(ngModel)]="user.status" name="user.status"></ion-toggle>
+        <ion-label>
+          Lock user (Off/On)
+        </ion-label>
+      </ion-item>
+      <ion-item class="listType removeLines">
+        <ion-label>Quyền hạn</ion-label>
+        <ion-select [(ngModel)]="user.role" name="user.role" required>
+          <ion-option value="Admin">Admin</ion-option>
+          <ion-option value="Order">Order</ion-option>
+          <ion-option value="Kitchen">Kitchen</ion-option>
+          <ion-option value="Cashier">Cashier</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-row class="heightInput">
+        <ion-col col-2>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button full class="submit-btn buttonAdd" [disabled]="!UserForm.form.valid" text-uppercase>
+            {{title}}
+          </button>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button full class="buttonAdd" type="button" text-uppercase (click)="cancelEdit()">
+            Cancel
+          </button>
+        </ion-col>
+        <ion-col col-2>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </form>
+  <ion-row class="headerInput">
+    Danh Sách user
+  </ion-row>
+  <ion-list class="childList listFood">
+    <ion-item-sliding *ngFor="let userDetails of authenticate.listUser">
+      <ion-item>
+        <h2>{{userDetails.loginid}}</h2>
+        <button ion-button clear item-end>{{userDetails.role}}</button>
+      </ion-item>
+      <ion-item-options side="left">
+        <button ion-button color="mainlightcolor" (click)="deleteUser(userDetails)">
+          <ion-icon ios="ios-trash-outline" md="ios-trash-outline"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+      <ion-item-options side="right">
+        <button ion-button color="maindarkcolor" (click)="editUser(userDetails)">
+          <ion-icon ios="ios-create-outline" md="ios-create-outline"></ion-icon>
+          Edit
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-row no-padding class="footerColor">
+    <ion-col col-12 no-padding text-center>
+      <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor"
+        icon-only icon-only navPop>
+        <ion-icon ios="md-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

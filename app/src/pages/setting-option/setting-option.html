@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar color='maincolor'>
+    <ion-title>Đăng kí option</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding class="backgroundColor">
+  <form (ngSubmit)="saveData()" #OptionForm="ngForm">
+    <ion-list>
+      <ion-row class="headerInput">
+        Thông tin option
+      </ion-row>
+      <ion-row class="heightInput">
+        <ion-input class="inputRound" placeholder="Tên option" type="text" [(ngModel)]="localOption" name="localOption"
+          required></ion-input>
+      </ion-row>
+      <ion-row class="heightInput">
+        <ion-col col-2>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button full class="submit-btn buttonAdd" [disabled]="!OptionForm.form.valid" text-uppercase>
+            {{title}}
+          </button>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button full class="buttonAdd" type="button" text-uppercase (click)="cancelEdit()">
+            Cancel
+          </button>
+        </ion-col>
+        <ion-col col-2>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </form>
+  <ion-row class="headerInput">
+    Danh Sách option
+  </ion-row>
+  <ion-list class="childList listFood">
+    <ion-item-sliding *ngFor="let typeOption of optionProvider.listOption">
+      <ion-item>
+        <h2>{{typeOption}}</h2>
+      </ion-item>
+      <ion-item-options side="left">
+        <button ion-button color="mainlightcolor" (click)="deleteOption(typeOption)">
+          <ion-icon ios="ios-trash-outline" md="ios-trash-outline"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+      <ion-item-options side="right">
+        <button ion-button color="maindarkcolor" (click)="editOption(typeOption)">
+          <ion-icon ios="ios-create-outline" md="ios-create-outline"></ion-icon>
+          Edit
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-row no-padding class="footerColor">
+    <ion-col col-12 no-padding text-center>
+      <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor"
+        icon-only icon-only navPop>
+        <ion-icon ios="md-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { OrderFoodProvider } from '../../providers/order-food/order-food';
+import { OptionProvider } from '../../providers/option/option';
 
 /**
- * Generated class for the SetupTypePage page.
+ * Generated class for the SettingOptionPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,33 +11,33 @@ import { OrderFoodProvider } from '../../providers/order-food/order-food';
 
 @IonicPage()
 @Component({
-  selector: 'page-setup-type',
-  templateUrl: 'setup-type.html',
+  selector: 'page-setting-option',
+  templateUrl: 'setting-option.html',
 })
-export class SetupTypePage {
+export class SettingOptionPage {
   title = "Tạo";
-  localType = "";
-  constructor(private navCtrl: NavController,
-    private orderProvider: OrderFoodProvider,
-    private alertCtrl: AlertController,
-    private navParams: NavParams) {
+  localOption = "";
+  constructor(public navCtrl: NavController, 
+              private optionProvider: OptionProvider,
+              private alertCtrl: AlertController,
+              public navParams: NavParams) {
   }
   saveData() {
     if (this.title == "Tạo") {
-      this.orderProvider.addType(this.localType);
+      this.optionProvider.addOption(this.localOption);
     }
     else {
-      this.orderProvider.editType(this.localType);
+      this.optionProvider.editOption(this.localOption);
     }
     this.title = "Tạo";
   }
-  editType(data: string) {
+  editOption(data: string) {
     this.title = "Sửa";
-    this.localType = data;
+    this.localOption = data;
   }
-  deleteType(dataDelete: string) {
+  deleteOption(dataDelete: string) {
     const prompt = this.alertCtrl.create({
-      title: 'Xóa phân loại món',
+      title: 'Xóa option',
       buttons: [
         {
           text: 'Đóng',
@@ -47,7 +47,7 @@ export class SetupTypePage {
         {
           text: 'Xóa',
           handler: data => {
-            this.orderProvider.deleteType(dataDelete);
+            this.optionProvider.deleteOption(dataDelete);
           }
         }
       ]
@@ -56,7 +56,7 @@ export class SetupTypePage {
 
   }
   cancelEdit() {
-    this.localType = "";
+    this.localOption = "";
     this.title = "Tạo";
   }
 }

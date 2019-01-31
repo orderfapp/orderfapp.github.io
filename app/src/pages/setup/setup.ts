@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { OrderProvider, CFood, CTypeFood } from '../../providers/order/order';
+import { OrderFoodProvider, CFood, CTypeFood } from '../../providers/order-food/order-food';
 import lodash from 'lodash'
 /**
  * Generated class for the SetupPage page.
@@ -19,8 +19,8 @@ export class SetupPage {
   localFood: CFood = new CFood();
   title = "Tạo";
   constructor(public navCtrl: NavController, 
-              private orderProvider: OrderProvider,
-              private alertCtrl: AlertController,
+              public orderProvider: OrderFoodProvider,
+              public alertCtrl: AlertController,
               public navParams: NavParams) {
     this.initializeItems();
   }
@@ -32,7 +32,7 @@ export class SetupPage {
         for (let index = 0; index < dataInfo.length; index++) {
           let food = new CFood();
           food.copy(dataInfo[index]);
-          this.orderProvider.listFood[food.id] = food;
+          this.orderProvider.listFoodObject[food.id] = food;
           dataOfFood.push(food);
         }
       }
@@ -89,5 +89,11 @@ export class SetupPage {
   }
   createType(){
     this.navCtrl.push('SetupTypePage');
+  }
+  createUser(){
+    this.navCtrl.push('SettingUserPage');
+  }
+  createOption(){
+    this.navCtrl.push('SettingOptionPage');    
   }
 }

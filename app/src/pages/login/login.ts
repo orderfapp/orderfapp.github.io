@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { OrderFoodProvider } from '../../providers/order-food/order-food';
+import { AuthenticateProvider } from '../../providers/authenticate/authenticate';
 
 /**
  * Generated class for the LoginPage page.
@@ -14,10 +16,53 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  loginInfo = { userName: '', password: '' };  
+  showButton = false;
+  constructor(public navCtrl: NavController,
+    private auth: AuthenticateProvider,
+    private alertCtrl: AlertController,
+    public navParams: NavParams,
+    public orderProvider: OrderFoodProvider, ) {
   }
-  login(){
-    
+  public login() {
+    this.showButton = false;
+    this.auth.login(this.loginInfo).subscribe(allowed => {
+      if (allowed) {
+        this.showButton = true;
+      } else {
+        this.showError("Sai tài khoản : " + this.loginInfo.userName);
+      }
+    },
+    error => {
+      this.showError(error);
+    });
+  }
+  showError(text) {
+    let alert = this.alertCtrl.create({
+      title: 'Thông báo lỗi',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+  goToOrder() {
+    this.navCtrl.push('OrderPage');
+  }
+  goToKitchen() {
+    this.navCtrl.push('ChiefPage');
+  }
+  goToCashier() {
+    this.navCtrl.push('CashierPage');
+  }
+  goToSetting() {
+    this.navCtrl.push('SetupPage');
+  }
+  summary(){
+    this.orderProvider.removeOrder();
+    let alert = this.alertCtrl.create({
+      title: 'Data đã được tổng kết',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

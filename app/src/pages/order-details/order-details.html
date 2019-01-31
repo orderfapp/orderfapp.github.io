@@ -1,0 +1,28 @@
+<ion-content>
+  <ion-list>
+    <ion-row no-padding class="headerRow" text-center>
+      <button ion-button class="buttonHeader" color="light" full clear>{{mode + " " + currentTable}}</button>
+    </ion-row>
+    <ion-item (press)="deleteFood(foodDetails)" (swipe)="addOption(foodDetails)" *ngFor="let foodDetails of orderProvider.orderTable.listOrder">
+      <ion-avatar item-start (click)="minusFood(foodDetails)">
+        <img src='{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}'>
+      </ion-avatar>
+      <h2>{{foodDetails.food.name}}</h2>
+      <p *ngIf="foodDetails.option.length == 0">Bình thường</p>
+      <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>
+      <button ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">{{"SL " + foodDetails.sl}}</button>
+    </ion-item>
+    <ion-row no-padding>
+      <ion-col col-6 padding text-center>
+        <button ion-button block color="mainlightcolor" (click)="closeOrder(orderProvider.orderTable)">
+          Xóa
+        </button>
+      </ion-col>
+      <ion-col col-6 padding text-center>
+        <button ion-button block color="mainlightcolor" (click)="confirmOrder(orderProvider.orderTable)">
+          Hoàn tất
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+</ion-content>
