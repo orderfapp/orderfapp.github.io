@@ -1,3 +1,9 @@
+@charset "UTF-8";
+@font-face {
+  font-family: AppFont;
+  src: url("…/assets/fonts/times.ttf");
+}
+
 .ion-ios-add:before {
   content: "\f102";
 }
@@ -5523,19 +5529,19 @@ ion-footer {
 }
 
 ion-app.ios {
-  font-family: -apple-system, "Helvetica Neue", "Roboto", sans-serif;
+  font-family: “AppFont”;
   font-size: 1.4rem;
   background-color: #fff;
 }
 
 ion-app.md {
-  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-family: “AppFont”;
   font-size: 1.4rem;
   background-color: #fff;
 }
 
 ion-app.wp {
-  font-family: "Segoe UI", "Noto Sans", sans-serif;
+  font-family: “AppFont”;
   font-size: 1.4rem;
   background-color: #fff;
 }
@@ -43603,6 +43609,40 @@ page-login .buttonLogin {
 
 .payment-popover .popover-arrow {
   display: none;
+}
+
+.fontButton {
+  font-size: 2rem !important;
+}
+
+.fontTextLarge {
+  font-size: 1.8rem !important;
+  color: black !important;
+}
+
+.fontTextSmall {
+  font-size: 1.5rem !important;
+  color: darkcyan !important;
+}
+
+.toolbar-title-ios {
+  font-size: 2.5rem !important;
+}
+
+.toolbar-title-md {
+  font-size: 2.5rem !important;
+}
+
+.customCSS .alert-input {
+  font-size: 2.5rem;
+}
+
+.customCSS .alert-title {
+  font-size: 2.5rem;
+}
+
+.searchbar-input {
+  font-size: 2rem !important;
 }
 
 page-order-details .headerRow {
