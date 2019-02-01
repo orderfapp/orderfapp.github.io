@@ -43590,6 +43590,10 @@ page-login .buttonLogin {
   display: none;
 }
 
+.custom-popover .popover-viewport {
+  height: 100%;
+}
+
 .payment-popover .popover-content {
   width: 90%;
   top: 5rem !important;
@@ -43599,10 +43603,6 @@ page-login .buttonLogin {
 
 .payment-popover .popover-arrow {
   display: none;
-}
-
-.payment-popover .popover-content .popover-viewport {
-  height: 100%;
 }
 
 page-order-details .headerRow {
