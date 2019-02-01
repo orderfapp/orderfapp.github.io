@@ -17,12 +17,12 @@ import { OrderFoodProvider, CFood, COrder, COrderDetails } from '../../providers
 })
 export class OrderPage {
   items: any[];
-  currentTable: string = "";  
+  currentTable: string = "";
   constructor(private navCtrl: NavController,
-              private navParams: NavParams,
-              private orderProvider: OrderFoodProvider,
-              private popoverCtrl: PopoverController,
-              private alertCtrl: AlertController) {
+    private navParams: NavParams,
+    private orderProvider: OrderFoodProvider,
+    private popoverCtrl: PopoverController,
+    private alertCtrl: AlertController) {
     this.items = this.orderProvider.listDataFood;
   }
   getItems(ev: any) {
@@ -77,7 +77,7 @@ export class OrderPage {
       }
     }
   }
-  addOrder(data: string) {
+  addOrder(data: string, ev: any) {
     if (!data || this.orderProvider.orderTable.listOrder.length == 0) {
       return;
     }
@@ -99,24 +99,20 @@ export class OrderPage {
           {
             text: 'OK',
             handler: data => {
-              if (data.tableNumber) {
-                this.currentTable = data.tableNumber.toLowerCase();
-                let popover = this.popoverCtrl.create("OrderDetailsPage", {
-                  mode: this.orderProvider.stringModeMuaVe,
-                  currentTable: this.currentTable
-                }, {
-                    cssClass: 'custom-popover'
-                  });
-                popover.present({
-                  ev: ""
+              this.currentTable = data.tableNumber.toLowerCase();
+              let popover = this.popoverCtrl.create("OrderDetailsPage", {
+                mode: this.orderProvider.stringModeMuaVe,
+                currentTable: this.currentTable
+              }, {
+                  cssClass: 'custom-popover'
                 });
-              }
-              else {
-                return false
-              }
+              popover.present({
+                ev: ev
+              });
             }
           }
-        ]
+        ],
+        cssClass: 'customCSS'
       });
       prompt.present();
     }
@@ -147,7 +143,7 @@ export class OrderPage {
                     cssClass: 'custom-popover'
                   });
                 popover.present({
-                  ev: ""
+                  ev: ev
                 });
               }
               else {
@@ -155,7 +151,8 @@ export class OrderPage {
               }
             }
           }
-        ]
+        ],
+        cssClass: 'customCSS'
       });
       prompt.present();
     }

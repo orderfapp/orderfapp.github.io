@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar color='maincolor'>
-    <ion-title>List Order</ion-title>
+    <ion-title>{{"Đơn order " + countItemDone + "/" + dataOfOrder.length}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -21,10 +21,10 @@
           <ion-avatar item-start>
             <img src='{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}'>
           </ion-avatar>
-          <h2>{{foodDetails.food.name}}</h2>
-          <p *ngIf="foodDetails.option.length == 0">Bình thường</p>
-          <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>
-          <button ion-button clear color="maincolor" item-end (click)="confirm(orderDetails, foodDetails)">OK</button>
+          <h2 class="fontTextLarge">{{foodDetails.food.name}}</h2>
+          <p class="fontTextSmall" *ngIf="foodDetails.option.length == 0">Bình thường</p>
+          <p class="fontTextSmall" *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>
+          <button class="fontButton" ion-button clear color="maincolor" item-end (click)="confirm(orderDetails, foodDetails)">OK</button>
         </ion-item>
       </ion-list>
     </ion-col>

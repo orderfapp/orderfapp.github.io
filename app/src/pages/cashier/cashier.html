@@ -6,14 +6,14 @@
 -->
 <ion-header>
   <ion-navbar color='maincolor'>
-    <ion-title>List Order</ion-title>
+    <ion-title>Thanh toán</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-row no-padding class="listOrder" *ngFor="let orderDetails of items">
     <ion-col col-2 no-padding class="colBackground">
-      <button ion-button class="buttonFullHeight" color="bgiphonedark" outline no-padding>Thanh toán</button>
+      <button ion-button class="buttonFullHeight" color="bgiphonedark" outline no-padding>{{orderDetails.table}}</button>
     </ion-col>
     <ion-col col-10 no-padding>
       <ion-list no-padding class="listDetails" *ngFor="let foodDetails of orderDetails.listOrder">
@@ -21,10 +21,10 @@
           <ion-avatar item-start>
             <img src='{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}'>
           </ion-avatar>
-          <h2>{{foodDetails.food.name}}</h2>
-          <p *ngIf="foodDetails.option.length == 0">Bình thường</p>
-          <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>
-          <button ion-button clear color="maincolor" item-end (click)="confirm(foodDetails)">{{foodDetails.food.value | currency:'VND':'VNĐ':'2.0'}}</button>
+          <h2 class="fontTextLarge">{{foodDetails.food.name}}</h2>
+          <p class="fontTextSmall" *ngIf="foodDetails.option.length == 0">Bình thường</p>
+          <p class="fontTextSmall" *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>
+          <button class="fontTextSmall" ion-button clear color="maincolor" item-end (click)="confirm(foodDetails)">{{foodDetails.food.value | currency:'VND':'VNĐ':'2.0'}}</button>
         </ion-item>
       </ion-list>
       <ion-list no-padding class="listDetails">

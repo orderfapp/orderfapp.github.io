@@ -13,7 +13,14 @@ $app-direction: ltr;
 
 
 @import "ionic.globals";
-
+@font-face {
+  font-family: AppFont;
+  src: url("…/assets/fonts/times.ttf");
+  }
+  
+  $font-family-ios-base: “AppFont”;
+  $font-family-md-base:“AppFont”;
+  $font-family-wp-base:“AppFont”;
 
 // Shared Variables
 // --------------------------------------------------

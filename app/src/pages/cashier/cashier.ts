@@ -49,18 +49,9 @@ export class CashierPage {
             }            
           }
           if(order.listOrder.length > 0){
-            this.dataOfOrder.push(order);
-            if (order.status) {
-              listOrderHide.push(index);
-              count++;
-            }
+            this.dataOfOrder.push(order);            
           }          
-        }
-        if (count > this.orderProvider.limitShow) {
-          for (let index = listOrderHide.length - this.orderProvider.limitShow - 1; index >= 0; index--) {
-            this.dataOfOrder.splice(listOrderHide[index], 1);
-          }
-        }
+        }        
       }
       else {
         this.dataOfOrder = [];

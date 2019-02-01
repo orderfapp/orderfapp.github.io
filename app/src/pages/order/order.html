@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color='maincolor'>
-    <ion-title>Order</ion-title>
+    <ion-title class="fontButton">Đặt món</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content >
@@ -10,20 +10,20 @@
       <ion-avatar item-start (click)="minusFood(foodDetails)">
         <img src='{{foodDetails.image ? foodDetails.image : "assets/icon/noimage.png"}}'>
       </ion-avatar>
-      <p>{{foodDetails.name}}</p>
-      <p>Giá : {{foodDetails.value}}<font style="color:red">{{foodDetails.status ? "" :" Hết hàng"}}</font>
+      <p class="fontTextLarge">{{foodDetails.name}}</p>
+      <p class="fontTextSmall">Giá : {{foodDetails.value}}<font style="color:red">{{foodDetails.status ? "" :" Hết hàng"}}</font>
       </p>
-      <button ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">{{orderProvider.listSLFoodObject[foodDetails.id] ? "SL " + orderProvider.listSLFoodObject[foodDetails.id] : "Đặt"}}</button>
+      <button class="fontButton" ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">{{orderProvider.listSLFoodObject[foodDetails.id] ? "SL " + orderProvider.listSLFoodObject[foodDetails.id] : "Đặt"}}</button>
     </ion-item>
   </ion-list>  
 </ion-content>
 <ion-footer>
   <ion-row no-padding>
     <ion-col col-6 no-padding text-center>
-        <button ion-button color="maincolor" block outline (click)="addOrder('Mua về')">Mua về</button>     
+        <button class="fontButton" ion-button color="maincolor" block outline (click)="addOrder('Mua về', $event)">Mua về</button>     
     </ion-col>
     <ion-col col-6 no-padding text-center>
-        <button ion-button color="maincolor" block outline (click)="addOrder('Tại bàn')">Tại bàn</button>
+        <button class="fontButton" ion-button color="maincolor" block outline (click)="addOrder('Tại bàn', $event)">Tại bàn</button>
     </ion-col>    
   </ion-row>
 </ion-footer>

@@ -17,6 +17,8 @@ import { OrderFoodProvider, COrder, COrderDetails } from '../../providers/order-
 export class ChiefPage {
   dataOfOrder = [];
   items: any[];
+  countItemDone = 0;
+  countItem = 0;
   constructor(private navCtrl: NavController,
     private orderProvider: OrderFoodProvider,
     private navParams: NavParams) {
@@ -27,17 +29,22 @@ export class ChiefPage {
       let count = 0;
       let listOrderHide = [];
       this.dataOfOrder = [];
+      this.countItemDone = 0;
+      this.countItem = 0;
       if (dataInfo) {
         for (let index = 0; index < dataInfo.length; index++) {
           let order = new COrder();
           let element: any = dataInfo[index];
-          console.log(element)
           order.copy(element);
+          if(order.status){
+            this.countItemDone++;
+          }
           for (const key in element.order) {
             if (this.orderProvider.listFoodObject[element.order[key].id]) {
               let orderDetail = new COrderDetails();
               orderDetail.copy(element.order[key]);
               orderDetail.food.copy(this.orderProvider.listFoodObject[element.order[key].id]);
+              this.countItem++;
               if (element.order[key].option) {
                 for (const keyOption in element.order[key].option) {
                   orderDetail.option.push(keyOption);

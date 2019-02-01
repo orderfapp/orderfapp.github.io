@@ -30,7 +30,9 @@ var firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      backButtonText: 'Trở về'
+     }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     CurrencyMaskModule

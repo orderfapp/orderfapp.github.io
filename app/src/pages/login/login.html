@@ -3,7 +3,7 @@
     <img class="logo-login" src="assets/icon/icon-login.png" />
   </ion-row>
   <ion-row class="nameLogo">
-    <div>TN Order</div>
+    <div>NT Order</div>
   </ion-row>
   <form (ngSubmit)="login()" #loginForm="ngForm" *ngIf="!showButton">
     <ion-item no-padding class="highlightRemove inputItemStyleF" no-lines>
@@ -16,59 +16,59 @@
     </ion-item>
     <ion-row class="marginRow" no-padding>
       <ion-col col-12>
-        <button ion-button color="light" block outline>login</button>
+        <button ion-button color="light" block outline class="fontButton">Đăng nhập</button>
       </ion-col>
     </ion-row>
   </form>
   <ion-row class="marginRow" *ngIf="showButton">
     <ion-col col-6 *ngIf="auth.userLogin.role == 'Admin'">
-      <button ion-button color="light" block outline (click)="goToOrder()" icon-start>
+      <button class="fontButton" ion-button color="light" block outline (click)="goToOrder()" icon-start>
         <ion-icon ios="ios-paper-outline" md="ios-paper-outline"></ion-icon>
-        Order
+        Đặt món
       </button>
     </ion-col>
     <ion-col col-6 *ngIf="auth.userLogin.role == 'Admin'">
-      <button ion-button color="bgiphonedark" block outline (click)="goToKitchen()" icon-start>
+      <button class="fontButton" ion-button color="bgiphonedark" block outline (click)="goToKitchen()" icon-start>
         <ion-icon ios="ios-bonfire" md="ios-bonfire"></ion-icon>
-        Kitchen
+        Nhà bếp
       </button>
     </ion-col>
     <ion-col col-12 *ngIf="auth.userLogin.role == 'Order'">
-      <button ion-button color="light" block outline (click)="goToOrder()" icon-start>
+      <button class="fontButton" ion-button color="light" block outline (click)="goToOrder()" icon-start>
         <ion-icon ios="ios-paper-outline" md="ios-paper-outline"></ion-icon>
-        Order
+        Đặt món
       </button>
     </ion-col>
     <ion-col col-12 *ngIf="auth.userLogin.role == 'Kitchen'">
-      <button ion-button color="bgiphonedark" block outline (click)="goToKitchen()" icon-start>
+      <button class="fontButton" ion-button color="bgiphonedark" block outline (click)="goToKitchen()" icon-start>
         <ion-icon ios="ios-bonfire" md="ios-bonfire"></ion-icon>
-        Kitchen
+        Nhà bếp
       </button>
     </ion-col>
   </ion-row>
   <ion-row class="marginRow" *ngIf="showButton">
     <ion-col col-6 *ngIf="auth.userLogin.role == 'Admin'">
-      <button ion-button color="light" block outline (click)="goToCashier()" icon-start>
+      <button class="fontButton" ion-button color="light" block outline (click)="goToCashier()" icon-start>
         <ion-icon ios="ios-cash-outline" md="ios-cash-outline"></ion-icon>
-        Cashier
+        Tính tiền
       </button>
     </ion-col>
     <ion-col col-6 *ngIf="auth.userLogin.role == 'Admin'">
-      <button ion-button color="bgiphonedark" block outline (click)="goToSetting()" icon-start>
+      <button class="fontButton" ion-button color="bgiphonedark" block outline (click)="goToSetting()" icon-start>
         <ion-icon ios="ios-settings-outline" md="ios-settings-outline"></ion-icon>
-        Setting
+        Cấu hình
       </button>
     </ion-col>
     <ion-col col-12 *ngIf="auth.userLogin.role == 'Cashier'">
-      <button ion-button color="light" block outline (click)="goToCashier()" icon-start>
+      <button class="fontButton" ion-button color="light" block outline (click)="goToCashier()" icon-start>
         <ion-icon ios="ios-cash-outline" md="ios-cash-outline"></ion-icon>
-        Cashier
+        Tính tiền
       </button>
     </ion-col>
     <ion-col col-12 *ngIf="auth.userLogin.role == 'Admin'">
-      <button ion-button color="bgiphonedark" block outline (click)="summary()" icon-start>
+      <button class="fontButton" ion-button color="bgiphonedark" block outline (click)="summary()" icon-start>
         <ion-icon ios="ios-stats-outline" md="ios-stats-outline"></ion-icon>
-        Summary
+        Tổng kết
       </button>
     </ion-col>
   </ion-row>
