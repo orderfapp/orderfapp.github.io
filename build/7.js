@@ -209,7 +209,12 @@ var OrderDetailsPage = /** @class */ (function () {
     };
     OrderDetailsPage.prototype.confirmOrder = function (order) {
         if (this.currentTable) {
-            order.table = this.currentTable.toLowerCase();
+            if (this.mode == this.orderProvider.stringModeMuaVe) {
+                order.table = this.currentTable.toLowerCase() + " " + this.mode;
+            }
+            else {
+                order.table = this.currentTable.toLowerCase();
+            }
         }
         else {
             order.table = this.mode;
