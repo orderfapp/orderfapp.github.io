@@ -82,22 +82,27 @@ var ChiefPage = /** @class */ (function () {
                 for (var index = 0; index < dataInfo.length; index++) {
                     var order = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["b" /* COrder */]();
                     var element = dataInfo[index];
+                    console.log(element);
                     order.copy(element);
                     for (var key in element.order) {
-                        var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* COrderDetails */]();
-                        orderDetail.copy(element.order[key]);
-                        orderDetail.food.copy(_this.orderProvider.listFoodObject[element.order[key].id]);
-                        if (element.order[key].option) {
-                            for (var keyOption in element.order[key].option) {
-                                orderDetail.option.push(keyOption);
+                        if (_this.orderProvider.listFoodObject[element.order[key].id]) {
+                            var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* COrderDetails */]();
+                            orderDetail.copy(element.order[key]);
+                            orderDetail.food.copy(_this.orderProvider.listFoodObject[element.order[key].id]);
+                            if (element.order[key].option) {
+                                for (var keyOption in element.order[key].option) {
+                                    orderDetail.option.push(keyOption);
+                                }
                             }
+                            order.listOrder.push(orderDetail);
                         }
-                        order.listOrder.push(orderDetail);
                     }
-                    _this.dataOfOrder.push(order);
-                    if (order.status) {
-                        listOrderHide.push(index);
-                        count++;
+                    if (order.listOrder.length > 0) {
+                        _this.dataOfOrder.push(order);
+                        if (order.status) {
+                            listOrderHide.push(index);
+                            count++;
+                        }
                     }
                 }
                 if (count > _this.orderProvider.limitShow) {

@@ -22,7 +22,7 @@ webpackEmptyAsyncContext.id = 192;
 
 var map = {
 	"../pages/cashier/cashier.module": [
-		501,
+		511,
 		10
 	],
 	"../pages/chief/chief.module": [
@@ -30,15 +30,15 @@ var map = {
 		9
 	],
 	"../pages/login/login.module": [
-		502,
+		501,
 		8
 	],
 	"../pages/order-details/order-details.module": [
-		504,
+		502,
 		7
 	],
 	"../pages/order/order.module": [
-		506,
+		504,
 		6
 	],
 	"../pages/payment/payment.module": [
@@ -46,7 +46,7 @@ var map = {
 		5
 	],
 	"../pages/setting-option/setting-option.module": [
-		507,
+		506,
 		4
 	],
 	"../pages/setting-user/setting-user.module": [
@@ -54,15 +54,15 @@ var map = {
 		3
 	],
 	"../pages/setup-type/setup-type.module": [
-		509,
+		507,
 		2
 	],
 	"../pages/setup/setup.module": [
-		510,
+		509,
 		0
 	],
 	"../pages/statistics/statistics.module": [
-		511,
+		510,
 		1
 	]
 };
@@ -310,17 +310,21 @@ var OrderFoodProvider = /** @class */ (function () {
                     var element = dataInfo[index];
                     order.copy(element);
                     for (var key in element.order) {
-                        var orderDetail = new COrderDetails();
-                        orderDetail.copy(element.order[key]);
-                        orderDetail.food.copy(_this.listFoodObject[element.order[key].id]);
-                        if (element.order[key].option) {
-                            for (var keyOption in element.order[key].option) {
-                                orderDetail.option.push(keyOption);
+                        if (_this.listFoodObject[element.order[key].id]) {
+                            var orderDetail = new COrderDetails();
+                            orderDetail.copy(element.order[key]);
+                            orderDetail.food.copy(_this.listFoodObject[element.order[key].id]);
+                            if (element.order[key].option) {
+                                for (var keyOption in element.order[key].option) {
+                                    orderDetail.option.push(keyOption);
+                                }
                             }
+                            order.listOrder.push(orderDetail);
                         }
-                        order.listOrder.push(orderDetail);
                     }
-                    dataOfOrder.push(order);
+                    if (order.listOrder.length > 0) {
+                        dataOfOrder.push(order);
+                    }
                 }
             }
             else {
@@ -743,17 +747,17 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/cashier/cashier.module#CashierPageModule', name: 'CashierPage', segment: 'cashier', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/chief/chief.module#ChiefPageModule', name: 'ChiefPage', segment: 'chief', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order-details/order-details.module#OrderDetailsPageModule', name: 'OrderDetailsPage', segment: 'order-details', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/payment/payment.module#PaymentPageModule', name: 'PaymentPage', segment: 'payment', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/chief/chief.module#ChiefPageModule', name: 'ChiefPage', segment: 'chief', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order/order.module#OrderPageModule', name: 'OrderPage', segment: 'order', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/payment/payment.module#PaymentPageModule', name: 'PaymentPage', segment: 'payment', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setting-option/setting-option.module#SettingOptionPageModule', name: 'SettingOptionPage', segment: 'setting-option', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/setting-user/setting-user.module#SettingUserPageModule', name: 'SettingUserPage', segment: 'setting-user', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup-type/setup-type.module#SetupTypePageModule', name: 'SetupTypePage', segment: 'setup-type', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/setting-user/setting-user.module#SettingUserPageModule', name: 'SettingUserPage', segment: 'setting-user', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup/setup.module#SetupPageModule', name: 'SetupPage', segment: 'setup', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/cashier/cashier.module#CashierPageModule', name: 'CashierPage', segment: 'cashier', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_7_angularfire2__["AngularFireModule"].initializeApp(firebaseConfig),
