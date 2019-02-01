@@ -1,6 +1,6 @@
 webpackJsonp([10],{
 
-/***/ 511:
+/***/ 509:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CashierPageModule", function() { return CashierPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cashier__ = __webpack_require__(524);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cashier__ = __webpack_require__(520);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var CashierPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 524:
+/***/ 520:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -161,7 +161,7 @@ var CashierPage = /** @class */ (function () {
     };
     CashierPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-cashier',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\cashier\cashier.html"*/'<!--\n  Generated template for the DeviceListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>List Order</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-row no-padding class="listOrder" *ngFor="let orderDetails of items">\n    <ion-col col-2 no-padding class="colBackground">\n      <button ion-button class="buttonFullHeight" color="bgiphonedark" outline no-padding>Thanh toán</button>\n    </ion-col>\n    <ion-col col-10 no-padding>\n      <ion-list no-padding class="listDetails" *ngFor="let foodDetails of orderDetails.listOrder">\n        <ion-item [ngClass]="{\'disableFood\': foodDetails.status}">\n          <ion-avatar item-start>\n            <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n          </ion-avatar>\n          <h2>{{foodDetails.food.name}}</h2>\n          <p *ngIf="foodDetails.option.length == 0">Bình thường</p>\n          <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n          <button ion-button clear color="maincolor" item-end (click)="confirm(foodDetails)">{{foodDetails.food.value}}</button>\n        </ion-item>\n      </ion-list>\n      <ion-list no-padding class="listDetails">\n        <ion-item>\n          <button ion-button clear color="maincolor" [disabled]="orderDetails.payment" class="payment" item-end (click)="payment(orderDetails)">{{orderDetails.payment ? "Đã Thanh toán" : "Thanh toán " + orderDetails.total()}}</button>\n        </ion-item>\n      </ion-list>\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\cashier\cashier.html"*/,
+            selector: 'page-cashier',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\cashier\cashier.html"*/'<!--\n  Generated template for the DeviceListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>List Order</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-row no-padding class="listOrder" *ngFor="let orderDetails of items">\n    <ion-col col-2 no-padding class="colBackground">\n      <button ion-button class="buttonFullHeight" color="bgiphonedark" outline no-padding>Thanh toán</button>\n    </ion-col>\n    <ion-col col-10 no-padding>\n      <ion-list no-padding class="listDetails" *ngFor="let foodDetails of orderDetails.listOrder">\n        <ion-item [ngClass]="{\'disableFood\': foodDetails.status}">\n          <ion-avatar item-start>\n            <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n          </ion-avatar>\n          <h2>{{foodDetails.food.name}}</h2>\n          <p *ngIf="foodDetails.option.length == 0">Bình thường</p>\n          <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n          <button ion-button clear color="maincolor" item-end (click)="confirm(foodDetails)">{{foodDetails.food.value | currency:\'VND\':\'VNĐ\':\'2.0\'}}</button>\n        </ion-item>\n      </ion-list>\n      <ion-list no-padding class="listDetails">\n        <ion-item>\n          <button ion-button clear color="maincolor" [disabled]="orderDetails.payment" class="payment" item-end (click)="payment(orderDetails)">{{orderDetails.payment\n            ? "Đã Thanh toán" : "Thanh toán "}}{{orderDetails.payment ? "" : orderDetails.total() | currency:\'VND\':\'VNĐ\':\'2.0\'}}</button>\n        </ion-item>\n      </ion-list>\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\cashier\cashier.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */],
