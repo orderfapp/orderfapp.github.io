@@ -24,12 +24,13 @@
           <h2>{{foodDetails.food.name}}</h2>
           <p *ngIf="foodDetails.option.length == 0">Bình thường</p>
           <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>
-          <button ion-button clear color="maincolor" item-end (click)="confirm(foodDetails)">{{foodDetails.food.value}}</button>
+          <button ion-button clear color="maincolor" item-end (click)="confirm(foodDetails)">{{foodDetails.food.value | currency:'VND':'VNĐ':'2.0'}}</button>
         </ion-item>
       </ion-list>
       <ion-list no-padding class="listDetails">
         <ion-item>
-          <button ion-button clear color="maincolor" [disabled]="orderDetails.payment" class="payment" item-end (click)="payment(orderDetails)">{{orderDetails.payment ? "Đã Thanh toán" : "Thanh toán " + orderDetails.total()}}</button>
+          <button ion-button clear color="maincolor" [disabled]="orderDetails.payment" class="payment" item-end (click)="payment(orderDetails)">{{orderDetails.payment
+            ? "Đã Thanh toán" : "Thanh toán "}}{{orderDetails.payment ? "" : orderDetails.total() | currency:'VND':'VNĐ':'2.0'}}</button>
         </ion-item>
       </ion-list>
     </ion-col>

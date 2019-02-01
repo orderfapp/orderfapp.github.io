@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { IonicPage, NavController, NavParams, AlertController, PopoverController } from 'ionic-angular';
 import { OrderFoodProvider, COrder, COrderDetails } from '../../providers/order-food/order-food';
 
