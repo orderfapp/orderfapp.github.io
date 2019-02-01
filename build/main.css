@@ -43601,6 +43601,10 @@ page-login .buttonLogin {
   display: none;
 }
 
+.payment-popover .popover-viewport {
+  height: 100%;
+}
+
 page-order-details .headerRow {
   background-color: #00796b;
 }
