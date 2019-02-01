@@ -22,8 +22,7 @@
         <ion-input class="inputRound" placeholder="Giá" type="text" [(ngModel)]="localFood.value" name="value" required></ion-input>
       </ion-row>
       <ion-row class="heightInput">
-        <ion-input class="inputRound" placeholder="Link Image" type="text" [(ngModel)]="localFood.image" name="image"
-          required></ion-input>
+        <ion-input class="inputRound" placeholder="Link Image" type="text" [(ngModel)]="localFood.image" name="image"></ion-input>
       </ion-row>
       <ion-item class="removeLines">
         <ion-toggle [(ngModel)]="localFood.status" name="status"></ion-toggle>
@@ -33,7 +32,7 @@
       </ion-item>
       <ion-item class="listType removeLines">
         <ion-label>Phân loại</ion-label>
-        <ion-select [(ngModel)]="localFood.type" name="type" required>
+        <ion-select [(ngModel)]="localFood.type" name="type">
           <ion-option value="{{type}}" *ngFor="let type of orderProvider.listTypeFood">{{type}}</ion-option>
         </ion-select>
       </ion-item>

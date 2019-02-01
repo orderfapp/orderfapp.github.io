@@ -79,6 +79,9 @@ export class SetupPage {
     this.title = "Tạo";
   }
   saveData(){
+    if(this.localFood.type == ""){
+      this.localFood.type = "Default";
+    }
     if(this.title == "Tạo"){
       this.orderProvider.addFood(this.localFood);
     }

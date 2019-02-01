@@ -184,17 +184,21 @@ export class OrderFoodProvider {
           let element: any = dataInfo[index];
           order.copy(element);
           for (const key in element.order) {
-            let orderDetail = new COrderDetails();
-            orderDetail.copy(element.order[key]);
-            orderDetail.food.copy(this.listFoodObject[element.order[key].id]);
-            if (element.order[key].option) {
-              for (const keyOption in element.order[key].option) {
-                orderDetail.option.push(keyOption);
+            if (this.listFoodObject[element.order[key].id]) {
+              let orderDetail = new COrderDetails();
+              orderDetail.copy(element.order[key]);
+              orderDetail.food.copy(this.listFoodObject[element.order[key].id]);
+              if (element.order[key].option) {
+                for (const keyOption in element.order[key].option) {
+                  orderDetail.option.push(keyOption);
+                }
               }
+              order.listOrder.push(orderDetail);
             }
-            order.listOrder.push(orderDetail);
           }
-          dataOfOrder.push(order);          
+          if(order.listOrder.length > 0){
+            dataOfOrder.push(order);
+          }          
         }
       }
       else {

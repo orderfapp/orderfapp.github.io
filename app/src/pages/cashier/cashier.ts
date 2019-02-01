@@ -34,22 +34,26 @@ export class CashierPage {
           let element: any = dataInfo[index];
           order.copy(element);
           for (const key in element.order) {
-            let orderDetail = new COrderDetails();
-            orderDetail.copy(element.order[key]);
-            orderDetail.food.copy(this.orderProvider.listFoodObject[element.order[key].id]);
-            if (element.order[key].option) {
-              for (const keyOption in element.order[key].option) {
-                orderDetail.option.push(keyOption);
+            if(this.orderProvider.listFoodObject[element.order[key].id]){
+              let orderDetail = new COrderDetails();
+              orderDetail.copy(element.order[key]);            
+              orderDetail.food.copy(this.orderProvider.listFoodObject[element.order[key].id]);
+              if (element.order[key].option) {
+                for (const keyOption in element.order[key].option) {
+                  orderDetail.option.push(keyOption);
+                }
+  
               }
-
+              order.listOrder.push(orderDetail);
+            }            
+          }
+          if(order.listOrder.length > 0){
+            this.dataOfOrder.push(order);
+            if (order.status) {
+              listOrderHide.push(index);
+              count++;
             }
-            order.listOrder.push(orderDetail);
-          }
-          this.dataOfOrder.push(order);
-          if (order.status) {
-            listOrderHide.push(index);
-            count++;
-          }
+          }          
         }
         if (count > this.orderProvider.limitShow) {
           for (let index = listOrderHide.length - this.orderProvider.limitShow - 1; index >= 0; index--) {
