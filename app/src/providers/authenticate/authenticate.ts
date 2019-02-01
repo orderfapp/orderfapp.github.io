@@ -84,8 +84,8 @@ export class AuthenticateProvider {
   }
   addUser(user: CUser) {
     let data = {};
-    data[this.userPath + user.loginid + "/" + this.useridloginPath] = user.loginid;
-    data[this.userPath + user.loginid + "/" + this.userpasswordPath] = user.password;
+    data[this.userPath + user.loginid + "/" + this.useridloginPath] = user.loginid.trim().toLowerCase();
+    data[this.userPath + user.loginid + "/" + this.userpasswordPath] = user.password.trim().toLowerCase();
     data[this.userPath + user.loginid + "/" + this.usernamePath] = user.name;
     data[this.userPath + user.loginid + "/" + this.status] = user.status;
     data[this.userPath + user.loginid + "/" + this.role] = user.role;
@@ -96,7 +96,7 @@ export class AuthenticateProvider {
   editUser(user: CUser) {
     let data = {};
     if (user.loginid) {
-      data[this.userPath + user.loginid + "/" + this.userpasswordPath] = user.password;
+      data[this.userPath + user.loginid + "/" + this.userpasswordPath] = user.password.trim().toLowerCase();
       data[this.userPath + user.loginid + "/" + this.usernamePath] = user.name;
       data[this.userPath + user.loginid + "/" + this.status] = user.status;
       data[this.userPath + user.loginid + "/" + this.role] = user.role;

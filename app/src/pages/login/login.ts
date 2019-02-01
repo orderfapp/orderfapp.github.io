@@ -26,6 +26,8 @@ export class LoginPage {
   }
   public login() {
     this.showButton = false;
+    this.loginInfo.userName = this.loginInfo.userName.toLowerCase();
+    this.loginInfo.password = this.loginInfo.password.toLowerCase();
     this.auth.login(this.loginInfo).subscribe(allowed => {
       if (allowed) {
         this.showButton = true;

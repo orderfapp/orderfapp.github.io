@@ -11,7 +11,7 @@
         required></ion-input>
     </ion-item>
     <ion-item no-padding class="highlightRemove inputItemStyleF" no-lines>
-      <ion-input placeholder="Mật khẩu" class="inputTextStyle" name="password" [(ngModel)]="loginInfo.password"
+      <ion-input placeholder="Mật khẩu" type="password" class="inputTextStyle" name="password" [(ngModel)]="loginInfo.password"
         required></ion-input>
     </ion-item>
     <ion-row class="marginRow" no-padding>
@@ -67,7 +67,7 @@
     </ion-col>
     <ion-col col-12 *ngIf="auth.userLogin.role == 'Admin'">
       <button ion-button color="bgiphonedark" block outline (click)="summary()" icon-start>
-        <ion-icon ios="ios-settings-outline" md="ios-settings-outline"></ion-icon>
+        <ion-icon ios="ios-stats-outline" md="ios-stats-outline"></ion-icon>
         Summary
       </button>
     </ion-col>
