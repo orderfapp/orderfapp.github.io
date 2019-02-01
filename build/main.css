@@ -43601,6 +43601,19 @@ page-login .buttonLogin {
   display: none;
 }
 
+.popover {
+  height: auto !important;
+}
+
+.popover ion-header-bar {
+  position: relative;
+}
+
+.popover ion-content {
+  top: 0;
+  position: relative;
+}
+
 page-order-details .headerRow {
   background-color: #00796b;
 }
@@ -43610,10 +43623,6 @@ page-order-details .buttonHeader .button-inner {
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-}
-
-page-order-details .scrollTo {
-  overflow-y: scroll;
 }
 
 page-payment .headerRow {

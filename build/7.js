@@ -1,6 +1,6 @@
 webpackJsonp([7],{
 
-/***/ 505:
+/***/ 504:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderDetailsPageModule", function() { return OrderDetailsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order_details__ = __webpack_require__(516);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order_details__ = __webpack_require__(515);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var OrderDetailsPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 516:
+/***/ 515:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -221,7 +221,7 @@ var OrderDetailsPage = /** @class */ (function () {
     };
     OrderDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-order-details',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\order-details\order-details.html"*/'<ion-content>\n  <ion-list class="scrollTo">\n    <ion-row no-padding class="headerRow" text-center>\n      <button ion-button class="buttonHeader" color="light" full clear>{{mode + " " + currentTable}}</button>\n    </ion-row>\n    <ion-item (press)="deleteFood(foodDetails)" (swipe)="addOption(foodDetails)" *ngFor="let foodDetails of orderProvider.orderTable.listOrder">\n      <ion-avatar item-start (click)="minusFood(foodDetails)">\n        <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n      </ion-avatar>\n      <h2>{{foodDetails.food.name}}</h2>\n      <p *ngIf="foodDetails.option.length == 0">Bình thường</p>\n      <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n      <button ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">{{"SL " + foodDetails.sl}}</button>\n    </ion-item>\n    <ion-row no-padding>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" (click)="closeOrder(orderProvider.orderTable)">\n          Xóa\n        </button>\n      </ion-col>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" (click)="confirmOrder(orderProvider.orderTable)">\n          Hoàn tất\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\order-details\order-details.html"*/,
+            selector: 'page-order-details',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\order-details\order-details.html"*/'<ion-content>\n  <ion-list>\n    <ion-row no-padding class="headerRow" text-center>\n      <button ion-button class="buttonHeader" color="light" full clear>{{mode + " " + currentTable}}</button>\n    </ion-row>\n    <ion-item (press)="deleteFood(foodDetails)" (swipe)="addOption(foodDetails)" *ngFor="let foodDetails of orderProvider.orderTable.listOrder">\n      <ion-avatar item-start (click)="minusFood(foodDetails)">\n        <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n      </ion-avatar>\n      <h2>{{foodDetails.food.name}}</h2>\n      <p *ngIf="foodDetails.option.length == 0">Bình thường</p>\n      <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n      <button ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">{{"SL " + foodDetails.sl}}</button>\n    </ion-item>\n    <ion-row no-padding>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" (click)="closeOrder(orderProvider.orderTable)">\n          Xóa\n        </button>\n      </ion-col>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" (click)="confirmOrder(orderProvider.orderTable)">\n          Hoàn tất\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\order-details\order-details.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],

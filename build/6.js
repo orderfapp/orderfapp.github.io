@@ -1,6 +1,6 @@
 webpackJsonp([6],{
 
-/***/ 504:
+/***/ 505:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderPageModule", function() { return OrderPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order__ = __webpack_require__(515);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order__ = __webpack_require__(516);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var OrderPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 515:
+/***/ 516:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -127,7 +127,7 @@ var OrderPage = /** @class */ (function () {
             }
         }
     };
-    OrderPage.prototype.addOrder = function (data) {
+    OrderPage.prototype.addOrder = function (data, ev) {
         var _this = this;
         if (!data || this.orderProvider.orderTable.listOrder.length == 0) {
             return;
@@ -159,7 +159,7 @@ var OrderPage = /** @class */ (function () {
                                     cssClass: 'custom-popover'
                                 });
                                 popover.present({
-                                    ev: ""
+                                    ev: ev
                                 });
                             }
                             else {
@@ -198,7 +198,7 @@ var OrderPage = /** @class */ (function () {
                                     cssClass: 'custom-popover'
                                 });
                                 popover.present({
-                                    ev: ""
+                                    ev: ev
                                 });
                             }
                             else {
@@ -230,7 +230,7 @@ var OrderPage = /** @class */ (function () {
     };
     OrderPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-order',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\order\order.html"*/'<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>Order</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content >\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-list class="listFood">\n    <ion-item *ngFor="let foodDetails of items">\n      <ion-avatar item-start (click)="minusFood(foodDetails)">\n        <img src=\'{{foodDetails.image ? foodDetails.image : "assets/icon/noimage.png"}}\'>\n      </ion-avatar>\n      <p>{{foodDetails.name}}</p>\n      <p>Giá : {{foodDetails.value}}<font style="color:red">{{foodDetails.status ? "" :" Hết hàng"}}</font>\n      </p>\n      <button ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">{{orderProvider.listSLFoodObject[foodDetails.id] ? "SL " + orderProvider.listSLFoodObject[foodDetails.id] : "Đặt"}}</button>\n    </ion-item>\n  </ion-list>  \n</ion-content>\n<ion-footer>\n  <ion-row no-padding>\n    <ion-col col-6 no-padding text-center>\n        <button ion-button color="maincolor" block outline (click)="addOrder(\'Mua về\')">Mua về</button>     \n    </ion-col>\n    <ion-col col-6 no-padding text-center>\n        <button ion-button color="maincolor" block outline (click)="addOrder(\'Tại bàn\')">Tại bàn</button>\n    </ion-col>    \n  </ion-row>\n</ion-footer>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\order\order.html"*/,
+            selector: 'page-order',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\order\order.html"*/'<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>Order</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content >\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-list class="listFood">\n    <ion-item *ngFor="let foodDetails of items">\n      <ion-avatar item-start (click)="minusFood(foodDetails)">\n        <img src=\'{{foodDetails.image ? foodDetails.image : "assets/icon/noimage.png"}}\'>\n      </ion-avatar>\n      <p>{{foodDetails.name}}</p>\n      <p>Giá : {{foodDetails.value}}<font style="color:red">{{foodDetails.status ? "" :" Hết hàng"}}</font>\n      </p>\n      <button ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">{{orderProvider.listSLFoodObject[foodDetails.id] ? "SL " + orderProvider.listSLFoodObject[foodDetails.id] : "Đặt"}}</button>\n    </ion-item>\n  </ion-list>  \n</ion-content>\n<ion-footer>\n  <ion-row no-padding>\n    <ion-col col-6 no-padding text-center>\n        <button ion-button color="maincolor" block outline (click)="addOrder(\'Mua về\', $event)">Mua về</button>     \n    </ion-col>\n    <ion-col col-6 no-padding text-center>\n        <button ion-button color="maincolor" block outline (click)="addOrder(\'Tại bàn\', $event)">Tại bàn</button>\n    </ion-col>    \n  </ion-row>\n</ion-footer>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\order\order.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
