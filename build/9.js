@@ -1,6 +1,6 @@
 webpackJsonp([9],{
 
-/***/ 501:
+/***/ 502:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChiefPageModule", function() { return ChiefPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chief__ = __webpack_require__(512);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chief__ = __webpack_require__(513);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var ChiefPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 512:
+/***/ 513:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -70,6 +70,8 @@ var ChiefPage = /** @class */ (function () {
         this.orderProvider = orderProvider;
         this.navParams = navParams;
         this.dataOfOrder = [];
+        this.countItemDone = 0;
+        this.countItem = 0;
         this.initializeItems();
     }
     ChiefPage.prototype.initializeItems = function () {
@@ -78,17 +80,22 @@ var ChiefPage = /** @class */ (function () {
             var count = 0;
             var listOrderHide = [];
             _this.dataOfOrder = [];
+            _this.countItemDone = 0;
+            _this.countItem = 0;
             if (dataInfo) {
                 for (var index = 0; index < dataInfo.length; index++) {
                     var order = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["b" /* COrder */]();
                     var element = dataInfo[index];
-                    console.log(element);
                     order.copy(element);
+                    if (order.status) {
+                        _this.countItemDone++;
+                    }
                     for (var key in element.order) {
                         if (_this.orderProvider.listFoodObject[element.order[key].id]) {
                             var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* COrderDetails */]();
                             orderDetail.copy(element.order[key]);
                             orderDetail.food.copy(_this.orderProvider.listFoodObject[element.order[key].id]);
+                            _this.countItem++;
                             if (element.order[key].option) {
                                 for (var keyOption in element.order[key].option) {
                                     orderDetail.option.push(keyOption);
@@ -171,7 +178,7 @@ var ChiefPage = /** @class */ (function () {
     };
     ChiefPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-chief',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\chief\chief.html"*/'<!--\n  Generated template for the DeviceListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>List Order</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-row no-padding *ngFor="let orderDetails of items" class="listOrder">\n    <ion-col col-2 no-padding class="colBackground">\n      <button ion-button class="buttonFullHeight" color="bgiphonedark" outline (click)="confirmAll(orderDetails)" no-padding>{{orderDetails.table}}</button>\n    </ion-col>\n    <ion-col col-10 no-padding>\n      <ion-list no-padding class="listDetails" *ngFor="let foodDetails of orderDetails.listOrder">\n        <ion-item [ngClass]="{\'disableFood\': foodDetails.status}">\n          <ion-avatar item-start>\n            <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n          </ion-avatar>\n          <h2>{{foodDetails.food.name}}</h2>\n          <p *ngIf="foodDetails.option.length == 0">Bình thường</p>\n          <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n          <button ion-button clear color="maincolor" item-end (click)="confirm(orderDetails, foodDetails)">OK</button>\n        </ion-item>\n      </ion-list>\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\chief\chief.html"*/,
+            selector: 'page-chief',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\chief\chief.html"*/'<!--\n  Generated template for the DeviceListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>{{"Đơn order " + countItemDone + "/" + dataOfOrder.length}}</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-row no-padding *ngFor="let orderDetails of items" class="listOrder">\n    <ion-col col-2 no-padding class="colBackground">\n      <button ion-button class="buttonFullHeight" color="bgiphonedark" outline (click)="confirmAll(orderDetails)" no-padding>{{orderDetails.table}}</button>\n    </ion-col>\n    <ion-col col-10 no-padding>\n      <ion-list no-padding class="listDetails" *ngFor="let foodDetails of orderDetails.listOrder">\n        <ion-item [ngClass]="{\'disableFood\': foodDetails.status}">\n          <ion-avatar item-start>\n            <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n          </ion-avatar>\n          <h2>{{foodDetails.food.name}}</h2>\n          <p *ngIf="foodDetails.option.length == 0">Bình thường</p>\n          <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n          <button ion-button clear color="maincolor" item-end (click)="confirm(orderDetails, foodDetails)">OK</button>\n        </ion-item>\n      </ion-list>\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\chief\chief.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */],
