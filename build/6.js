@@ -133,7 +133,7 @@ var OrderPage = /** @class */ (function () {
             return;
         }
         if (data == this.orderProvider.stringModeMuaVe) {
-            var prompt_1 = this.alertCtrl.create({
+            var prompt = this.alertCtrl.create({
                 title: 'Tên người mua',
                 inputs: [
                     {
@@ -150,29 +150,24 @@ var OrderPage = /** @class */ (function () {
                     {
                         text: 'OK',
                         handler: function (data) {
-                            if (data.tableNumber) {
-                                _this.currentTable = data.tableNumber.toLowerCase();
-                                var popover = _this.popoverCtrl.create("OrderDetailsPage", {
-                                    mode: _this.orderProvider.stringModeMuaVe,
-                                    currentTable: _this.currentTable
-                                }, {
-                                    cssClass: 'custom-popover'
-                                });
-                                popover.present({
-                                    ev: ev
-                                });
-                            }
-                            else {
-                                return false;
-                            }
+                            _this.currentTable = data.tableNumber.toLowerCase();
+                            var popover = _this.popoverCtrl.create("OrderDetailsPage", {
+                                mode: _this.orderProvider.stringModeMuaVe,
+                                currentTable: _this.currentTable
+                            }, {
+                                cssClass: 'custom-popover'
+                            });
+                            popover.present({
+                                ev: ev
+                            });
                         }
                     }
                 ]
             });
-            prompt_1.present();
+            prompt.present();
         }
         else if (data == this.orderProvider.stringModeTaiBan) {
-            var prompt_2 = this.alertCtrl.create({
+            var prompt = this.alertCtrl.create({
                 title: 'Chọn bàn',
                 inputs: [
                     {
@@ -208,7 +203,7 @@ var OrderPage = /** @class */ (function () {
                     }
                 ]
             });
-            prompt_2.present();
+            prompt.present();
         }
     };
     OrderPage.prototype.xoaDau = function (str) {
@@ -232,13 +227,10 @@ var OrderPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-order',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\order\order.html"*/'<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>Order</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content >\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-list class="listFood">\n    <ion-item *ngFor="let foodDetails of items">\n      <ion-avatar item-start (click)="minusFood(foodDetails)">\n        <img src=\'{{foodDetails.image ? foodDetails.image : "assets/icon/noimage.png"}}\'>\n      </ion-avatar>\n      <p>{{foodDetails.name}}</p>\n      <p>Giá : {{foodDetails.value}}<font style="color:red">{{foodDetails.status ? "" :" Hết hàng"}}</font>\n      </p>\n      <button ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">{{orderProvider.listSLFoodObject[foodDetails.id] ? "SL " + orderProvider.listSLFoodObject[foodDetails.id] : "Đặt"}}</button>\n    </ion-item>\n  </ion-list>  \n</ion-content>\n<ion-footer>\n  <ion-row no-padding>\n    <ion-col col-6 no-padding text-center>\n        <button ion-button color="maincolor" block outline (click)="addOrder(\'Mua về\', $event)">Mua về</button>     \n    </ion-col>\n    <ion-col col-6 no-padding text-center>\n        <button ion-button color="maincolor" block outline (click)="addOrder(\'Tại bàn\', $event)">Tại bàn</button>\n    </ion-col>    \n  </ion-row>\n</ion-footer>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\order\order.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object])
     ], OrderPage);
     return OrderPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=order.js.map

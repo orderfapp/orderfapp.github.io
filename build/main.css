@@ -43601,7 +43601,7 @@ page-login .buttonLogin {
   display: none;
 }
 
-.payment-popover .popover-viewport {
+.payment-popover .popover-content .popover-viewport {
   height: 100%;
 }
 
