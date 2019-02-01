@@ -43612,6 +43612,10 @@ page-order-details .buttonHeader .button-inner {
   justify-content: flex-start;
 }
 
+page-order-details .scrollTo {
+  overflow-y: scroll;
+}
+
 page-payment .headerRow {
   background-color: #00796b;
 }
