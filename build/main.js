@@ -26,11 +26,11 @@ var map = {
 		10
 	],
 	"../pages/chief/chief.module": [
-		502,
+		503,
 		9
 	],
 	"../pages/login/login.module": [
-		503,
+		502,
 		8
 	],
 	"../pages/order-details/order-details.module": [
@@ -38,11 +38,11 @@ var map = {
 		7
 	],
 	"../pages/order/order.module": [
-		505,
+		506,
 		6
 	],
 	"../pages/payment/payment.module": [
-		506,
+		505,
 		5
 	],
 	"../pages/setting-option/setting-option.module": [
@@ -50,11 +50,11 @@ var map = {
 		4
 	],
 	"../pages/setting-user/setting-user.module": [
-		509,
+		508,
 		3
 	],
 	"../pages/setup-type/setup-type.module": [
-		508,
+		509,
 		2
 	],
 	"../pages/setup/setup.module": [
@@ -548,8 +548,8 @@ var AuthenticateProvider = /** @class */ (function () {
     };
     AuthenticateProvider.prototype.addUser = function (user) {
         var data = {};
-        data[this.userPath + user.loginid + "/" + this.useridloginPath] = user.loginid;
-        data[this.userPath + user.loginid + "/" + this.userpasswordPath] = user.password;
+        data[this.userPath + user.loginid + "/" + this.useridloginPath] = user.loginid.trim().toLowerCase();
+        data[this.userPath + user.loginid + "/" + this.userpasswordPath] = user.password.trim().toLowerCase();
         data[this.userPath + user.loginid + "/" + this.usernamePath] = user.name;
         data[this.userPath + user.loginid + "/" + this.status] = user.status;
         data[this.userPath + user.loginid + "/" + this.role] = user.role;
@@ -560,7 +560,7 @@ var AuthenticateProvider = /** @class */ (function () {
     AuthenticateProvider.prototype.editUser = function (user) {
         var data = {};
         if (user.loginid) {
-            data[this.userPath + user.loginid + "/" + this.userpasswordPath] = user.password;
+            data[this.userPath + user.loginid + "/" + this.userpasswordPath] = user.password.trim().toLowerCase();
             data[this.userPath + user.loginid + "/" + this.usernamePath] = user.name;
             data[this.userPath + user.loginid + "/" + this.status] = user.status;
             data[this.userPath + user.loginid + "/" + this.role] = user.role;
@@ -744,14 +744,14 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/cashier/cashier.module#CashierPageModule', name: 'CashierPage', segment: 'cashier', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/chief/chief.module#ChiefPageModule', name: 'ChiefPage', segment: 'chief', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/chief/chief.module#ChiefPageModule', name: 'ChiefPage', segment: 'chief', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order-details/order-details.module#OrderDetailsPageModule', name: 'OrderDetailsPage', segment: 'order-details', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/order/order.module#OrderPageModule', name: 'OrderPage', segment: 'order', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/payment/payment.module#PaymentPageModule', name: 'PaymentPage', segment: 'payment', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/order/order.module#OrderPageModule', name: 'OrderPage', segment: 'order', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setting-option/setting-option.module#SettingOptionPageModule', name: 'SettingOptionPage', segment: 'setting-option', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/setup-type/setup-type.module#SetupTypePageModule', name: 'SetupTypePage', segment: 'setup-type', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setting-user/setting-user.module#SettingUserPageModule', name: 'SettingUserPage', segment: 'setting-user', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/setup-type/setup-type.module#SetupTypePageModule', name: 'SetupTypePage', segment: 'setup-type', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup/setup.module#SetupPageModule', name: 'SetupPage', segment: 'setup', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] }
                     ]
