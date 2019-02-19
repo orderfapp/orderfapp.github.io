@@ -46,7 +46,7 @@ var map = {
 		5
 	],
 	"../pages/setting-option/setting-option.module": [
-		507,
+		509,
 		4
 	],
 	"../pages/setting-user/setting-user.module": [
@@ -54,7 +54,7 @@ var map = {
 		3
 	],
 	"../pages/setup-type/setup-type.module": [
-		509,
+		507,
 		2
 	],
 	"../pages/setup/setup.module": [
@@ -755,9 +755,9 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/order-details/order-details.module#OrderDetailsPageModule', name: 'OrderDetailsPage', segment: 'order-details', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/payment/payment.module#PaymentPageModule', name: 'PaymentPage', segment: 'payment', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order/order.module#OrderPageModule', name: 'OrderPage', segment: 'order', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/setting-option/setting-option.module#SettingOptionPageModule', name: 'SettingOptionPage', segment: 'setting-option', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/setting-user/setting-user.module#SettingUserPageModule', name: 'SettingUserPage', segment: 'setting-user', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup-type/setup-type.module#SetupTypePageModule', name: 'SetupTypePage', segment: 'setup-type', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/setting-user/setting-user.module#SettingUserPageModule', name: 'SettingUserPage', segment: 'setting-user', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/setting-option/setting-option.module#SettingOptionPageModule', name: 'SettingOptionPage', segment: 'setting-option', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup/setup.module#SetupPageModule', name: 'SetupPage', segment: 'setup', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] }
                     ]
@@ -821,7 +821,7 @@ var MyApp = /** @class */ (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"D:\ionic\orderFood\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"D:\ionic\orderFood\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\User\Documents\orderfapp.github.io-master\app\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\User\Documents\orderfapp.github.io-master\app\src\app\app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
