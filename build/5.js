@@ -1,6 +1,6 @@
 webpackJsonp([5],{
 
-/***/ 506:
+/***/ 505:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentPageModule", function() { return PaymentPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment__ = __webpack_require__(517);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment__ = __webpack_require__(516);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var PaymentPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 517:
+/***/ 516:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110,7 +110,7 @@ var PaymentPage = /** @class */ (function () {
     };
     PaymentPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-payment',template:/*ion-inline-start:"C:\Users\User\Documents\orderfapp.github.io-master\app\src\pages\payment\payment.html"*/'<ion-content>\n    <form (ngSubmit)="payment()" #paymentForm="ngForm">\n  <ion-list>\n    <ion-row no-padding class="headerRow" text-center>\n      <button ion-button class="buttonHeader" color="light" full clear>Thanh toán</button>\n    </ion-row>  \n    <ion-item>\n      <ion-label>{{order.total() | currency:\'VND\':\'VNĐ\':\'2.0\'}}</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input placeholder="Số tiền khách trả" type="number" pattern="[0-9]*" [(ngModel)]="money" name="money" (input)="change($event)" required></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>{{returnText}} {{returnBack | currency:\'VND\':\'VNĐ\':\'2.0\'}}</ion-label>\n    </ion-item>\n    <ion-row no-padding>\n      <ion-col col-6 padding text-center>\n        <button ion-button type="button" block color="mainlightcolor" (click)="closePayment()">\n          Hủy\n        </button>\n      </ion-col>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" [disabled]="!paymentForm.form.valid">\n          Thanh toán\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-list>\n  </form>\n</ion-content>'/*ion-inline-end:"C:\Users\User\Documents\orderfapp.github.io-master\app\src\pages\payment\payment.html"*/,
+            selector: 'page-payment',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\payment\payment.html"*/'<ion-content>\n    <form (ngSubmit)="payment()" #paymentForm="ngForm">\n  <ion-list>\n    <ion-row no-padding class="headerRow" text-center>\n      <button ion-button class="buttonHeader" color="light" full clear>Thanh toán</button>\n    </ion-row>  \n    <ion-item>\n      <ion-label>{{order.total() | currency:\'VND\':\'VNĐ\':\'2.0\'}}</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input placeholder="Số tiền khách trả" type="number" pattern="[0-9]*" [(ngModel)]="money" name="money" (input)="change($event)" required></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>{{returnText}} {{returnBack | currency:\'VND\':\'VNĐ\':\'2.0\'}}</ion-label>\n    </ion-item>\n    <ion-row no-padding>\n      <ion-col col-6 padding text-center>\n        <button ion-button type="button" block color="mainlightcolor" (click)="closePayment()">\n          Hủy\n        </button>\n      </ion-col>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" [disabled]="!paymentForm.form.valid">\n          Thanh toán\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-list>\n  </form>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\payment\payment.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ViewController */],
