@@ -43668,7 +43668,7 @@ html {
   border-radius: 10px;
   position: absolute;
   top: 60%;
-  left: 35%;
+  left: 31%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   width: 60%;
@@ -43746,11 +43746,7 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(10, 0fr);
   grid-gap: 1px;
-  padding: 5px;
-  overflow: auto;
-  overflow-x: scroll;
-  overflow-y: scroll;
-  white-space: nowrap;
+  padding: 1px;
 }
 
 page-order-details .headerRow {
