@@ -43672,6 +43672,10 @@ html {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   width: 95%;
+  overflow: auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 .calculator-screen {
