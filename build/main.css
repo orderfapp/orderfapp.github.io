@@ -43676,7 +43676,7 @@ html {
 }
 
 .calculator-screen {
-  width: 30%;
+  width: 60%;
   font-size: 1rem;
   height: 120px;
   border: none;
@@ -43745,8 +43745,12 @@ button:hover {
 .calculator-keys {
   display: grid;
   grid-template-columns: repeat(10, 0fr);
-  grid-gap: 3px;
+  grid-gap: 1px;
   padding: 5px;
+  overflow: auto;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  white-space: nowrap;
 }
 
 page-order-details .headerRow {
