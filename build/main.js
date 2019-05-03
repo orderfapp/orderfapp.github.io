@@ -26,11 +26,11 @@ var map = {
 		10
 	],
 	"../pages/chief/chief.module": [
-		502,
+		503,
 		9
 	],
 	"../pages/login/login.module": [
-		503,
+		502,
 		8
 	],
 	"../pages/order-details/order-details.module": [
@@ -54,11 +54,11 @@ var map = {
 		4
 	],
 	"../pages/setup-type/setup-type.module": [
-		509,
+		508,
 		3
 	],
 	"../pages/setup/setup.module": [
-		508,
+		509,
 		1
 	],
 	"../pages/statistics/statistics.module": [
@@ -750,14 +750,14 @@ var AppModule = /** @class */ (function () {
                 }, {
                     links: [
                         { loadChildren: '../pages/cashier/cashier.module#CashierPageModule', name: 'CashierPage', segment: 'cashier', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/chief/chief.module#ChiefPageModule', name: 'ChiefPage', segment: 'chief', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/chief/chief.module#ChiefPageModule', name: 'ChiefPage', segment: 'chief', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order-details/order-details.module#OrderDetailsPageModule', name: 'OrderDetailsPage', segment: 'order-details', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/payment/payment.module#PaymentPageModule', name: 'PaymentPage', segment: 'payment', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setting-option/setting-option.module#SettingOptionPageModule', name: 'SettingOptionPage', segment: 'setting-option', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setting-user/setting-user.module#SettingUserPageModule', name: 'SettingUserPage', segment: 'setting-user', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/setup/setup.module#SetupPageModule', name: 'SetupPage', segment: 'setup', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup-type/setup-type.module#SetupTypePageModule', name: 'SetupTypePage', segment: 'setup-type', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/setup/setup.module#SetupPageModule', name: 'SetupPage', segment: 'setup', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order/order.module#OrderPageModule', name: 'OrderPage', segment: 'order', priority: 'low', defaultHistory: [] }
                     ]

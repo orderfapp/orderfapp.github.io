@@ -43667,37 +43667,33 @@ html {
   border: 1px solid #ccc;
   border-radius: 5px;
   position: absolute;
-  top: 83%;
-  left: 50%;
+  top: 32%;
+  left: 35%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 95%;
-  overflow: auto;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  white-space: nowrap;
+  width: 60%;
 }
 
 .calculator-screen {
-  width: 100%;
-  font-size: 3rem;
+  width: 40%;
+  font-size: 1rem;
   height: 80px;
   border: none;
   background-color: black;
   color: #fff;
-  text-align: right;
+  text-align: left;
   padding-right: 0px;
   padding-left: 0px;
 }
 
 button {
-  height: 100px;
-  width: 100px;
+  height: 30px;
+  width: 30px;
   background-color: #fff;
   border-radius: 3px;
   border: 1px solid #c4c4c4;
   background-color: transparent;
-  font-size: 3rem;
+  font-size: 1rem;
   color: #333;
   background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(0, 0, 0, 0.04)));
   background-image: linear-gradient(to bottom, transparent, transparent 50%, rgba(0, 0, 0, 0.04));
@@ -43715,7 +43711,12 @@ button:hover {
 }
 
 .operator-text {
-  font-size: 250%;
+  font-size: 80%;
+  color: #337cac;
+}
+
+.operator-text-long {
+  font-size: 65%;
   color: #337cac;
 }
 
@@ -43734,7 +43735,6 @@ button:hover {
   border-color: #337cac;
   color: #fff;
   height: 100%;
-  grid-area: 1 / 1 / 1 / 1 / 1 / 1 / 1;
 }
 
 .equal-sign:hover {
@@ -43744,7 +43744,7 @@ button:hover {
 .calculator-keys {
   display: grid;
   grid-template-columns: repeat(10, 0fr);
-  grid-gap: 5px;
+  grid-gap: 0px;
   padding: 5px;
 }
 
