@@ -1,14 +1,14 @@
 webpackJsonp([5],{
 
-/***/ 505:
+/***/ 506:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentPageModule", function() { return PaymentPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SettingOptionPageModule", function() { return SettingOptionPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment__ = __webpack_require__(516);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__setting_option__ = __webpack_require__(677);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var PaymentPageModule = /** @class */ (function () {
-    function PaymentPageModule() {
+var SettingOptionPageModule = /** @class */ (function () {
+    function SettingOptionPageModule() {
     }
-    PaymentPageModule = __decorate([
+    SettingOptionPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__payment__["a" /* PaymentPage */],
+                __WEBPACK_IMPORTED_MODULE_2__setting_option__["a" /* SettingOptionPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__payment__["a" /* PaymentPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__setting_option__["a" /* SettingOptionPage */]),
             ],
         })
-    ], PaymentPageModule);
-    return PaymentPageModule;
+    ], SettingOptionPageModule);
+    return SettingOptionPageModule;
 }());
 
-//# sourceMappingURL=payment.module.js.map
+//# sourceMappingURL=setting-option.module.js.map
 
 /***/ }),
 
-/***/ 516:
+/***/ 677:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaymentPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingOptionPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__ = __webpack_require__(289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_option_option__ = __webpack_require__(290);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,68 +59,70 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the PaymentPage page.
+ * Generated class for the SettingOptionPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var PaymentPage = /** @class */ (function () {
-    function PaymentPage(navCtrl, viewCtrl, orderProvider, navParams) {
+var SettingOptionPage = /** @class */ (function () {
+    function SettingOptionPage(navCtrl, optionProvider, alertCtrl, navParams) {
         this.navCtrl = navCtrl;
-        this.viewCtrl = viewCtrl;
-        this.orderProvider = orderProvider;
+        this.optionProvider = optionProvider;
+        this.alertCtrl = alertCtrl;
         this.navParams = navParams;
-        this.order = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["b" /* COrder */]();
-        this.allOrder = [];
-        this.money = null;
-        this.returnBack = 0;
-        this.returnText = "";
+        this.title = "Tạo";
+        this.localOption = "";
     }
-    PaymentPage.prototype.ngOnInit = function () {
-        if (this.navParams.data) {
-            this.order = this.navParams.data.order;
-            this.allOrder = this.navParams.data.allOrder;
-        }
-    };
-    PaymentPage.prototype.change = function (ev) {
-        var val = ev.target.value;
-        var total = this.order.total();
-        if (val) {
-            val = parseInt(val);
+    SettingOptionPage.prototype.saveData = function () {
+        if (this.title == "Tạo") {
+            this.optionProvider.addOption(this.localOption);
         }
         else {
-            val = 0;
+            this.optionProvider.editOption(this.localOption);
         }
-        if (val - total < 0) {
-            this.returnBack = total - val;
-            this.returnText = "Khách còn thiếu: ";
-        }
-        else if (val - total >= 0) {
-            this.returnBack = val - total;
-            this.returnText = "Tiền trả lại: ";
-        }
+        this.title = "Tạo";
     };
-    PaymentPage.prototype.payment = function () {
-        this.order.payment = true;
-        this.orderProvider.paymentOrder(this.order);
-        this.viewCtrl.dismiss();
+    SettingOptionPage.prototype.editOption = function (data) {
+        this.title = "Sửa";
+        this.localOption = data;
     };
-    PaymentPage.prototype.closePayment = function () {
-        this.viewCtrl.dismiss();
+    SettingOptionPage.prototype.deleteOption = function (dataDelete) {
+        var _this = this;
+        var prompt = this.alertCtrl.create({
+            title: 'Xóa option',
+            buttons: [
+                {
+                    text: 'Đóng',
+                    handler: function (data) {
+                    }
+                },
+                {
+                    text: 'Xóa',
+                    handler: function (data) {
+                        _this.optionProvider.deleteOption(dataDelete);
+                    }
+                }
+            ]
+        });
+        prompt.present();
     };
-    PaymentPage = __decorate([
+    SettingOptionPage.prototype.cancelEdit = function () {
+        this.localOption = "";
+        this.title = "Tạo";
+    };
+    SettingOptionPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-payment',template:/*ion-inline-start:"D:\ionic\orderFood\src\pages\payment\payment.html"*/'<ion-content>\n    <form (ngSubmit)="payment()" #paymentForm="ngForm">\n  <ion-list>\n    <ion-row no-padding class="headerRow" text-center>\n      <button ion-button class="buttonHeader" color="light" full clear>Thanh toán</button>\n    </ion-row>  \n    <ion-item>\n      <ion-label>{{order.total() | currency:\'VND\':\'VNĐ\':\'2.0\'}}</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input placeholder="Số tiền khách trả" type="number" pattern="[0-9]*" [(ngModel)]="money" name="money" (input)="change($event)" required></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>{{returnText}} {{returnBack | currency:\'VND\':\'VNĐ\':\'2.0\'}}</ion-label>\n    </ion-item>\n    <ion-row no-padding>\n      <ion-col col-6 padding text-center>\n        <button ion-button type="button" block color="mainlightcolor" (click)="closePayment()">\n          Hủy\n        </button>\n      </ion-col>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" [disabled]="!paymentForm.form.valid">\n          Thanh toán\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-list>\n  </form>\n</ion-content>'/*ion-inline-end:"D:\ionic\orderFood\src\pages\payment\payment.html"*/,
+            selector: 'page-setting-option',template:/*ion-inline-start:"c:\Users\User\Downloads\orderapp\app\src\pages\setting-option\setting-option.html"*/'<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>Đăng kí option</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding class="backgroundColor">\n  <form (ngSubmit)="saveData()" #OptionForm="ngForm">\n    <ion-list>\n      <ion-row class="headerInput">\n        Thông tin option\n      </ion-row>\n      <ion-row class="heightInput">\n        <ion-input class="inputRound" placeholder="Tên option" type="text" [(ngModel)]="localOption" name="localOption"\n          required></ion-input>\n      </ion-row>\n      <ion-row class="heightInput">\n        <ion-col col-2>\n        </ion-col>\n        <ion-col col-4>\n          <button ion-button full class="submit-btn buttonAdd" [disabled]="!OptionForm.form.valid" text-uppercase>\n            {{title}}\n          </button>\n        </ion-col>\n        <ion-col col-4>\n          <button ion-button full class="buttonAdd" type="button" text-uppercase (click)="cancelEdit()">\n            Cancel\n          </button>\n        </ion-col>\n        <ion-col col-2>\n        </ion-col>\n      </ion-row>\n    </ion-list>\n  </form>\n  <ion-row class="headerInput">\n    Danh Sách option\n  </ion-row>\n  <ion-list class="childList listFood">\n    <ion-item-sliding *ngFor="let typeOption of optionProvider.listOption">\n      <ion-item>\n        <h2>{{typeOption}}</h2>\n      </ion-item>\n      <ion-item-options side="left">\n        <button ion-button color="mainlightcolor" (click)="deleteOption(typeOption)">\n          <ion-icon ios="ios-trash-outline" md="ios-trash-outline"></ion-icon>\n          Delete\n        </button>\n      </ion-item-options>\n      <ion-item-options side="right">\n        <button ion-button color="maindarkcolor" (click)="editOption(typeOption)">\n          <ion-icon ios="ios-create-outline" md="ios-create-outline"></ion-icon>\n          Edit\n        </button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n</ion-content>\n<ion-footer>\n  <ion-row no-padding class="footerColor">\n    <ion-col col-12 no-padding text-center>\n      <button ion-button class="roundButton buttonHeader" outline style="border-radius: 27%;" color="maincolor"\n        icon-only icon-only navPop>\n        <ion-icon ios="md-arrow-round-back" md="md-arrow-round-back"></ion-icon>\n      </button>\n    </ion-col>\n  </ion-row>\n</ion-footer>'/*ion-inline-end:"c:\Users\User\Downloads\orderapp\app\src\pages\setting-option\setting-option.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_option_option__["a" /* OptionProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
-    ], PaymentPage);
-    return PaymentPage;
+    ], SettingOptionPage);
+    return SettingOptionPage;
 }());
 
-//# sourceMappingURL=payment.js.map
+//# sourceMappingURL=setting-option.js.map
 
 /***/ })
 
