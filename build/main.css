@@ -43667,7 +43667,7 @@ html {
   border: 0px solid #ccc;
   border-radius: 10px;
   position: absolute;
-  top: 52%;
+  top: 60%;
   left: 35%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -43676,12 +43676,12 @@ html {
 }
 
 .calculator-screen {
-  width: 70%;
+  width: 30%;
   font-size: 1rem;
-  height: 80px;
+  height: 120px;
   border: none;
-  background-color: black;
-  color: #fff;
+  background-color: #fff;
+  color: #050505;
   text-align: left;
   padding-right: 0px;
   padding-left: 0px;
