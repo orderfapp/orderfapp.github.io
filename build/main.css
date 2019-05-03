@@ -43664,18 +43664,19 @@ html {
 }
 
 .calculator {
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 0px solid #ccc;
+  border-radius: 10px;
   position: absolute;
-  top: 32%;
+  top: 52%;
   left: 35%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   width: 60%;
+  height: 80%;
 }
 
 .calculator-screen {
-  width: 40%;
+  width: 70%;
   font-size: 1rem;
   height: 80px;
   border: none;
@@ -43687,8 +43688,8 @@ html {
 }
 
 button {
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   background-color: #fff;
   border-radius: 3px;
   border: 1px solid #c4c4c4;
@@ -43744,7 +43745,7 @@ button:hover {
 .calculator-keys {
   display: grid;
   grid-template-columns: repeat(10, 0fr);
-  grid-gap: 0px;
+  grid-gap: 3px;
   padding: 5px;
 }
 
