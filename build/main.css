@@ -43676,7 +43676,7 @@ html {
 }
 
 .calculator-screen {
-  width: 60%;
+  width: 100%;
   font-size: 2rem;
   font-weight: 700;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -43693,7 +43693,7 @@ html {
 
 button {
   height: 40px;
-  width: 38px;
+  width: 36px;
   background-color: #fff;
   border-radius: 3px;
   border: 1px solid #c4c4c4;
