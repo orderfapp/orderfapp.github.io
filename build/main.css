@@ -43676,11 +43676,10 @@ html {
 }
 
 .calculator-screen {
-  width: 100%;
   font-size: 2rem;
   font-weight: 700;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  height: 120px;
+  height: 150px;
   color: red;
   text-align: left;
   padding-right: 0px;
@@ -43693,7 +43692,7 @@ html {
 
 button {
   height: 40px;
-  width: 36px;
+  width: 34px;
   background-color: #fff;
   border-radius: 3px;
   border: 1px solid #c4c4c4;
