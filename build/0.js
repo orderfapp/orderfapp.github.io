@@ -26864,7 +26864,7 @@ var OrderPage = /** @class */ (function () {
         }
         else {
             console.log('CalculatorScientificPage::add | add value ', value);
-            this.expression = this.expression.concat("　" + value);
+            this.expression = this.expression.concat(" " + value);
         }
         console.log('CalculatorScientificPage::add | expression=', this.expression);
     };
