@@ -43667,12 +43667,20 @@ html {
   border: 0px solid #ccc;
   border-radius: 10px;
   position: absolute;
-  top: 60%;
+  top: 70%;
   left: 31%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   width: 60%;
   height: 80%;
+}
+
+.listItemScreen {
+  max-height: 200px;
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  white-space: nowrap;
 }
 
 .button-screen {
