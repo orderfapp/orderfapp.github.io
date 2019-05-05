@@ -43667,7 +43667,7 @@ html {
   border: 0px solid #ccc;
   border-radius: 10px;
   position: absolute;
-  top: 70%;
+  top: 65%;
   left: 31%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -43676,7 +43676,7 @@ html {
 }
 
 .listItemScreen {
-  max-height: 200px;
+  max-height: 150px;
   overflow: auto;
   overflow-x: hidden;
   overflow-y: scroll;
