@@ -43684,13 +43684,14 @@ html {
 }
 
 .button-screen {
+  width: 2%;
   background-color: red;
   color: black;
 }
 
 .show-screen {
   width: 100%;
-  font-size: 20px;
+  font-size: 17px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   height: 5px;
   color: blue;
@@ -43698,7 +43699,7 @@ html {
 
 .calculator-screen {
   width: 100%;
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 700;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   height: 50px;
