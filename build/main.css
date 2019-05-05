@@ -43667,7 +43667,7 @@ html {
   border: 0px solid #ccc;
   border-radius: 10px;
   position: absolute;
-  top: 66%;
+  top: 70%;
   left: 31%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -43690,15 +43690,15 @@ html {
 
 .show-screen {
   width: 100%;
-  font-size: 11px;
+  font-size: 20px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  height: 1px;
+  height: 5px;
   color: blue;
 }
 
 .calculator-screen {
   width: 100%;
-  font-size: 1rem;
+  font-size: 2rem;
   font-weight: 700;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   height: 50px;
@@ -43737,7 +43737,7 @@ button:hover {
 }
 
 .operator-text {
-  font-size: 80%;
+  font-size: 120%;
   color: #337cac;
 }
 
@@ -43747,6 +43747,7 @@ button:hover {
 }
 
 .all-clear {
+  font-size: 120%;
   background-color: #f0595f;
   border-color: #b0353a;
   color: #fff;
