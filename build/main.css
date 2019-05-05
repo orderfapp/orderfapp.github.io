@@ -43713,8 +43713,8 @@ html {
 }
 
 button {
-  height: 55px;
-  width: 36px;
+  height: 45px;
+  width: 72px;
   background-color: #fff;
   border-radius: 3px;
   border: 1px solid #c4c4c4;
@@ -43769,7 +43769,7 @@ button:hover {
 
 .calculator-keys {
   display: grid;
-  grid-template-columns: repeat(10, 0fr);
+  grid-template-columns: repeat(5, 0fr);
   grid-gap: 0px;
   padding: 0px;
 }
