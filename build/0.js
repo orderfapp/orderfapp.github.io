@@ -26856,17 +26856,38 @@ var OrderPage = /** @class */ (function () {
         this.expression = __WEBPACK_IMPORTED_MODULE_3_mathjs__["format"](__WEBPACK_IMPORTED_MODULE_3_mathjs__["eval"](this.expression), { precision: 14 });
     };
     OrderPage.prototype.add = function (value) {
-        this.backValue = value;
-        console.log('CalculatorScientificPage::add | value=', value);
-        var noexpression = (this.expression === '' || this.expression === undefined) ? true : false;
-        if (this.expression === '' || this.expression === undefined) {
-            this.expression = String(value);
+        var check = this.checkExpression(value);
+        if (check) {
+            this.backValue = value;
+            console.log('CalculatorScientificPage::add | value=', value);
+            var noexpression = (this.expression === '' || this.expression === undefined) ? true : false;
+            if (this.expression === '' || this.expression === undefined) {
+                this.expression = String(value);
+            }
+            else {
+                console.log('CalculatorScientificPage::add | add value ', value);
+                // check 2 number
+                var num1 = this.expression.trim();
+                var num2 = value.trim();
+                var test1 = /^\d+$/.test(num1);
+                var test2 = /^\d+$/.test(num2);
+                if (test1 === true && test2 === true) {
+                    this.expression = this.expression.concat(value);
+                }
+                else {
+                    this.expression = this.expression.concat(" " + value);
+                }
+            }
+            console.log('CalculatorScientificPage::add | expression=', this.expression);
         }
         else {
-            console.log('CalculatorScientificPage::add | add value ', value);
-            this.expression = this.expression.concat(" " + value);
+            var alert = this.alertCtrl.create({
+                title: 'WRONG',
+                subTitle: 'TRY AGAIN',
+                buttons: ['OK']
+            });
+            alert.present();
         }
-        console.log('CalculatorScientificPage::add | expression=', this.expression);
     };
     OrderPage.prototype.addFunction = function (value) {
         console.log('CalculatorScientificPage::add | value=', value);
@@ -26894,8 +26915,10 @@ var OrderPage = /** @class */ (function () {
     };
     OrderPage.prototype.addToArray = function () {
         //
-        this.inputText.push(this.expression);
-        this.expression = '';
+        if (this.expression.trim() != '') {
+            this.inputText.push(this.expression);
+            this.expression = '';
+        }
         //
     };
     OrderPage.prototype.removeItemScreenButton = function (string) {
@@ -26904,9 +26927,59 @@ var OrderPage = /** @class */ (function () {
             this.inputText.splice(index, 1);
         }
     };
+    OrderPage.prototype.undo = function () {
+        var string = this.expression;
+        var arr = string.split(" ");
+        arr.pop();
+        var value = "";
+        for (var i = 0; i < arr.length; i += 1) {
+            value = value + " " + arr[i];
+        }
+        this.expression = value;
+    };
+    OrderPage.prototype.checkExpression = function (value) {
+        var string = this.expression;
+        var arr = string.split(" ");
+        var bol = false;
+        var a = arr[0];
+        var test = /^\d+$/.test(arr[0]);
+        if (string === "") {
+            var test_1 = /^\d+$/.test(value);
+            if (test_1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            if (arr.length >= 2) {
+                return true;
+            }
+            var thisExpressions = [/^\d+$/, /Nhỏ/, /Lớn/, /ĐầyĐủ/, /ĐặcBiệt/, /Cua/, /Tôm/, /Giò/, /Thịt/, /Nạc/,
+                /Gân/, /Móng/, /Bánh/, /Huyết/, /Nấm/];
+            var bol_1 = this.matchInArray(value, thisExpressions);
+            if (bol_1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    };
+    OrderPage.prototype.matchInArray = function (string, expressions) {
+        var len = expressions.length, i = 0;
+        for (; i < len; i++) {
+            if (string.match(expressions[i])) {
+                return true;
+            }
+        }
+        return false;
+    };
+    ;
     OrderPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-order',template:/*ion-inline-start:"c:\Users\User\Downloads\orderapp\app\src\pages\order\order.html"*/'<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <!-- <ion-title class="fontButton">Đặt món</ion-title> -->\n    <ion-row>\n      <!-- <ion-col col-1>\n        <ion-title class="fontButton">Đặt món</ion-title>\n      </ion-col> -->\n      <ion-col col-10>\n        <ion-textarea class="calculator-screen" rows="3" cols="10" value="" disabled [(ngModel)]="expression">\n        </ion-textarea>\n      </ion-col>\n      <ion-col col-2>\n          <button style="width: 2%;" ion-button item-end>{{inputText.length}}</button>\n        </ion-col>\n\n    </ion-row>\n  </ion-navbar>\n  <!-- <input type="text" class="calculator-scr\n    een" value="" disabled [(ngModel)]="expression"> -->\n  <ion-list class="listItemScreen">\n    <ion-item *ngFor="let string of inputText; let num = index">\n      <ion-textarea class="show-screen" disabled value="{{string}}"></ion-textarea>\n      <button class="button-screen" ion-button item-end (click)="removeItemScreenButton(string)">{{num+1}}</button>\n    </ion-item>\n  </ion-list>\n  <!-- <ion-item>\n    <ion-textarea class="calculator-screen" rows="3" value="" disabled [(ngModel)]="expression"></ion-textarea>\n  </ion-item> -->\n\n\n</ion-header>\n<ion-content overflow-scroll="true">\n  <div class="calculator">\n\n    <div class="calculator-keys">\n      <!-- so thu tu 1-5-->\n      <button type="button" class="operator-text" (click)="add(\'1\')" value="1">1</button>\n      <button type="button" class="operator-text" (click)="add(\'2\')" value="2">2</button>\n      <button type="button" class="operator-text" (click)="add(\'3\')" value="3">3</button>\n      <button type="button" class="operator-text" (click)="add(\'4\')" value="4">4</button>\n      <button type="button" class="operator-text" (click)="add(\'5\')" value="5">5</button>\n      <!-- so thu tu 6-0-->\n      <button type="button" class="operator-text" (click)="add(\'6\')" value="6">6</button>\n      <button type="button" class="operator-text" (click)="add(\'7\')" value="7">7</button>\n      <button type="button" class="operator-text" (click)="add(\'8\')" value="8">8</button>\n      <button type="button" class="operator-text" (click)="add(\'9\')" value="9">9</button>\n      <button type="button" class="operator-text" (click)="add(\'0\')" value="0">0</button>\n\n      <!-- Tô -->\n      <button type="button" class="operator-text" (click)="add(\'Nhỏ\')" value="Nhỏ">Nhỏ</button>\n      <button type="button" class="operator-text" (click)="add(\'Lớn\')" value="Lớn">Lớn</button>\n      <button type="button" class="operator-text" (click)="add(\'Đầy Đủ \')" value="Đầy Đủ">Đầy Đủ</button>\n      <button type="button" class="operator-text" (click)="add(\'Đặc Biệt\')" value="Đặc Biệt">Đặc Biệt</button>\n      <button type="button" class="all-clear" (click)="clear()">CL</button>\n\n      <!-- Loại -->\n      <button type="button" class="operator-text" (click)="add(\'Cua\')" value="Cua">Cua</button>\n      <button type="button" class="operator-text" (click)="add(\'Tôm\')" value="Tôm">Tôm</button>\n      <button type="button" class="operator-text" (click)="add(\'Giò\')" value="Giò">Giò</button>\n      <button type="button" class="operator-text" (click)="add(\'Thịt\')" value="Thịt">Thịt</button>\n      <div></div>\n\n      <!--  -->\n      <button type="button" class="operator-text" (click)="add(\'Nạc\')" value="Nạc">Nạc</button>\n      <button type="button" class="operator-text" (click)="add(\'Gân\')" value="Gân">Gân</button>\n      <button type="button" class="operator-text" (click)="add(\'Móng\')" value="Móng">Móng</button>\n      <div></div>\n      <div></div>\n\n      <!--  -->\n      <button type="button" class="operator-text" (click)="add(\'Ít\')" value="Ít">Ít</button>\n      <button type="button" class="operator-text" (click)="add(\'Nhiều\')" value="Nhiều">Nhiều</button>\n      <button type="button" class="operator-text" (click)="add(\'Không\')" value="Không">Không</button>\n      <div></div>\n      <button style="background-color: blue" type="button" class="operator-text" (click)="addToArray()"\n      value="\\n">NEXT</button>\n\n      <!--  -->\n      <button type="button" class="operator-text" (click)="add(\'Hành\')" value="Hành">Hành</button>\n      <button type="button" class="operator-text" (click)="add(\'Tiêu\')" value="Tiêu">Tiêu</button>\n      <button type="button" class="operator-text" (click)="add(\'Bánh\')" value="Nh Bánh">Bánh</button>\n      <button type="button" class="operator-text" (click)="add(\'Huyết\')" value="Huyết">Huyết</button>\n      <button type="button" class="operator-text" (click)="add(\'Nấm\')" value="Nấm">Nấm</button>\n\n    </div>\n  </div>\n</ion-content>\n<ion-footer>\n  <ion-row no-padding>\n    <ion-col col-6 no-padding text-center>\n      <button class="fontButton" ion-button color="maincolor" block outline (click)="addOrder(\'Mua về\', $event)">Mua\n        về</button>\n    </ion-col>\n    <ion-col col-6 no-padding text-center>\n      <button class="fontButton" ion-button color="maincolor" block outline (click)="addOrder(\'Tại bàn\', $event)">Tại\n        bàn</button>\n    </ion-col>\n  </ion-row>\n</ion-footer>'/*ion-inline-end:"c:\Users\User\Downloads\orderapp\app\src\pages\order\order.html"*/,
+            selector: 'page-order',template:/*ion-inline-start:"c:\Users\User\Downloads\orderapp\app\src\pages\order\order.html"*/'<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <!-- <ion-title class="fontButton">Đặt món</ion-title> -->\n    <ion-row>\n      <!-- <ion-col col-1>\n        <ion-title class="fontButton">Đặt món</ion-title>\n      </ion-col> -->\n      <ion-col col-10>\n        <ion-textarea class="calculator-screen" rows="3" cols="10" value="" disabled [(ngModel)]="expression">\n        </ion-textarea>\n      </ion-col>\n      <ion-col col-2>\n        <button style="width: 2%;" ion-button item-end>{{inputText.length}}</button>\n      </ion-col>\n    </ion-row>\n  </ion-navbar>\n  <ion-list class="listItemScreen">\n    <ion-item *ngFor="let string of inputText; let num = index">\n      <ion-textarea class="show-screen" disabled value="{{string}}"></ion-textarea>\n      <button class="button-screen" ion-button item-end (click)="removeItemScreenButton(string)">{{num+1}}</button>\n    </ion-item>\n  </ion-list>\n  <!-- <ion-item>\n    <ion-textarea class="calculator-screen" rows="3" value="" disabled [(ngModel)]="expression"></ion-textarea>\n  </ion-item> -->\n</ion-header>\n<ion-content overflow-scroll="true">\n  <div class="calculator">\n\n    <div class="calculator-keys">\n      <!-- so thu tu 1-5-->\n      <button type="button" class="operator-text" (click)="add(\'1\')" value="1">1</button>\n      <button type="button" class="operator-text" (click)="add(\'2\')" value="2">2</button>\n      <button type="button" class="operator-text" (click)="add(\'3\')" value="3">3</button>\n      <button type="button" class="operator-text" (click)="add(\'4\')" value="4">4</button>\n      <button type="button" class="operator-text" (click)="add(\'5\')" value="5">5</button>\n      <!-- so thu tu 6-0-->\n      <button type="button" class="operator-text" (click)="add(\'6\')" value="6">6</button>\n      <button type="button" class="operator-text" (click)="add(\'7\')" value="7">7</button>\n      <button type="button" class="operator-text" (click)="add(\'8\')" value="8">8</button>\n      <button type="button" class="operator-text" (click)="add(\'9\')" value="9">9</button>\n      <button type="button" class="operator-text" (click)="add(\'0\')" value="0">0</button>\n\n      <!-- Tô -->\n      <button type="button" class="operator-text" (click)="add(\'Nhỏ\')" value="Nhỏ">Nhỏ</button>\n      <button type="button" class="operator-text" (click)="add(\'Lớn\')" value="Lớn">Lớn</button>\n      <button type="button" class="operator-text" (click)="add(\'ĐầyĐủ\')" value="ĐầyĐủ">ĐầyĐủ</button>\n      <button type="button" class="operator-text" (click)="add(\'ĐặcBiệt\')" value="ĐặcBiệt">ĐặcBiệt</button>\n      <button type="button" class="all-clear" (click)="clear()">Bỏ</button>\n\n      <!-- Loại -->\n      <button type="button" class="operator-text" (click)="add(\'Cua\')" value="Cua">Cua</button>\n      <button type="button" class="operator-text" (click)="add(\'Tôm\')" value="Tôm">Tôm</button>\n      <button type="button" class="operator-text" (click)="add(\'Giò\')" value="Giò">Giò</button>\n      <button type="button" class="operator-text" (click)="add(\'Thịt\')" value="Thịt">Thịt</button>\n      <button type="button" class="undo" (click)="undo()">Xóa</button>\n\n      <!--  -->\n      <button type="button" class="operator-text" (click)="add(\'Nạc\')" value="Nạc">Nạc</button>\n      <button type="button" class="operator-text" (click)="add(\'Gân\')" value="Gân">Gân</button>\n      <button type="button" class="operator-text" (click)="add(\'Móng\')" value="Móng">Móng</button>\n      <div></div>\n      <div></div>\n\n      <!--  -->\n      <button type="button" class="operator-text" (click)="add(\'Ít\')" value="Ít">Ít</button>\n      <button type="button" class="operator-text" (click)="add(\'Nhiều\')" value="Nhiều">Nhiều</button>\n      <button type="button" class="operator-text" (click)="add(\'Không\')" value="Không">Không</button>\n      <div></div>\n      <button style="background-color: blue" type="button" class="operator-text" (click)="addToArray()"\n        value="\\n">Tiếp</button>\n\n      <!--  -->\n      <button type="button" class="operator-text" (click)="add(\'Hành\')" value="Hành">Hành</button>\n      <button type="button" class="operator-text" (click)="add(\'Tiêu\')" value="Tiêu">Tiêu</button>\n      <button type="button" class="operator-text" (click)="add(\'Bánh\')" value="Nh Bánh">Bánh</button>\n      <button type="button" class="operator-text" (click)="add(\'Huyết\')" value="Huyết">Huyết</button>\n      <button type="button" class="operator-text" (click)="add(\'Nấm\')" value="Nấm">Nấm</button>\n\n    </div>\n  </div>\n</ion-content>\n<ion-footer>\n  <ion-row no-padding>\n    <ion-col col-6 no-padding text-center>\n      <button class="fontButton" ion-button color="maincolor" block outline (click)="addOrder(\'Mua về\', $event)">Mua\n        về</button>\n    </ion-col>\n    <ion-col col-6 no-padding text-center>\n      <button class="fontButton" ion-button color="maincolor" block outline (click)="addOrder(\'Tại bàn\', $event)">Tại\n        bàn</button>\n    </ion-col>\n  </ion-row>\n</ion-footer>'/*ion-inline-end:"c:\Users\User\Downloads\orderapp\app\src\pages\order\order.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object])
     ], OrderPage);

@@ -43754,6 +43754,13 @@ button:hover {
   color: #fff;
 }
 
+.undo {
+  font-size: 120%;
+  background-color: yellow;
+  border-color: #b0353a;
+  color: #fff;
+}
+
 .all-clear:hover {
   background-color: #f17377;
 }
