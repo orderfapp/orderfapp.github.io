@@ -22,19 +22,19 @@ webpackEmptyAsyncContext.id = 192;
 
 var map = {
 	"../pages/cashier/cashier.module": [
-		501,
+		502,
 		10
 	],
 	"../pages/chief/chief.module": [
-		502,
+		501,
 		9
 	],
 	"../pages/login/login.module": [
-		504,
+		503,
 		8
 	],
 	"../pages/order-details/order-details.module": [
-		503,
+		504,
 		7
 	],
 	"../pages/order/order.module": [
@@ -42,19 +42,19 @@ var map = {
 		0
 	],
 	"../pages/payment/payment.module": [
-		505,
+		506,
 		6
 	],
 	"../pages/setting-option/setting-option.module": [
-		507,
+		505,
 		5
 	],
 	"../pages/setting-user/setting-user.module": [
-		506,
+		507,
 		4
 	],
 	"../pages/setup-type/setup-type.module": [
-		509,
+		508,
 		3
 	],
 	"../pages/setup/setup.module": [
@@ -62,7 +62,7 @@ var map = {
 		1
 	],
 	"../pages/statistics/statistics.module": [
-		508,
+		509,
 		2
 	]
 };
@@ -444,82 +444,6 @@ var OrderFoodProvider = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OptionProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(130);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-/*
-  Generated class for the OptionProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
-var OptionProvider = /** @class */ (function () {
-    function OptionProvider(db) {
-        var _this = this;
-        this.db = db;
-        this.optionPath = "option/";
-        this.listOption = [];
-        var data = this.getAllOption().valueChanges().subscribe(function (dataInfo) {
-            _this.listOption = [];
-            if (dataInfo) {
-                for (var index = 0; index < dataInfo.length; index++) {
-                    _this.listOption.push(dataInfo[index]);
-                }
-            }
-        });
-    }
-    OptionProvider.prototype.getAllOption = function () {
-        return this.db.list(this.optionPath, function (ref) { return ref.orderByKey(); });
-    };
-    OptionProvider.prototype.addOption = function (option) {
-        var data = {};
-        data[this.optionPath + option] = option;
-        var addData = this.db.object("/");
-        addData.update(data);
-        option = "";
-    };
-    OptionProvider.prototype.editOption = function (option) {
-        var data = {};
-        data[this.optionPath + option] = option;
-        var addData = this.db.object("/");
-        addData.update(data);
-    };
-    OptionProvider.prototype.deleteOption = function (option) {
-        var data = {};
-        data[this.optionPath + option] = null;
-        var addData = this.db.object("/");
-        addData.update(data);
-    };
-    OptionProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["AngularFireDatabase"]])
-    ], OptionProvider);
-    return OptionProvider;
-}());
-
-//# sourceMappingURL=option.js.map
-
-/***/ }),
-
-/***/ 291:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return CUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthenticateProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
@@ -669,6 +593,82 @@ var AuthenticateProvider = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 291:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OptionProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+/*
+  Generated class for the OptionProvider provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
+var OptionProvider = /** @class */ (function () {
+    function OptionProvider(db) {
+        var _this = this;
+        this.db = db;
+        this.optionPath = "option/";
+        this.listOption = [];
+        var data = this.getAllOption().valueChanges().subscribe(function (dataInfo) {
+            _this.listOption = [];
+            if (dataInfo) {
+                for (var index = 0; index < dataInfo.length; index++) {
+                    _this.listOption.push(dataInfo[index]);
+                }
+            }
+        });
+    }
+    OptionProvider.prototype.getAllOption = function () {
+        return this.db.list(this.optionPath, function (ref) { return ref.orderByKey(); });
+    };
+    OptionProvider.prototype.addOption = function (option) {
+        var data = {};
+        data[this.optionPath + option] = option;
+        var addData = this.db.object("/");
+        addData.update(data);
+        option = "";
+    };
+    OptionProvider.prototype.editOption = function (option) {
+        var data = {};
+        data[this.optionPath + option] = option;
+        var addData = this.db.object("/");
+        addData.update(data);
+    };
+    OptionProvider.prototype.deleteOption = function (option) {
+        var data = {};
+        data[this.optionPath + option] = null;
+        var addData = this.db.object("/");
+        addData.update(data);
+    };
+    OptionProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["AngularFireDatabase"]])
+    ], OptionProvider);
+    return OptionProvider;
+}());
+
+//# sourceMappingURL=option.js.map
+
+/***/ }),
+
 /***/ 292:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -694,7 +694,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(284);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(287);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(493);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_authenticate_authenticate__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_authenticate_authenticate__ = __webpack_require__(290);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__(494);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angularfire2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(83);
@@ -702,7 +702,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_order_food_order_food__ = __webpack_require__(289);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_currency_mask__ = __webpack_require__(495);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_ng2_currency_mask__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_option_option__ = __webpack_require__(290);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_option_option__ = __webpack_require__(291);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -749,15 +749,15 @@ var AppModule = /** @class */ (function () {
                     backButtonText: 'Trở về'
                 }, {
                     links: [
-                        { loadChildren: '../pages/cashier/cashier.module#CashierPageModule', name: 'CashierPage', segment: 'cashier', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/chief/chief.module#ChiefPageModule', name: 'ChiefPage', segment: 'chief', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/order-details/order-details.module#OrderDetailsPageModule', name: 'OrderDetailsPage', segment: 'order-details', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/cashier/cashier.module#CashierPageModule', name: 'CashierPage', segment: 'cashier', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/order-details/order-details.module#OrderDetailsPageModule', name: 'OrderDetailsPage', segment: 'order-details', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/setting-option/setting-option.module#SettingOptionPageModule', name: 'SettingOptionPage', segment: 'setting-option', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/payment/payment.module#PaymentPageModule', name: 'PaymentPage', segment: 'payment', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setting-user/setting-user.module#SettingUserPageModule', name: 'SettingUserPage', segment: 'setting-user', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/setting-option/setting-option.module#SettingOptionPageModule', name: 'SettingOptionPage', segment: 'setting-option', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup-type/setup-type.module#SetupTypePageModule', name: 'SetupTypePage', segment: 'setup-type', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup/setup.module#SetupPageModule', name: 'SetupPage', segment: 'setup', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order/order.module#OrderPageModule', name: 'OrderPage', segment: 'order', priority: 'low', defaultHistory: [] }
                     ]

@@ -43714,7 +43714,7 @@ html {
 }
 
 button {
-  height: 45px;
+  height: 40px;
   width: 72px;
   background-color: #fff;
   border-radius: 3px;
@@ -43781,6 +43781,10 @@ button:hover {
   grid-template-columns: repeat(5, 0fr);
   grid-gap: 0px;
   padding: 0px;
+}
+
+.fontButton {
+  height: 25px;
 }
 
 page-order-details .headerRow {
