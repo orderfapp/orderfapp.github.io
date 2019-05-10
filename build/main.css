@@ -43714,7 +43714,7 @@ html {
 }
 
 button {
-  height: 40px;
+  height: 42px;
   width: 72px;
   background-color: #fff;
   border-radius: 3px;
@@ -43766,10 +43766,12 @@ button:hover {
 }
 
 .equal-sign {
-  background-color: #2e86c0;
-  border-color: #337cac;
-  color: #fff;
+  background-color: transparent;
+  font-size: 2.7rem;
+  background-color: white;
+  color: #333;
   height: 100%;
+  grid-area: 3 / 5 / 5 / 5;
 }
 
 .equal-sign:hover {
