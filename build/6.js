@@ -1,14 +1,14 @@
 webpackJsonp([6],{
 
-/***/ 506:
+/***/ 511:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentPageModule", function() { return PaymentPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderPageModule", function() { return OrderPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment__ = __webpack_require__(677);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order__ = __webpack_require__(524);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,31 +18,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var PaymentPageModule = /** @class */ (function () {
-    function PaymentPageModule() {
+var OrderPageModule = /** @class */ (function () {
+    function OrderPageModule() {
     }
-    PaymentPageModule = __decorate([
+    OrderPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__payment__["a" /* PaymentPage */],
+                __WEBPACK_IMPORTED_MODULE_2__order__["a" /* OrderPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__payment__["a" /* PaymentPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__order__["a" /* OrderPage */]),
             ],
         })
-    ], PaymentPageModule);
-    return PaymentPageModule;
+    ], OrderPageModule);
+    return OrderPageModule;
 }());
 
-//# sourceMappingURL=payment.module.js.map
+//# sourceMappingURL=order.module.js.map
 
 /***/ }),
 
-/***/ 677:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaymentPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrderPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__ = __webpack_require__(289);
@@ -59,68 +59,319 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the PaymentPage page.
+ * Generated class for the OrderPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var PaymentPage = /** @class */ (function () {
-    function PaymentPage(navCtrl, viewCtrl, orderProvider, navParams) {
+var OrderPage = /** @class */ (function () {
+    //
+    function OrderPage(navCtrl, navParams, orderProvider, popoverCtrl, alertCtrl) {
         this.navCtrl = navCtrl;
-        this.viewCtrl = viewCtrl;
-        this.orderProvider = orderProvider;
         this.navParams = navParams;
-        this.order = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["b" /* COrder */]();
-        this.allOrder = [];
-        this.money = null;
-        this.returnBack = 0;
-        this.returnText = "";
+        this.orderProvider = orderProvider;
+        this.popoverCtrl = popoverCtrl;
+        this.alertCtrl = alertCtrl;
+        this.inputText = [];
+        this.currentTable = "";
+        //
+        this.expression = "";
+        this.backValue = "";
+        this.itemsFood = this.orderProvider.listDataFood;
     }
-    PaymentPage.prototype.ngOnInit = function () {
-        if (this.navParams.data) {
-            this.order = this.navParams.data.order;
-            this.allOrder = this.navParams.data.allOrder;
-        }
-    };
-    PaymentPage.prototype.change = function (ev) {
+    OrderPage.prototype.getItems = function (ev) {
+        var _this = this;
         var val = ev.target.value;
-        var total = this.order.total();
-        if (val) {
-            val = parseInt(val);
+        // if the value is an empty string don't filter the items
+        if (val && val.trim() != '') {
+            val = this.xoaDau(val);
+            this.itemsFood = this.orderProvider.listDataFood.filter(function (item) {
+                return (_this.xoaDau(item.name).toLowerCase().includes(val.toLowerCase()) == true);
+            });
         }
         else {
-            val = 0;
-        }
-        if (val - total < 0) {
-            this.returnBack = total - val;
-            this.returnText = "Khách còn thiếu: ";
-        }
-        else if (val - total >= 0) {
-            this.returnBack = val - total;
-            this.returnText = "Tiền trả lại: ";
+            this.itemsFood = this.orderProvider.listDataFood;
         }
     };
-    PaymentPage.prototype.payment = function () {
-        this.order.payment = true;
-        this.orderProvider.paymentOrder(this.order);
-        this.viewCtrl.dismiss();
+    OrderPage.prototype.addFood = function (food) {
+        var indexFood = -1;
+        var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* COrderDetails */]();
+        orderDetail.id = food.id;
+        orderDetail.sl = 1;
+        orderDetail.status = false;
+        orderDetail.food.copy(food);
+        for (var index = 0; index < this.orderProvider.orderTable.listOrder.length; index++) {
+            if (this.orderProvider.orderTable.listOrder[index].id == food.id) {
+                indexFood = index;
+                break;
+            }
+        }
+        this.orderProvider.orderTable.listOrder.push(orderDetail);
+        if (indexFood != -1) {
+            this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] + 1;
+        }
+        else {
+            this.orderProvider.listSLFoodObject[food.id] = 1;
+        }
     };
-    PaymentPage.prototype.closePayment = function () {
-        this.viewCtrl.dismiss();
+    OrderPage.prototype.minusFood = function (food) {
+        var indexFood = -1;
+        for (var index = 0; index < this.orderProvider.orderTable.listOrder.length; index++) {
+            if (this.orderProvider.orderTable.listOrder[index].id == food.id) {
+                indexFood = index;
+                break;
+            }
+        }
+        if (indexFood > -1) {
+            this.orderProvider.orderTable.listOrder.splice(indexFood, 1);
+            if (this.orderProvider.listSLFoodObject[food.id] == 1) {
+                this.orderProvider.listSLFoodObject[food.id] = null;
+            }
+            else if (indexFood != -1 && this.orderProvider.listSLFoodObject[food.id] > 1) {
+                this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] - 1;
+            }
+        }
     };
-    PaymentPage = __decorate([
+    OrderPage.prototype.xoaDau = function (str) {
+        str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+        str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+        str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+        str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+        str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+        str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+        str = str.replace(/đ/g, "d");
+        str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+        str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+        str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+        str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+        str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+        str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+        str = str.replace(/Đ/g, "D");
+        return str;
+    };
+    ///////////start
+    OrderPage.prototype.add = function (value) {
+        var check = this.checkExpression(value);
+        if (check) {
+            this.backValue = value;
+            console.log('CalculatorScientificPage::add | value=', value);
+            var noexpression = (this.expression === '' || this.expression === undefined) ? true : false;
+            if (this.expression === '' || this.expression === undefined) {
+                this.expression = String(value);
+            }
+            else {
+                console.log('CalculatorScientificPage::add | add value ', value);
+                // check 2 number
+                var num1 = this.expression.trim();
+                var num2 = value.trim();
+                var test1 = /^\d+$/.test(num1);
+                var test2 = /^\d+$/.test(num2);
+                if (test1 === true && test2 === true) {
+                    this.expression = this.expression.concat(value);
+                }
+                else {
+                    this.expression = this.expression.concat(" " + value);
+                }
+            }
+            console.log('CalculatorScientificPage::add | expression=', this.expression);
+        }
+        else {
+            var alert = this.alertCtrl.create({
+                title: 'WRONG',
+                subTitle: 'TRY AGAIN',
+                buttons: ['OK']
+            });
+            alert.present();
+        }
+    };
+    OrderPage.prototype.clean = function (data) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i] === '') {
+                data.splice(i, 1);
+            }
+        }
+        return data;
+    };
+    OrderPage.prototype.clear = function () {
+        this.expression = '';
+        console.log('CalculatorScientificPage::clear | ', this.expression);
+    };
+    OrderPage.prototype.addToArray = function () {
+        //
+        if (this.expression.trim() != '') {
+            this.inputText.push(this.expression);
+            this.expression = '';
+        }
+        //
+    };
+    OrderPage.prototype.undo = function () {
+        var string = this.expression;
+        var arr = string.split(" ");
+        arr.pop();
+        var value = "";
+        for (var i = 0; i < arr.length; i += 1) {
+            value = value + " " + arr[i];
+        }
+        this.expression = value;
+    };
+    OrderPage.prototype.checkExpression = function (value) {
+        var string = this.expression;
+        var arr = string.split(" ");
+        var bol = false;
+        var a = arr[0];
+        var test = /^\d+$/.test(arr[0]);
+        if (string === "") {
+            var test_1 = /^\d+$/.test(value);
+            if (test_1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            if (arr.length >= 2) {
+                return true;
+            }
+            var thisExpressions = [/^\d+$/, /Nhỏ/, /Lớn/, /ĐầyĐủ/, /ĐặcBiệt/, /Cua/, /Tôm/, /Giò/, /Thịt/, /Nạc/,
+                /Gân/, /Móng/, /Bánh/, /Huyết/, /Nấm/];
+            var bol_1 = this.matchInArray(value, thisExpressions);
+            if (bol_1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    };
+    OrderPage.prototype.matchInArray = function (string, expressions) {
+        var len = expressions.length, i = 0;
+        for (; i < len; i++) {
+            if (string.match(expressions[i])) {
+                return true;
+            }
+        }
+        return false;
+    };
+    ;
+    OrderPage.prototype.addOrder = function (data, ev) {
+        var _this = this;
+        //
+        this.itemsFood = this.orderProvider.listDataFood;
+        this.itemsFood;
+        var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* COrderDetails */]();
+        orderDetail.id = '1548948325490';
+        orderDetail.sl = 1;
+        orderDetail.status = false;
+        orderDetail.food.copy(this.itemsFood[0]);
+        this.orderProvider.orderTable.listOrder.push(orderDetail);
+        //
+        if (!data || this.orderProvider.orderTable.listOrder.length == 0) {
+            return;
+        }
+        if (data == this.orderProvider.stringModeMuaVe) {
+            var prompt = this.alertCtrl.create({
+                title: 'Tên người mua',
+                // inputs: [
+                //   {
+                //     name: 'tableNumber',
+                //     placeholder: 'Nhập tên'
+                //   },
+                // ],
+                buttons: [
+                    {
+                        text: 'Đóng',
+                        handler: function (data) {
+                        }
+                    },
+                    {
+                        text: 'OK',
+                        handler: function (data) {
+                            //
+                            var str = '';
+                            _this.inputText.forEach(function (element) {
+                                str = str + element + '@';
+                                //
+                            });
+                            // this.currentTable = data.tableNumber.toLowerCase();
+                            var popover = _this.popoverCtrl.create("OrderDetailsPage", {
+                                mode: _this.orderProvider.stringModeMuaVe,
+                                currentTable: str
+                            }, {
+                                cssClass: 'custom-popover'
+                            });
+                            popover.present({
+                                ev: ev
+                            });
+                        }
+                    }
+                ],
+                cssClass: 'customCSS'
+            });
+            prompt.present();
+        }
+        else if (data == this.orderProvider.stringModeTaiBan) {
+            var prompt = this.alertCtrl.create({
+                title: 'Chọn bàn',
+                inputs: [
+                    {
+                        name: 'tableNumber',
+                        placeholder: 'Nhập số bàn',
+                        value: '123'
+                    },
+                ],
+                buttons: [
+                    {
+                        text: 'Đóng',
+                        handler: function (data) {
+                        }
+                    },
+                    {
+                        text: 'OK',
+                        handler: function (data) {
+                            // if (data.tableNumber) {
+                            //
+                            var str = '';
+                            _this.inputText.forEach(function (element) {
+                                str += element + '@';
+                                //
+                            });
+                            str += data.tableNumber;
+                            // this.currentTable = data.tableNumber.toLowerCase();
+                            // this.currentTable = data.tableNumber;
+                            var popover = _this.popoverCtrl.create("OrderDetailsPage", {
+                                mode: _this.orderProvider.stringModeTaiBan,
+                                // currentTable: this.currentTable
+                                currentTable: str
+                            }, {
+                                cssClass: 'custom-popover'
+                            });
+                            popover.present({
+                                ev: ev
+                            });
+                            // }
+                            // else {
+                            //   return false
+                            // }
+                        }
+                    }
+                ],
+                cssClass: 'customCSS'
+            });
+            prompt.present();
+        }
+    };
+    OrderPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-payment',template:/*ion-inline-start:"c:\Users\User\Downloads\orderapp\app\src\pages\payment\payment.html"*/'<ion-content>\n    <form (ngSubmit)="payment()" #paymentForm="ngForm">\n  <ion-list>\n    <ion-row no-padding class="headerRow" text-center>\n      <button ion-button class="buttonHeader" color="light" full clear>Thanh toán</button>\n    </ion-row>  \n    <ion-item>\n      <ion-label>{{order.total() | currency:\'VND\':\'VNĐ\':\'2.0\'}}</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input placeholder="Số tiền khách trả" type="number" pattern="[0-9]*" [(ngModel)]="money" name="money" (input)="change($event)" required></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>{{returnText}} {{returnBack | currency:\'VND\':\'VNĐ\':\'2.0\'}}</ion-label>\n    </ion-item>\n    <ion-row no-padding>\n      <ion-col col-6 padding text-center>\n        <button ion-button type="button" block color="mainlightcolor" (click)="closePayment()">\n          Hủy\n        </button>\n      </ion-col>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" [disabled]="!paymentForm.form.valid">\n          Thanh toán\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-list>\n  </form>\n</ion-content>'/*ion-inline-end:"c:\Users\User\Downloads\orderapp\app\src\pages\payment\payment.html"*/,
+            selector: 'page-order',template:/*ion-inline-start:"c:\Users\User\Downloads\orderapp\app\src\pages\order\order.html"*/'<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-row>\n      <ion-col col-10>\n        <ion-textarea class="calculator-screen" rows="3" cols="10" value="" disabled [(ngModel)]="expression">\n        </ion-textarea>\n      </ion-col>\n      <ion-col col-2>\n        <button style="width: 2%;" ion-button item-end>{{inputText.length}}</button>\n      </ion-col>\n    </ion-row>\n  </ion-navbar>\n  <ion-list class="listItemScreen">\n    <ion-item *ngFor="let string of inputText; let num = index">\n      <ion-textarea class="show-screen" disabled value="{{string}}"></ion-textarea>\n      <button class="button-screen" ion-button item-end (click)="removeItemScreenButton(string)">{{num+1}}</button>\n    </ion-item>\n  </ion-list>\n</ion-header>\n<ion-content overflow-scroll="true">\n  <div class="calculator">\n\n    <div class="calculator-keys">\n      <!-- so thu tu 1-5-->\n      <button type="button" class="operator-text" (click)="add(\'1\')" value="1">1</button>\n      <button type="button" class="operator-text" (click)="add(\'2\')" value="2">2</button>\n      <button type="button" class="operator-text" (click)="add(\'3\')" value="3">3</button>\n      <button type="button" class="operator-text" (click)="add(\'4\')" value="4">4</button>\n      <button type="button" class="operator-text" (click)="add(\'5\')" value="5">5</button>\n      <!-- so thu tu 6-0-->\n      <button type="button" class="operator-text" (click)="add(\'6\')" value="6">6</button>\n      <button type="button" class="operator-text" (click)="add(\'7\')" value="7">7</button>\n      <button type="button" class="operator-text" (click)="add(\'8\')" value="8">8</button>\n      <button type="button" class="operator-text" (click)="add(\'9\')" value="9">9</button>\n      <button type="button" class="operator-text" (click)="add(\'0\')" value="0">0</button>\n\n      <!-- Tô -->\n      <button type="button" class="operator-text" (click)="add(\'Nhỏ\')" value="Nhỏ">Nhỏ</button>\n      <button type="button" class="operator-text" (click)="add(\'Lớn\')" value="Lớn">Lớn</button>\n      <button type="button" class="operator-text" (click)="add(\'ĐầyĐủ\')" value="ĐầyĐủ">ĐầyĐủ</button>\n      <button type="button" class="operator-text" (click)="add(\'ĐặcBiệt\')" value="ĐặcBiệt">ĐặcBiệt</button>\n      <button type="button" class="equal-sign" (click)="add(\'ConCua\')" value="ConCua">ConCua</button>\n\n      <!-- Loại -->\n      <button type="button" class="operator-text" (click)="add(\'Cua\')" value="Cua">Cua</button>\n      <button type="button" class="operator-text" (click)="add(\'Tôm\')" value="Tôm">Tôm</button>\n      <button type="button" class="operator-text" (click)="add(\'Giò\')" value="Giò">Giò</button>\n      <button type="button" class="operator-text" (click)="add(\'Thịt\')" value="Thịt">Thịt</button>\n\n      <!--  -->\n      <button type="button" class="operator-text" (click)="add(\'Nạc\')" value="Nạc">Nạc</button>\n      <button type="button" class="operator-text" (click)="add(\'Gân\')" value="Gân">Gân</button>\n      <button type="button" class="operator-text" (click)="add(\'Móng\')" value="Móng">Móng</button>\n      <div></div>\n      <div></div>\n\n      <!--  -->\n      <button type="button" class="operator-text" (click)="add(\'Ít\')" value="Ít">Ít</button>\n      <button type="button" class="operator-text" (click)="add(\'Nhiều\')" value="Nhiều">Nhiều</button>\n      <button type="button" class="operator-text" (click)="add(\'Không\')" value="Không">Không</button>\n      <button type="button" class="operator-text" (click)="add(\'Hành\')" value="Hành">Hành</button>\n      <button type="button" class="all-clear" (click)="clear()">Bỏ</button>\n\n      <!--  -->\n      <button type="button" class="operator-text" (click)="add(\'Bánh\')" value="Nh Bánh">Bánh</button>\n      <button type="button" class="operator-text" (click)="add(\'Huyết\')" value="Huyết">Huyết</button>\n      <button type="button" class="operator-text" (click)="add(\'Nấm\')" value="Nấm">Nấm</button>\n      <button type="button" class="operator-text" (click)="add(\'Tiêu\')" value="Tiêu">Tiêu</button>\n      <button type="button" class="undo" (click)="undo()">Xóa</button>\n      \n       <!--  -->\n       <button type="button" class="operator-text" (click)="add(\'Nước Chung\')" value="Hành">Nước Riêng</button>\n       <button type="button" class="operator-text" (click)="add(\'Nước Nguội\')" value="Tiêu">Nước Nguội</button>\n       <button type="button" class="operator-text" (click)="add(\'Nước Nóng\')" value="Nh Bánh">Nước Nóng</button>\n       <button type="button" class="operator-text" (click)="add(\'Bánh Trắng\')" value="Huyết">Bánh Trắng</button>\n       <button style="background-color: blue" type="button" class="operator-text" (click)="addToArray()"\n       value="\\n">Tiếp</button>\n\n    </div>\n  </div>\n</ion-content>\n<ion-footer>\n  <ion-row no-padding>\n    <ion-col col-6 no-padding text-center>\n      <button class="fontButton" ion-button color="maincolor" block outline (click)="addOrder(\'Mua về\', $event)">Mua\n        về</button>\n    </ion-col>\n    <ion-col col-6 no-padding text-center>\n      <button class="fontButton" ion-button color="maincolor" block outline (click)="addOrder(\'Tại bàn\', $event)">Tại\n        bàn</button>\n    </ion-col>\n  </ion-row>\n</ion-footer>'/*ion-inline-end:"c:\Users\User\Downloads\orderapp\app\src\pages\order\order.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
-    ], PaymentPage);
-    return PaymentPage;
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object])
+    ], OrderPage);
+    return OrderPage;
+    var _a, _b, _c, _d, _e;
 }());
 
-//# sourceMappingURL=payment.js.map
+//# sourceMappingURL=order.js.map
 
 /***/ })
 
