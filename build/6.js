@@ -75,7 +75,7 @@ var OrderPage = /** @class */ (function () {
         this.inputText = [];
         this.currentTable = "";
         //
-        this.expression = "3 Nhỏ Cua Tôm Giò Nhiều Bánh Huyết Nấm";
+        this.expression = "";
         this.backValue = "";
         this.itemsFood = this.orderProvider.listDataFood;
     }
@@ -416,9 +416,9 @@ var OrderPage = /** @class */ (function () {
                 var count_1 = 0;
                 if (this_1.matchInArray(stringSplit[indexOfItem + 1], ex)) {
                     count_1++;
-                    if (this_1.matchInArray(stringSplit[indexOfItem + 2], ex)) {
+                    if ((indexOfItem + 2 <= stringSplit.length - 1) && this_1.matchInArray(stringSplit[indexOfItem + 2], ex)) {
                         count_1++;
-                        if (this_1.matchInArray(stringSplit[indexOfItem + 3], ex)) {
+                        if ((indexOfItem + 3 <= stringSplit.length - 1) && this_1.matchInArray(stringSplit[indexOfItem + 3], ex)) {
                             count_1++;
                         }
                     }
