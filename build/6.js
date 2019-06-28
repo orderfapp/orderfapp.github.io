@@ -75,7 +75,7 @@ var OrderPage = /** @class */ (function () {
         this.inputText = [];
         this.currentTable = "";
         //
-        this.expression = "";
+        this.expression = "3 Nhỏ Cua Tôm Giò Nhiều Bánh Huyết Nấm";
         this.backValue = "";
         this.itemsFood = this.orderProvider.listDataFood;
     }
@@ -192,6 +192,12 @@ var OrderPage = /** @class */ (function () {
         }
         return data;
     };
+    OrderPage.prototype.removeItemScreenButton = function (string) {
+        var index = this.inputText.indexOf(string);
+        if (index > -1) {
+            this.inputText.splice(index, 1);
+        }
+    };
     OrderPage.prototype.clear = function () {
         this.expression = '';
         console.log('CalculatorScientificPage::clear | ', this.expression);
@@ -257,14 +263,7 @@ var OrderPage = /** @class */ (function () {
     OrderPage.prototype.addOrder = function (data, ev) {
         var _this = this;
         //
-        this.itemsFood = this.orderProvider.listDataFood;
-        this.itemsFood;
-        var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* COrderDetails */]();
-        orderDetail.id = '1548948325490';
-        orderDetail.sl = 1;
-        orderDetail.status = false;
-        orderDetail.food.copy(this.itemsFood[0]);
-        this.orderProvider.orderTable.listOrder.push(orderDetail);
+        this.addItemOrder(this.inputText);
         //
         if (!data || this.orderProvider.orderTable.listOrder.length == 0) {
             return;
@@ -360,6 +359,95 @@ var OrderPage = /** @class */ (function () {
             });
             prompt.present();
         }
+    };
+    OrderPage.prototype.addItemOrder = function (input) {
+        var _this = this;
+        this.itemsFood = this.orderProvider.listDataFood;
+        var _loop_1 = function (index) {
+            var stringSplit = input[index].split(' ');
+            // add 1
+            var soLuong1 = stringSplit[0];
+            var name = '';
+            if (input[index].includes('Nhỏ')) {
+                if (input[index].includes('Giò')) {
+                    name = 'Tô Lớn';
+                }
+                else {
+                    name = 'Tô Nhỏ';
+                }
+            }
+            else if (input[index].includes('Lớn')) {
+                if (input[index].includes('Giò')) {
+                    name = 'Tô Đầy Đủ';
+                }
+                else {
+                    name = 'Tô Lớn';
+                }
+            }
+            else if (input[index].includes('ĐầyĐủ')) {
+                name = 'Tô Đầy Đủ';
+            }
+            else if (input[index].includes('ĐặcBiệt')) {
+                name = 'Tô Đặt Biệt';
+            }
+            // begin add to order 1
+            this_1.itemsFood.forEach(function (element) {
+                if (element.name === name) {
+                    var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* COrderDetails */]();
+                    orderDetail.id = element.id;
+                    orderDetail.sl = 1;
+                    orderDetail.status = false;
+                    orderDetail.food.copy(element);
+                    for (var index_1 = 0; index_1 < parseInt(soLuong1); index_1++) {
+                        _this.orderProvider.orderTable.listOrder.push(orderDetail);
+                    }
+                }
+            });
+            // end add to order 1
+            // add 2
+            var indexOfItem = stringSplit.indexOf('Nhiều');
+            if (indexOfItem > 1) {
+                var soLuong2_1 = stringSplit[indexOfItem - 1];
+                if (!this_1.matchInArray(soLuong2_1, [/^\d+$/])) {
+                    soLuong2_1 = soLuong1;
+                }
+                //test 1
+                var ex = [/Bánh/, /Huyết/, /Nấm/];
+                var count_1 = 0;
+                if (this_1.matchInArray(stringSplit[indexOfItem + 1], ex)) {
+                    count_1++;
+                    if (this_1.matchInArray(stringSplit[indexOfItem + 2], ex)) {
+                        count_1++;
+                        if (this_1.matchInArray(stringSplit[indexOfItem + 3], ex)) {
+                            count_1++;
+                        }
+                    }
+                }
+                //end test 1
+                if (count_1 > 0) {
+                    // begin add to order 2
+                    this_1.itemsFood.forEach(function (element) {
+                        if (element.name === 'Món 5k') {
+                            var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* COrderDetails */]();
+                            orderDetail.id = element.id;
+                            orderDetail.sl = 1;
+                            orderDetail.status = false;
+                            orderDetail.food.copy(element);
+                            for (var index_2 = 0; index_2 < parseInt(soLuong2_1) * count_1; index_2++) {
+                                _this.orderProvider.orderTable.listOrder.push(orderDetail);
+                            }
+                        }
+                    });
+                    // end add to order 2
+                }
+            }
+        };
+        var this_1 = this;
+        // begin for input
+        for (var index = 0; index < input.length; index++) {
+            _loop_1(index);
+        }
+        // end for input
     };
     OrderPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
