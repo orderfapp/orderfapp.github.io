@@ -176,12 +176,12 @@ var OrderPage = /** @class */ (function () {
             console.log('CalculatorScientificPage::add | expression=', this.expression);
         }
         else {
-            var alert = this.alertCtrl.create({
+            var alert_1 = this.alertCtrl.create({
                 title: 'WRONG',
                 subTitle: 'TRY AGAIN',
                 buttons: ['OK']
             });
-            alert.present();
+            alert_1.present();
         }
     };
     OrderPage.prototype.clean = function (data) {
@@ -261,103 +261,133 @@ var OrderPage = /** @class */ (function () {
     };
     ;
     OrderPage.prototype.addOrder = function (data, ev) {
-        var _this = this;
         //
         this.addItemOrder(this.inputText);
         //
         if (!data || this.orderProvider.orderTable.listOrder.length == 0) {
             return;
         }
+        // begin mua ve
         if (data == this.orderProvider.stringModeMuaVe) {
-            var prompt = this.alertCtrl.create({
-                title: 'Tên người mua',
-                // inputs: [
-                //   {
-                //     name: 'tableNumber',
-                //     placeholder: 'Nhập tên'
-                //   },
-                // ],
-                buttons: [
-                    {
-                        text: 'Đóng',
-                        handler: function (data) {
-                        }
-                    },
-                    {
-                        text: 'OK',
-                        handler: function (data) {
-                            //
-                            var str = '';
-                            _this.inputText.forEach(function (element) {
-                                str = str + element + '@';
-                                //
-                            });
-                            // this.currentTable = data.tableNumber.toLowerCase();
-                            var popover = _this.popoverCtrl.create("OrderDetailsPage", {
-                                mode: _this.orderProvider.stringModeMuaVe,
-                                currentTable: str
-                            }, {
-                                cssClass: 'custom-popover'
-                            });
-                            popover.present({
-                                ev: ev
-                            });
-                        }
-                    }
-                ],
-                cssClass: 'customCSS'
+            // const prompt = this.alertCtrl.create({
+            //   title: 'Tên người mua',
+            //   // inputs: [
+            //   //   {
+            //   //     name: 'tableNumber',
+            //   //     placeholder: 'Nhập tên'
+            //   //   },
+            //   // ],
+            //   buttons: [
+            //     {
+            //       text: 'Đóng',
+            //       handler: data => {
+            //       }
+            //     },
+            //     {
+            //       text: 'OK',
+            //       handler: data => {
+            //         //
+            //         let str = '';
+            //         this.inputText.forEach(element => {
+            //           str = str + element + '@';
+            //           //
+            //         });
+            //         // this.currentTable = data.tableNumber.toLowerCase();
+            //         let popover = this.popoverCtrl.create("OrderDetailsPage", {
+            //           mode: this.orderProvider.stringModeMuaVe,
+            //           currentTable: str
+            //         }, {
+            //             cssClass: 'custom-popover'
+            //           });
+            //         popover.present({
+            //           ev: ev
+            //         });
+            //       }
+            //     }
+            //   ],
+            //   cssClass: 'customCSS'
+            // });
+            // prompt.present();
+            var str_1 = '';
+            this.inputText.forEach(function (element) {
+                str_1 = str_1 + element + '@';
+                //
             });
-            prompt.present();
+            // this.currentTable = data.tableNumber.toLowerCase();
+            var popover = this.popoverCtrl.create("OrderDetailsPage", {
+                mode: this.orderProvider.stringModeMuaVe,
+                currentTable: str_1
+            }, {
+                cssClass: 'custom-popover'
+            });
+            popover.present({
+                ev: ev
+            });
+            // end mua ve
         }
         else if (data == this.orderProvider.stringModeTaiBan) {
-            var prompt = this.alertCtrl.create({
-                title: 'Chọn bàn',
-                inputs: [
-                    {
-                        name: 'tableNumber',
-                        placeholder: 'Nhập số bàn',
-                        value: '123'
-                    },
-                ],
-                buttons: [
-                    {
-                        text: 'Đóng',
-                        handler: function (data) {
-                        }
-                    },
-                    {
-                        text: 'OK',
-                        handler: function (data) {
-                            // if (data.tableNumber) {
-                            //
-                            var str = '';
-                            _this.inputText.forEach(function (element) {
-                                str += element + '@';
-                                //
-                            });
-                            str += data.tableNumber;
-                            // this.currentTable = data.tableNumber.toLowerCase();
-                            // this.currentTable = data.tableNumber;
-                            var popover = _this.popoverCtrl.create("OrderDetailsPage", {
-                                mode: _this.orderProvider.stringModeTaiBan,
-                                // currentTable: this.currentTable
-                                currentTable: str
-                            }, {
-                                cssClass: 'custom-popover'
-                            });
-                            popover.present({
-                                ev: ev
-                            });
-                            // }
-                            // else {
-                            //   return false
-                            // }
-                        }
-                    }
-                ],
-                cssClass: 'customCSS'
+            //   const prompt = this.alertCtrl.create({
+            //     title: 'Chọn bàn',
+            //     inputs: [
+            //       {
+            //         name: 'tableNumber',
+            //         placeholder: 'Nhập số bàn',
+            //         value: '123'
+            //       },
+            //     ],
+            //     buttons: [
+            //       {
+            //         text: 'Đóng',
+            //         handler: data => {
+            //         }
+            //       },
+            //       {
+            //         text: 'OK',
+            //         handler: data => {
+            //           // if (data.tableNumber) {
+            //           //
+            //           let str = '';
+            //           this.inputText.forEach(element => {
+            //             str += element + '@';
+            //             //
+            //           });
+            //           str += data.tableNumber;
+            //           // this.currentTable = data.tableNumber.toLowerCase();
+            //           // this.currentTable = data.tableNumber;
+            //           let popover = this.popoverCtrl.create("OrderDetailsPage", {
+            //             mode: this.orderProvider.stringModeTaiBan,
+            //             // currentTable: this.currentTable
+            //             currentTable: str
+            //           }, {
+            //               cssClass: 'custom-popover'
+            //             });
+            //           popover.present({
+            //             ev: ev
+            //           });
+            //           // }
+            //           // else {
+            //           //   return false
+            //           // }
+            //         }
+            //       }
+            //     ],
+            //     cssClass: 'customCSS'
+            //   });
+            //   prompt.present();
+            // }
+            var str_2 = '';
+            this.inputText.forEach(function (element) {
+                str_2 += element + '@';
             });
-            prompt.present();
+            var popover = this.popoverCtrl.create("OrderDetailsPage", {
+                mode: this.orderProvider.stringModeTaiBan,
+                currentTable: str_2
+            }, {
+                cssClass: 'custom-popover'
+            });
+            popover.present({
+                ev: ev
+            });
         }
     };
     OrderPage.prototype.addItemOrder = function (input) {
@@ -367,32 +397,32 @@ var OrderPage = /** @class */ (function () {
             var stringSplit = input[index].split(' ');
             // add 1
             var soLuongMonChinh = stringSplit[0];
-            var name = '';
+            var name_1 = '';
             if (input[index].includes('Nhỏ')) {
                 if (input[index].includes('Giò')) {
-                    name = 'Tô Lớn';
+                    name_1 = 'Tô Lớn';
                 }
                 else {
-                    name = 'Tô Nhỏ';
+                    name_1 = 'Tô Nhỏ';
                 }
             }
             else if (input[index].includes('Lớn')) {
                 if (input[index].includes('Giò')) {
-                    name = 'Tô Đầy Đủ';
+                    name_1 = 'Tô Đầy Đủ';
                 }
                 else {
-                    name = 'Tô Lớn';
+                    name_1 = 'Tô Lớn';
                 }
             }
             else if (input[index].includes('ĐầyĐủ')) {
-                name = 'Tô Đầy Đủ';
+                name_1 = 'Tô Đầy Đủ';
             }
             else if (input[index].includes('ĐặcBiệt')) {
-                name = 'Tô Đặt Biệt';
+                name_1 = 'Tô Đặt Biệt';
             }
             // begin add to order 1
             this_1.itemsFood.forEach(function (element) {
-                if (element.name === name) {
+                if (element.name === name_1) {
                     var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* COrderDetails */]();
                     orderDetail.id = element.id;
                     orderDetail.sl = 1;
@@ -468,10 +498,13 @@ var OrderPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-order',template:/*ion-inline-start:"c:\Users\User\Downloads\orderapp\app\src\pages\order\order.html"*/'<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-row>\n      <ion-col col-10>\n        <ion-textarea class="calculator-screen" rows="3" cols="10" value="" disabled [(ngModel)]="expression">\n        </ion-textarea>\n      </ion-col>\n      <ion-col col-2>\n        <button style="width: 2%;" ion-button item-end>{{inputText.length}}</button>\n      </ion-col>\n    </ion-row>\n  </ion-navbar>\n  <ion-list class="listItemScreen">\n    <ion-item *ngFor="let string of inputText; let num = index">\n      <ion-textarea class="show-screen" disabled value="{{string}}"></ion-textarea>\n      <button class="button-screen" ion-button item-end (click)="removeItemScreenButton(string)">{{num+1}}</button>\n    </ion-item>\n  </ion-list>\n</ion-header>\n<ion-content overflow-scroll="true">\n  <div class="calculator">\n\n    <div class="calculator-keys">\n      <!-- so thu tu 1-5-->\n      <button type="button" class="operator-text" (click)="add(\'1\')" value="1">1</button>\n      <button type="button" class="operator-text" (click)="add(\'2\')" value="2">2</button>\n      <button type="button" class="operator-text" (click)="add(\'3\')" value="3">3</button>\n      <button type="button" class="operator-text" (click)="add(\'4\')" value="4">4</button>\n      <button type="button" class="operator-text" (click)="add(\'5\')" value="5">5</button>\n      <!-- so thu tu 6-0-->\n      <button type="button" class="operator-text" (click)="add(\'6\')" value="6">6</button>\n      <button type="button" class="operator-text" (click)="add(\'7\')" value="7">7</button>\n      <button type="button" class="operator-text" (click)="add(\'8\')" value="8">8</button>\n      <button type="button" class="operator-text" (click)="add(\'9\')" value="9">9</button>\n      <button type="button" class="operator-text" (click)="add(\'0\')" value="0">0</button>\n\n      <!-- Tô -->\n      <button type="button" class="operator-text" (click)="add(\'Nhỏ\')" value="Nhỏ">Nhỏ</button>\n      <button type="button" class="operator-text" (click)="add(\'Lớn\')" value="Lớn">Lớn</button>\n      <button type="button" class="operator-text" (click)="add(\'ĐầyĐủ\')" value="ĐầyĐủ">ĐầyĐủ</button>\n      <button type="button" class="operator-text" (click)="add(\'ĐặcBiệt\')" value="ĐặcBiệt">ĐặcBiệt</button>\n      <button type="button" class="equal-sign" (click)="add(\'ConCua\')" value="ConCua">ConCua</button>\n\n      <!-- Loại -->\n      <button type="button" class="operator-text" (click)="add(\'Cua\')" value="Cua">Cua</button>\n      <button type="button" class="operator-text" (click)="add(\'Tôm\')" value="Tôm">Tôm</button>\n      <button type="button" class="operator-text" (click)="add(\'Giò\')" value="Giò">Giò</button>\n      <button type="button" class="operator-text" (click)="add(\'Thịt\')" value="Thịt">Thịt</button>\n\n      <!--  -->\n      <button type="button" class="operator-text" (click)="add(\'Nạc\')" value="Nạc">Nạc</button>\n      <button type="button" class="operator-text" (click)="add(\'Gân\')" value="Gân">Gân</button>\n      <button type="button" class="operator-text" (click)="add(\'Móng\')" value="Móng">Móng</button>\n      <div></div>\n      <div></div>\n\n      <!--  -->\n      <button type="button" class="operator-text" (click)="add(\'Ít\')" value="Ít">Ít</button>\n      <button type="button" class="operator-text" (click)="add(\'Nhiều\')" value="Nhiều">Nhiều</button>\n      <button type="button" class="operator-text" (click)="add(\'Không\')" value="Không">Không</button>\n      <button type="button" class="operator-text" (click)="add(\'Hành\')" value="Hành">Hành</button>\n      <button type="button" class="all-clear" (click)="clear()">Bỏ</button>\n\n      <!--  -->\n      <button type="button" class="operator-text" (click)="add(\'Bánh\')" value="Nh Bánh">Bánh</button>\n      <button type="button" class="operator-text" (click)="add(\'Huyết\')" value="Huyết">Huyết</button>\n      <button type="button" class="operator-text" (click)="add(\'Nấm\')" value="Nấm">Nấm</button>\n      <button type="button" class="operator-text" (click)="add(\'Tiêu\')" value="Tiêu">Tiêu</button>\n      <button type="button" class="undo" (click)="undo()">Xóa</button>\n      \n       <!--  -->\n       <button type="button" class="operator-text" (click)="add(\'Nước Chung\')" value="Hành">Nước Riêng</button>\n       <button type="button" class="operator-text" (click)="add(\'Nước Nguội\')" value="Tiêu">Nước Nguội</button>\n       <button type="button" class="operator-text" (click)="add(\'Nước Nóng\')" value="Nh Bánh">Nước Nóng</button>\n       <button type="button" class="operator-text" (click)="add(\'Bánh Trắng\')" value="Huyết">Bánh Trắng</button>\n       <button style="background-color: blue" type="button" class="operator-text" (click)="addToArray()"\n       value="\\n">Tiếp</button>\n\n    </div>\n  </div>\n</ion-content>\n<ion-footer>\n  <ion-row no-padding>\n    <ion-col col-6 no-padding text-center>\n      <button class="fontButton" ion-button color="maincolor" block outline (click)="addOrder(\'Mua về\', $event)">Mua\n        về</button>\n    </ion-col>\n    <ion-col col-6 no-padding text-center>\n      <button class="fontButton" ion-button color="maincolor" block outline (click)="addOrder(\'Tại bàn\', $event)">Tại\n        bàn</button>\n    </ion-col>\n  </ion-row>\n</ion-footer>'/*ion-inline-end:"c:\Users\User\Downloads\orderapp\app\src\pages\order\order.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], OrderPage);
     return OrderPage;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=order.js.map

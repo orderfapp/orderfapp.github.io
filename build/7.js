@@ -1,6 +1,6 @@
 webpackJsonp([7],{
 
-/***/ 504:
+/***/ 503:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderDetailsPageModule", function() { return OrderDetailsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order_details__ = __webpack_require__(515);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order_details__ = __webpack_require__(514);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var OrderDetailsPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 515:
+/***/ 514:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46,7 +46,7 @@ var OrderDetailsPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__ = __webpack_require__(289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_option_option__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_option_option__ = __webpack_require__(290);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -76,6 +76,7 @@ var OrderDetailsPage = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.mode = "";
         this.currentTable = "";
+        this.tableNumber = "";
         this.orderProvider.orderTable.listOrder = this.orderProvider.orderTable.listOrder.sort(function (a, b) {
             if (a.id < b.id)
                 return -1;
@@ -98,93 +99,90 @@ var OrderDetailsPage = /** @class */ (function () {
         });
     };
     OrderDetailsPage.prototype.addOption = function (food) {
-        var alert = this.alertCtrl.create();
-        alert.setTitle('Chọn thêm?');
-        for (var index = 0; index < this.optionProvider.listOption.length; index++) {
-            var element = this.optionProvider.listOption[index];
-            alert.addInput({
-                type: 'checkbox',
-                label: element,
-                value: element
-            });
-        }
-        alert.addButton('Hủy');
-        alert.addButton({
-            text: 'Chọn',
-            handler: function (data) {
-                food.option = data;
-            }
-        });
-        alert.present();
+        // let alert = this.alertCtrl.create();
+        // alert.setTitle('Chọn thêm?');
+        // for (let index = 0; index < this.optionProvider.listOption.length; index++) {
+        //   const element = this.optionProvider.listOption[index];
+        //   alert.addInput({
+        //     type: 'checkbox',
+        //     label: element,
+        //     value: element
+        //   });
+        // }
+        // alert.addButton('Hủy');
+        // alert.addButton({
+        //   text: 'Chọn',
+        //   handler: data => {
+        //     food.option = data;
+        //   }
+        // });
+        // alert.present();
     };
     OrderDetailsPage.prototype.deleteFood = function (food) {
-        var _this = this;
-        var prompt = this.alertCtrl.create({
-            title: 'Xóa món',
-            buttons: [
-                {
-                    text: 'Đóng',
-                    handler: function (data) {
-                    }
-                },
-                {
-                    text: 'Xóa',
-                    handler: function (data) {
-                        var indexFood = -1;
-                        for (var index = 0; index < _this.orderProvider.orderTable.listOrder.length; index++) {
-                            if (_this.orderProvider.orderTable.listOrder[index].id == food.id) {
-                                indexFood = index;
-                                break;
-                            }
-                        }
-                        if (indexFood != -1) {
-                            _this.orderProvider.orderTable.listOrder.splice(indexFood, 1);
-                            if (_this.orderProvider.listSLFoodObject[food.id] == 1) {
-                                _this.orderProvider.listSLFoodObject[food.id] = null;
-                            }
-                            else if (indexFood != -1 && _this.orderProvider.listSLFoodObject[food.id] > 1) {
-                                _this.orderProvider.listSLFoodObject[food.id] = _this.orderProvider.listSLFoodObject[food.id] - 1;
-                            }
-                        }
-                    }
-                }
-            ]
-        });
-        prompt.present();
+        // const prompt = this.alertCtrl.create({
+        //   title: 'Xóa món',
+        //   buttons: [
+        //     {
+        //       text: 'Đóng',
+        //       handler: data => {
+        //       }
+        //     },
+        //     {
+        //       text: 'Xóa',
+        //       handler: data => {
+        //         let indexFood = -1;
+        //         for (let index = 0; index < this.orderProvider.orderTable.listOrder.length; index++) {
+        //           if (this.orderProvider.orderTable.listOrder[index].id == food.id) {
+        //             indexFood = index;
+        //             break;
+        //           }
+        //         }
+        //         if (indexFood != -1) {
+        //           this.orderProvider.orderTable.listOrder.splice(indexFood, 1);
+        //           if (this.orderProvider.listSLFoodObject[food.id] == 1) {
+        //             this.orderProvider.listSLFoodObject[food.id] = null;
+        //           }
+        //           else if (indexFood != -1 && this.orderProvider.listSLFoodObject[food.id] > 1) {
+        //             this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] - 1;
+        //           }
+        //         }
+        //       }
+        //     }
+        //   ]
+        // });
+        // prompt.present();
     };
     OrderDetailsPage.prototype.addFood = function (food) {
-        var orderDetail = new __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["c" /* COrderDetails */]();
-        orderDetail.id = food.id;
-        orderDetail.sl = 1;
-        orderDetail.status = false;
-        orderDetail.food.copy(food.food);
-        this.orderProvider.orderTable.listOrder.push(orderDetail);
-        this.orderProvider.orderTable.listOrder = this.orderProvider.orderTable.listOrder.sort(function (a, b) {
-            if (a.id < b.id)
-                return -1;
-            if (a.id > b.id)
-                return 1;
-            return 0;
-        });
-        this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] + 1;
+        // let orderDetail = new COrderDetails();
+        // orderDetail.id = food.id;
+        // orderDetail.sl = 1;
+        // orderDetail.status = false;
+        // orderDetail.food.copy(food.food);
+        // this.orderProvider.orderTable.listOrder.push(orderDetail);
+        // this.orderProvider.orderTable.listOrder = this.orderProvider.orderTable.listOrder.sort((a, b) => {
+        //   if (a.id < b.id) return -1;
+        //   if (a.id > b.id) return 1;
+        //   return 0;
+        // });
+        // this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] + 1;
     };
     OrderDetailsPage.prototype.minusFood = function (food) {
-        var indexFood = -1;
-        for (var index = 0; index < this.orderProvider.orderTable.listOrder.length; index++) {
-            if (this.orderProvider.orderTable.listOrder[index].id == food.id) {
-                indexFood = index;
-                break;
-            }
-        }
-        if (indexFood > -1) {
-            this.orderProvider.orderTable.listOrder.splice(indexFood, 1);
-            if (this.orderProvider.listSLFoodObject[food.id] == 1) {
-                this.orderProvider.listSLFoodObject[food.id] = null;
-            }
-            else if (indexFood != -1 && this.orderProvider.listSLFoodObject[food.id] > 1) {
-                this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] - 1;
-            }
-        }
+        // let indexFood = -1;
+        // for (let index = 0; index < this.orderProvider.orderTable.listOrder.length; index++) {
+        //   if (this.orderProvider.orderTable.listOrder[index].id == food.id) {
+        //     indexFood = index;
+        //     break;
+        //   }
+        // }
+        // if (indexFood > -1) {
+        //   this.orderProvider.orderTable.listOrder.splice(indexFood, 1);
+        //   if (this.orderProvider.listSLFoodObject[food.id] == 1) {
+        //     this.orderProvider.listSLFoodObject[food.id] = null;
+        //   }
+        //   else if (indexFood != -1 && this.orderProvider.listSLFoodObject[food.id] > 1) {
+        //     this.orderProvider.listSLFoodObject[food.id] = this.orderProvider.listSLFoodObject[food.id] - 1;
+        //   }
+        // }
     };
     OrderDetailsPage.prototype.closeOrder = function (order) {
         var _this = this;
@@ -226,18 +224,22 @@ var OrderDetailsPage = /** @class */ (function () {
         this.currentTable = "";
         this.viewCtrl.dismiss();
     };
+    OrderDetailsPage.prototype.add = function (value) {
+        this.currentTable += value;
+        var arrSplit = this.currentTable.split('@');
+        var lastIndex = arrSplit[arrSplit.length - 1];
+        if (lastIndex !== "") {
+            this.tableNumber = lastIndex;
+        }
+    };
     OrderDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-order-details',template:/*ion-inline-start:"c:\Users\User\Downloads\orderapp\app\src\pages\order-details\order-details.html"*/'<ion-content class="scroll">\n  <ion-list>\n    <ion-row no-padding class="headerRow" text-center>\n      <button ion-button class="buttonHeader" color="light" full clear>{{mode + " " + currentTable}}</button>\n    </ion-row>\n    <ion-item (press)="deleteFood(foodDetails)" (swipe)="addOption(foodDetails)" *ngFor="let foodDetails of orderProvider.orderTable.listOrder">\n      <ion-avatar item-start (click)="minusFood(foodDetails)">\n        <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n      </ion-avatar>\n      <h2>{{foodDetails.food.name}}</h2>\n      <p *ngIf="foodDetails.option.length == 0">Bình thường</p>\n      <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n      <button ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">{{"SL " + foodDetails.sl}}</button>\n    </ion-item>\n    <ion-row no-padding>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" (click)="closeOrder(orderProvider.orderTable)">\n          Xóa\n        </button>\n      </ion-col>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" (click)="confirmOrder(orderProvider.orderTable)">\n          Hoàn tất\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"c:\Users\User\Downloads\orderapp\app\src\pages\order-details\order-details.html"*/,
+            selector: 'page-order-details',template:/*ion-inline-start:"c:\Users\User\Downloads\orderapp\app\src\pages\order-details\order-details.html"*/'<ion-content class="scroll">\n  <ion-list>\n    <ion-row *ngIf="mode == \'Mua về\'" no-padding class="headerRow" text-center>\n      <button ion-button class="buttonHeader" color="light" full clear>{{mode}}</button>\n    </ion-row>\n    <ion-row *ngIf="mode == \'Tại bàn\'" no-padding class="headerRow" text-center>\n      <button ion-button class="buttonHeader" color="light" full clear>{{mode + "   " + tableNumber}}</button>\n    </ion-row>\n    <ion-row no-padding>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" (click)="closeOrder(orderProvider.orderTable)">\n          Xóa\n        </button>\n      </ion-col>\n      <ion-col col-6 padding text-center>\n        <button ion-button block color="mainlightcolor" (click)="confirmOrder(orderProvider.orderTable)">\n          Hoàn tất\n        </button>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="mode == \'Tại bàn\'" no-padding>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'1\')" value="1">1</button>\n      </ion-col>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'2\')" value="2">2</button>\n      </ion-col>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'3\')" value="3">3</button>\n      </ion-col>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'4\')" value="4">4</button>\n      </ion-col>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'5\')" value="5">5</button>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="mode == \'Tại bàn\'" no-padding>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'6\')" value="6">6</button>\n      </ion-col>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'7\')" value="7">7</button>\n      </ion-col>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'8\')" value="8">8</button>\n      </ion-col>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'9\')" value="9">9</button>\n      </ion-col>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'10\')" value="10">10</button>\n      </ion-col>\n    </ion-row>\n    <ion-row *ngIf="mode == \'Tại bàn\'" no-padding>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'Trái\')" value="Trái">Trái</button>\n      </ion-col>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'Phải\')" value="Phải">Phải</button>\n      </ion-col>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'Trong\')" value="Trong">Trong</button>\n      </ion-col>\n      <ion-col col-1 padding text-center>\n        <button type="button" class="operator-text" (click)="add(\'Ngoài\')" value="Ngoài">Ngoài</button>\n      </ion-col>\n    </ion-row>\n    <!-- <ion-item (press)="deleteFood(foodDetails)" (swipe)="addOption(foodDetails)" *ngFor="let foodDetails of orderProvider.orderTable.listOrder">\n      <ion-avatar item-start (click)="minusFood(foodDetails)">\n        <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n      </ion-avatar>\n      <h2>{{foodDetails.food.name}}</h2>\n      <p *ngIf="foodDetails.option.length == 0">Bình thường</p>\n      <p *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n      <button ion-button clear color="maincolor" item-end (click)="addFood(foodDetails)">{{"SL " + foodDetails.sl}}</button>\n    </ion-item> -->\n\n  </ion-list>\n</ion-content>'/*ion-inline-end:"c:\Users\User\Downloads\orderapp\app\src\pages\order-details\order-details.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_option_option__["a" /* OptionProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ViewController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__providers_option_option__["a" /* OptionProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_option_option__["a" /* OptionProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _f || Object])
     ], OrderDetailsPage);
     return OrderDetailsPage;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=order-details.js.map
