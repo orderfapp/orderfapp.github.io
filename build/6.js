@@ -265,6 +265,12 @@ var OrderPage = /** @class */ (function () {
         this.addItemOrder(this.inputText);
         //
         if (!data || this.orderProvider.orderTable.listOrder.length == 0) {
+            var alert_2 = this.alertCtrl.create({
+                title: 'WRONG',
+                subTitle: 'TRY AGAIN',
+                buttons: ['OK']
+            });
+            alert_2.present();
             return;
         }
         // begin mua ve
