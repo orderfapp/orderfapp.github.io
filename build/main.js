@@ -22,19 +22,19 @@ webpackEmptyAsyncContext.id = 192;
 
 var map = {
 	"../pages/cashier/cashier.module": [
-		504,
+		501,
 		10
 	],
 	"../pages/chief/chief.module": [
-		501,
+		502,
 		9
 	],
 	"../pages/login/login.module": [
-		502,
+		503,
 		8
 	],
 	"../pages/order-details/order-details.module": [
-		503,
+		504,
 		7
 	],
 	"../pages/order/order.module": [
@@ -58,11 +58,11 @@ var map = {
 		2
 	],
 	"../pages/setup/setup.module": [
-		510,
+		509,
 		0
 	],
 	"../pages/statistics/statistics.module": [
-		509,
+		510,
 		1
 	]
 };
@@ -749,16 +749,16 @@ var AppModule = /** @class */ (function () {
                     backButtonText: 'Trở về'
                 }, {
                     links: [
+                        { loadChildren: '../pages/cashier/cashier.module#CashierPageModule', name: 'CashierPage', segment: 'cashier', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/chief/chief.module#ChiefPageModule', name: 'ChiefPage', segment: 'chief', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order-details/order-details.module#OrderDetailsPageModule', name: 'OrderDetailsPage', segment: 'order-details', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/cashier/cashier.module#CashierPageModule', name: 'CashierPage', segment: 'cashier', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/payment/payment.module#PaymentPageModule', name: 'PaymentPage', segment: 'payment', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setting-option/setting-option.module#SettingOptionPageModule', name: 'SettingOptionPage', segment: 'setting-option', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setting-user/setting-user.module#SettingUserPageModule', name: 'SettingUserPage', segment: 'setting-user', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup-type/setup-type.module#SetupTypePageModule', name: 'SetupTypePage', segment: 'setup-type', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/setup/setup.module#SetupPageModule', name: 'SetupPage', segment: 'setup', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order/order.module#OrderPageModule', name: 'OrderPage', segment: 'order', priority: 'low', defaultHistory: [] }
                     ]
                 }),
