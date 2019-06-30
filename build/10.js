@@ -70,6 +70,10 @@ var CashierPage = /** @class */ (function () {
         this.orderProvider = orderProvider;
         this.popoverCtrl = popoverCtrl;
         this.navParams = navParams;
+        //
+        this.showTable = [];
+        this.showFood = [];
+        //
         this.dataOfOrder = [];
         this.initializeItems();
     }
@@ -99,6 +103,29 @@ var CashierPage = /** @class */ (function () {
                     }
                     if (order.listOrder.length > 0) {
                         _this.dataOfOrder.push(order);
+                        //
+                        var str = element.table.split('@');
+                        var getArrStr = [];
+                        for (var index_1 = 0; index_1 < str.length - 1; index_1++) {
+                            getArrStr.push(str[index_1]);
+                        }
+                        _this.showFood.push(getArrStr);
+                        str = str[str.length - 1];
+                        var checkMode = order.mode;
+                        var getStrTable = "";
+                        if (checkMode === "Mua về") {
+                            var strReplace = str;
+                            strReplace = strReplace.replace("Mua về", "");
+                            getStrTable = checkMode + " " + strReplace;
+                        }
+                        else if (checkMode === "Tại bàn") {
+                            getStrTable = checkMode + " " + str;
+                        }
+                        else {
+                            return;
+                        }
+                        _this.showTable.push(getStrTable);
+                        //
                     }
                 }
             }
@@ -152,14 +179,12 @@ var CashierPage = /** @class */ (function () {
     };
     CashierPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-cashier',template:/*ion-inline-start:"c:\Users\User\Downloads\orderapp\app\src\pages\cashier\cashier.html"*/'<!--\n  Generated template for the DeviceListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>Thanh toán</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-row no-padding class="listOrder" *ngFor="let orderDetails of items">\n    <ion-col col-2 no-padding class="colBackground">\n      <button ion-button class="buttonFullHeight" color="bgiphonedark" outline no-padding>{{orderDetails.table}}</button>\n    </ion-col>\n    <ion-col col-10 no-padding>\n      <ion-list no-padding class="listDetails" *ngFor="let foodDetails of orderDetails.listOrder">\n        <ion-item [ngClass]="{\'disableFood\': foodDetails.status}">\n          <ion-avatar item-start>\n            <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n          </ion-avatar>\n          <h2 class="fontTextLarge">{{foodDetails.food.name}}</h2>\n          <p class="fontTextSmall" *ngIf="foodDetails.option.length == 0">Bình thường</p>\n          <p class="fontTextSmall" *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n          <button class="fontTextSmall" ion-button clear color="maincolor" item-end (click)="confirm(foodDetails)">{{foodDetails.food.value | currency:\'VND\':\'VNĐ\':\'2.0\'}}</button>\n        </ion-item>\n      </ion-list>\n      <ion-list no-padding class="listDetails">\n        <ion-item>\n          <button ion-button clear color="maincolor" [disabled]="orderDetails.payment" class="payment" item-end (click)="payment(orderDetails)">{{orderDetails.payment\n            ? "Đã Thanh toán" : "Thanh toán "}}{{orderDetails.payment ? "" : orderDetails.total() | currency:\'VND\':\'VNĐ\':\'2.0\'}}</button>\n        </ion-item>\n      </ion-list>\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"c:\Users\User\Downloads\orderapp\app\src\pages\cashier\cashier.html"*/,
+            selector: 'page-cashier',template:/*ion-inline-start:"c:\Users\User\Downloads\orderapp\app\src\pages\cashier\cashier.html"*/'<!--\n  Generated template for the DeviceListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>Thanh toán</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-row no-padding class="listOrder" *ngFor="let orderDetails of items; let num = index">\n    <ion-col col-2 no-padding class="colBackground">\n      <button ion-button class="buttonFullHeight" color="bgiphonedark" outline no-padding>{{showTable[num]}}</button>\n    </ion-col>\n    <ion-col col-10 no-padding>\n      <!-- <ion-list no-padding class="listDetails" *ngFor="let foodDetails of orderDetails.listOrder">\n        <ion-item [ngClass]="{\'disableFood\': foodDetails.status}">\n          <ion-avatar item-start>\n            <img src=\'{{foodDetails.food.image ? foodDetails.food.image : "assets/icon/noimage.png"}}\'>\n          </ion-avatar>\n          <h2 class="fontTextLarge">{{foodDetails.food.name}}</h2>\n          <p class="fontTextSmall" *ngIf="foodDetails.option.length == 0">Bình thường</p>\n          <p class="fontTextSmall" *ngFor="let foodOption of foodDetails.option">{{foodOption}}</p>\n          <button class="fontTextSmall" ion-button clear color="maincolor" item-end\n            (click)="confirm(foodDetails)">{{foodDetails.food.value | currency:\'VND\':\'VNĐ\':\'2.0\'}}</button>\n        </ion-item>\n      </ion-list> -->\n      <ion-list no-padding class="listDetails" *ngFor="let food of showFood[num]">\n        <h2 class="fontTextLarge">{{food}}</h2>\n      </ion-list>\n      <ion-list no-padding class="listDetails">\n        <ion-item>\n          <button ion-button clear color="maincolor" [disabled]="orderDetails.payment" class="payment" item-end\n            (click)="payment(orderDetails)">{{orderDetails.payment\n            ? "Đã Thanh toán" : "Thanh toán "}}{{orderDetails.payment ? "" : orderDetails.total() | currency:\'VND\':\'VNĐ\':\'2.0\'}}</button>\n        </ion-item>\n      </ion-list>\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"c:\Users\User\Downloads\orderapp\app\src\pages\cashier\cashier.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* PopoverController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _d || Object])
     ], CashierPage);
     return CashierPage;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=cashier.js.map

@@ -1,6 +1,6 @@
 webpackJsonp([9],{
 
-/***/ 502:
+/***/ 510:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChiefPageModule", function() { return ChiefPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chief__ = __webpack_require__(513);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chief__ = __webpack_require__(523);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var ChiefPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 513:
+/***/ 523:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -71,6 +71,7 @@ var ChiefPage = /** @class */ (function () {
         this.navParams = navParams;
         //
         this.showStr = [];
+        this.showTable = [];
         //
         this.dataOfOrder = [];
         this.items = [];
@@ -98,6 +99,20 @@ var ChiefPage = /** @class */ (function () {
                     for (var index_1 = 0; index_1 < str.length - 1; index_1++) {
                         stringFull.push(str[index_1]);
                     }
+                    var checkMode = element.mode;
+                    var getStrTable = "";
+                    if (checkMode === "Mua về") {
+                        var strReplace = element.table;
+                        strReplace = strReplace.replace("Mua về", "");
+                        getStrTable = checkMode + " " + strReplace;
+                    }
+                    else if (checkMode === "Tại bàn") {
+                        getStrTable = checkMode + " " + element.table;
+                    }
+                    else {
+                        return;
+                    }
+                    _this.showTable.push(getStrTable);
                     _this.showStr.push(stringFull);
                     //
                     order.copy(element);
@@ -192,7 +207,7 @@ var ChiefPage = /** @class */ (function () {
     };
     ChiefPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-chief',template:/*ion-inline-start:"c:\Users\User\Downloads\orderapp\app\src\pages\chief\chief.html"*/'<!--\n  Generated template for the DeviceListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>{{"Nhà bếp " + countItemDone + "/" + dataOfOrder.length}}</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <ion-row no-padding *ngFor="let orderDetails of items, let numOrderDetails = index" class="listOrder">\n    <ion-col col-2 no-padding class="colBackground">\n      <!-- <buttonorderDetails.table}}</button> -->\n      <button ion-button class="buttonFullHeight" color="bgiphonedark" outline\n        no-padding>{{orderDetails.table}}</button>\n    </ion-col>\n    <ion-col col-10 no-padding>\n      <ion-list no-padding class="listDetails" *ngFor="let str of showStr[numOrderDetails], let numStr = index">\n        <ion-item>\n          <!-- <h2 class="fontTextLarge">{{str}}</h2> -->\n          <ion-textarea disabled value="{{str}}"></ion-textarea>\n        </ion-item>\n      </ion-list>\n      <!-- <h2 class="fontTextLarge">{{showStr[num]}}</h2> -->\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"c:\Users\User\Downloads\orderapp\app\src\pages\chief\chief.html"*/,
+            selector: 'page-chief',template:/*ion-inline-start:"c:\Users\User\Downloads\orderapp\app\src\pages\chief\chief.html"*/'<!--\n  Generated template for the DeviceListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color=\'maincolor\'>\n    <ion-title>{{"Nhà bếp " + countItemDone + "/" + dataOfOrder.length}}</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n  <!-- <ion-row no-padding *ngFor="let orderDetails of items, let numOrderDetails = index" class="listOrder"> -->\n  <ion-row no-padding *ngFor="let table of showTable, let numOfShowTable = index" class="listOrder">\n    <ion-col col-2 no-padding class="colBackground">\n      <!-- <button ion-button class="buttonFullHeight" color="bgiphonedark" outline no-padding>{{orderDetails.table}}</button> -->\n      <button ion-button class="buttonFullHeight" color="bgiphonedark" outline\n        no-padding>{{table}}</button>\n    </ion-col>\n    <ion-col col-10 no-padding>\n      <ion-list no-padding class="listDetails" *ngFor="let str of showStr[numOfShowTable], let numStr = index">\n        <ion-item>\n          <!-- <h2 class="fontTextLarge">{{str}}</h2> -->\n          <ion-textarea disabled value="{{str}}"></ion-textarea>\n        </ion-item>\n      </ion-list>\n      <!-- <h2 class="fontTextLarge">{{showStr[num]}}</h2> -->\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"c:\Users\User\Downloads\orderapp\app\src\pages\chief\chief.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2__providers_order_food_order_food__["e" /* OrderFoodProvider */],
